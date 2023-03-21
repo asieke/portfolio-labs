@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	@apply h-full;
+}
+
+body {
+	@apply h-full bg-slate-100 dark:bg-slate-700;
+}
+
+.header {
+	@apply pb-24 bg-gradient-to-r from-primary-600 to-cyan-600 dark:from-primary-900 dark:to-slate-900;
+	@apply transition-all duration-500 ease-in-out;
+}
+
+.container {
+	@apply bg-slate-50 dark:bg-slate-800 shadow dark:shadow-none ring-1 ring-slate-100 dark:ring-1 dark:ring-slate-600;
+	@apply text-black dark:text-slate-100;
+	@apply transition-all duration-100 ease-in-out;
+}
+
+h3 {
+	@apply text-gray-900 dark:text-gray-50;
+}
+
+p {
+	@apply text-gray-700 dark:text-gray-300;
+}
+
+form input[type='text'],
+form input[type='email'],
+form textarea,
+form select,
+form button {
+	@apply bg-slate-100 dark:bg-slate-700;
+	@apply px-2 py-1 focus:ring-1 focus:ring-offset-primary-300 ring-1 ring-slate-400;
+}
+
+span,
+label {
+	@apply text-gray-500 dark:text-gray-400;
+}
+
+/* Data Table */
+
+.data-table table {
+	@apply divide-gray-300 divide-y;
+}
+
+.data-table tbody {
+	@apply divide-y divide-gray-200;
+}
