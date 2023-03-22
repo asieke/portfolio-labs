@@ -1,30 +1,58 @@
 import type { Format } from '$data/types';
 
-//write a function that takes a string and returns a comma separated number
-//example: 1000000 -> 1,000,000
-export const formatNumber = (num: number) => {
+/**
+ * Formats a number as a string with commas separating the thousands places.
+ * param num The number to format.
+ * returns A string representation of the number with commas separating the thousands places.
+ */
+export const formatNumber = (num: number): string => {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-export const formatCurrency = (num: number) => {
+/**
+ * Formats a number as a currency string with a dollar sign and commas separating the thousands places.
+ * param num The number to format.
+ * returns A string representation of the number as a currency value.
+ */
+export const formatCurrency = (num: number): string => {
 	return `$${formatNumber(num)}`;
 };
 
-export const formatPercent = (num: number) => {
-	return `${Math.round(num * 1000) / 10}%`;
+/**
+ * Formats a number as a percentage string with one decimal place.
+ * param num The number to format as a percentage.
+ * returns A string representation of the number as a percentage value.
+ */
+export const formatPercent = (num: number): string => {
+	return `${(num * 100).toFixed(1)}%`;
 };
 
-export const format = (num: number | string, format: Format) => {
+/**
+ * Formats a number or string according to the specified format.
+ * param num The number or string to format.
+ * param format The format to use when formatting the value.
+ * returns A string representation of the value formatted according to the specified format.
+ */
+export const format = (num: number | string, format: Format): string => {
+	// If the value is already a string or the format is 'string', return the value as is
 	if (typeof num === 'string' || format === 'string') {
-		return num;
-	} else {
-		switch (format) {
-			case 'number':
-				return formatNumber(num);
-			case 'percent':
-				return formatPercent(num);
-			case 'currency':
-				return formatCurrency(num);
-		}
+		return num.toString();
+	}
+
+	// If the format is not recognized, throw an error
+	if (format !== 'number' && format !== 'percent' && format !== 'currency') {
+		throw new Error(`Unrecognized format: ${format}`);
+	}
+
+	// Format the value according to the specified format
+	switch (format) {
+		case 'number':
+			return formatNumber(num as number);
+		case 'percent':
+			return formatPercent(num as number);
+		case 'currency':
+			return formatCurrency(num as number);
+		default:
+			throw new Error(`Unrecognized format: ${format}`);
 	}
 };

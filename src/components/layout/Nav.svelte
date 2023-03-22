@@ -17,10 +17,10 @@
 	<div class="mx-auto max-w-3xl lg:max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="relative flex flex-wrap items-center justify-between pt-4">
 			<!-- Logo -->
-			<div class="flex-shrink-0">
+			<div class="w-8">
 				<a href="/">
 					<span class="sr-only">Portfolio Labs</span>
-					<img class="h-8 w-auto" src="/logo.png" alt="" />
+					<img class="h-8 w-8" src="/logo.png" alt="" />
 				</a>
 			</div>
 
