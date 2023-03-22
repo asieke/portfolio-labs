@@ -13,3 +13,23 @@ export const fakePortfolio: DataType = {
 		['Cash and Cash Equivalents', 10000, 1, 0.04, 10000]
 	]
 };
+
+export const fakeNotifications = [
+	{
+		title: 'New Product Launch',
+		description:
+			"Check out our latest product and get it before it's gone. Limited stock available!",
+		time: 1679516397000
+	},
+	{
+		title: 'Important System Maintenance',
+		description:
+			"We'll be performing maintenance on our systems tonight from 9pm-11pm EST. Please plan accordingly.",
+		time: 1679516397000 - 24 * 60 * 60 * 1000
+	},
+	{
+		title: 'Upcoming Sale',
+		description: "Don't miss our upcoming sale starting next week. Save up to 50% on select items!",
+		time: 1679516397000 - 6 * 24 * 60 * 60 * 1000
+	}
+];

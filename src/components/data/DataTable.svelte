@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { DataType } from '$data/types';
-	import { getDataTotals } from '$lib/dataTransformations';
-	import { format } from '$lib/formatters';
+	import { getDataTotals } from '$lib/shared/dataTransformations';
+	import { format } from '$lib/shared/formatters';
 	export let data: DataType;
 	export let showTotal = true;
 	const total = getDataTotals(data);

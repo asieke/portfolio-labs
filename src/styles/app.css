@@ -7,10 +7,30 @@
 	@apply transition-all duration-500 ease-in-out;
 }
 
+.header a {
+	@apply text-white;
+}
+
+.header a:hover {
+	@apply bg-opacity-10 bg-white;
+}
+
 .container {
 	@apply bg-slate-50 dark:bg-slate-800 shadow dark:shadow-none ring-1 ring-slate-100 dark:ring-1 dark:ring-slate-600;
 	@apply text-black dark:text-slate-100;
 	@apply transition-all duration-100 ease-in-out;
+}
+
+.dropdown {
+	@apply bg-white ring-1 ring-black ring-opacity-5 dark:bg-gray-600;
+}
+
+.dropdown a {
+	@apply text-gray-900 dark:text-gray-200;
+}
+
+.dropdown a:hover {
+	@apply dark:bg-gray-700 bg-gray-300;
 }
 
 /*=************************************

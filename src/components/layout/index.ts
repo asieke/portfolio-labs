@@ -3,9 +3,10 @@ import Container from './Container.svelte';
 import Footer from './Footer.svelte';
 import LinksMain from './LinksMain.svelte';
 import LinksProfile from './LinksProfile.svelte';
-import MobileMenu from './MobileMenu.svelte';
+import MenuDarkMode from './MenuDarkMode.svelte';
+import MenuMobile from './MenuMobile.svelte';
+import MenuNotifications from './MenuNotifications.svelte';
+import MenuProfile from './MenuProfile.svelte';
 import Nav from './Nav.svelte';
-import ProfileDropdown from './ProfileDropdown.svelte';
-import Sidebar from './Sidebar.svelte';
 
-export { Container, Footer, LinksMain, LinksProfile, MobileMenu, Nav, ProfileDropdown, Sidebar};
+export { Container, Footer, LinksMain, LinksProfile, MenuDarkMode, MenuMobile, MenuNotifications, MenuProfile, Nav};

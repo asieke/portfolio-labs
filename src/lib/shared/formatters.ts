@@ -56,3 +56,28 @@ export const format = (num: number | string, format: Format): string => {
 			throw new Error(`Unrecognized format: ${format}`);
 	}
 };
+
+export const timeAgo = (timestamp: number) => {
+	const currentTime = new Date().getTime();
+	const timeDifference = currentTime - timestamp;
+
+	const secondsInMilli = 1000;
+	const minutesInMilli = secondsInMilli * 60;
+	const hoursInMilli = minutesInMilli * 60;
+	const daysInMilli = hoursInMilli * 24;
+
+	const days = Math.floor(timeDifference / daysInMilli);
+	const hours = Math.floor((timeDifference % daysInMilli) / hoursInMilli);
+	const minutes = Math.floor((timeDifference % hoursInMilli) / minutesInMilli);
+	const seconds = Math.floor((timeDifference % minutesInMilli) / secondsInMilli);
+
+	if (days > 0) {
+		return `${days}d ago`;
+	} else if (hours > 0) {
+		return `${hours}h ago`;
+	} else if (minutes > 0) {
+		return `${minutes}m ago`;
+	} else {
+		return `${seconds}s ago`;
+	}
+};
