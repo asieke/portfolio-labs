@@ -1,0 +1,105 @@
+pre code.hljs {
+	@apply block py-4 px-6 overflow-auto;
+}
+code.hljs {
+}
+.hljs {
+	@apply bg-slate-700 text-slate-100 rounded-lg shadow-md shadow-gray-600 mt-8;
+}
+.hljs-comment,
+.hljs-quote {
+	color: #5c6370;
+	font-style: italic;
+}
+.hljs-doctag,
+.hljs-formula,
+.hljs-keyword {
+	color: #c678dd;
+}
+.hljs-deletion,
+.hljs-name,
+.hljs-section,
+.hljs-selector-tag,
+.hljs-subst {
+	color: #e06c75;
+}
+.hljs-literal {
+	color: #56b6c2;
+}
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string,
+.hljs-regexp,
+.hljs-string {
+	color: #98c379;
+}
+.hljs-attr,
+.hljs-number,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-pseudo,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable {
+	color: #d19a66;
+}
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-symbol,
+.hljs-title {
+	color: #61aeee;
+}
+.hljs-built_in,
+.hljs-class .hljs-title,
+.hljs-title.class_ {
+	color: #e6c07b;
+}
+.hljs-emphasis {
+	font-style: italic;
+}
+.hljs-strong {
+	font-weight: 700;
+}
+.hljs-link {
+	text-decoration: underline;
+}
+
+.md h2,
+.md h3,
+.md h4,
+.md h5,
+.md h6 {
+	@apply text-slate-900 !mt-8 !mb-3 !font-bold;
+}
+
+.md h2 {
+	@apply !text-2xl;
+}
+
+.md h3 {
+	@apply !text-xl;
+}
+
+.md p,
+.md ul,
+.md li {
+	@apply text-slate-500 leading-relaxed;
+}
+
+.md ul {
+	@apply !list-disc !ml-6 !mt-2;
+}
+
+.md p {
+	@apply !mt-4;
+}
+
+.md ol {
+	@apply !list-decimal !ml-6 !mt-2;
+}
+
+.md img {
+	@apply w-full h-96 object-cover mt-8 mb-8 shadow-xl rounded-xl;
+}

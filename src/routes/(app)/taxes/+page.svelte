@@ -2,4 +2,4 @@
 	import { Container } from '$components/layout';
 </script>
 
-<Container>Home</Container>
+<Container>Taxes</Container>

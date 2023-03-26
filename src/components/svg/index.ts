@@ -2,7 +2,9 @@
 import Bars from './Bars.svelte';
 import Bell from './Bell.svelte';
 import Chart from './Chart.svelte';
+import CheckMark from './CheckMark.svelte';
 import Gear from './Gear.svelte';
+import Hamburger from './Hamburger.svelte';
 import Home from './Home.svelte';
 import Money from './Money.svelte';
 import Recommendations from './Recommendations.svelte';
@@ -11,4 +13,4 @@ import Signout from './Signout.svelte';
 import User from './User.svelte';
 import Xmark from './Xmark.svelte';
 
-export { Bars, Bell, Chart, Gear, Home, Money, Recommendations, Rocket, Signout, User, Xmark};
+export { Bars, Bell, Chart, CheckMark, Gear, Hamburger, Home, Money, Recommendations, Rocket, Signout, User, Xmark};
