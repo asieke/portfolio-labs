@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import { Container } from '../components';
+	import { orgChart } from '$data/sample';
+
+	console.log(orgChart);
 
 	export let data: any;
 	const { data: posts } = data;
-
-	console.log(posts);
 
 	let i = 0;
 
@@ -97,10 +97,12 @@
 								their portfolios
 							</h1>
 							<p class="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">
-								Cupidatat minim id magna ipsum sint dolor qui. Sunt sit in quis cupidatat mollit
-								aute velit. Et labore commodo nulla aliqua proident mollit ullamco exercitation
-								tempor. Sint aliqua anim nulla sunt mollit id pariatur in voluptate cillum. Eu
-								voluptate tempor esse minim amet fugiat veniam occaecat aliqua.
+								Portfolio Labs empowers investors to make smarter decisions with a powerful
+								dashboard that simplifies portfolio management. Unlock the same tools financial
+								advisors use, without the high fees, and gain actionable insights for tax
+								optimization, account rebalancing, and long-term planning. Join Portfolio Labs today
+								and experience affordable, advanced portfolio management that puts you in control of
+								your financial future.
 							</p>
 						</div>
 						<div
@@ -177,23 +179,27 @@
 				<div class="mt-6 flex flex-col gap-y-20 gap-x-8 lg:flex-row">
 					<div class="lg:w-full lg:max-w-2xl lg:flex-auto">
 						<p class="text-xl leading-8 text-gray-600">
-							Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi,
-							nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas ac. Diam nulla orci
-							at in viverra scelerisque eget. Eleifend egestas fringilla sapien.
+							At Portfolio Labs, our mission is to empower investors by providing them with the
+							tools and resources needed to make informed decisions and take control of their
+							financial future. We believe that every investor, regardless of their account size,
+							deserves access to advanced portfolio management tools without breaking the bank.
+							That's why we have designed our services to be accessible and affordable, leveling the
+							playing field and democratizing the world of finance.
 						</p>
 						<div class="mt-10 max-w-xl text-base leading-7 text-gray-700">
 							<p>
-								Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis
-								mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio
-								penatibus risus viverra tellus varius sit neque erat velit. Faucibus commodo massa
-								rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet
-								vitae sed turpis id.
+								Our user-friendly dashboard connects all of your accounts, offering actionable
+								insights and guidance on tax-efficient strategies, account rebalancing, and
+								goal-oriented planning. We strive to help our users navigate the complexities of
+								investing with confidence and ease.
 							</p>
 							<p class="mt-10">
-								Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis odio id et. Id
-								blandit molestie auctor fermentum dignissim. Lacus diam tincidunt ac cursus in vel.
-								Mauris varius vulputate et ultrices hac adipiscing egestas. Iaculis convallis ac
-								tempor et ut. Ac lorem vel integer orci.
+								As we continue to innovate and grow, our commitment to transparency, affordability,
+								and data security remains unwavering. We are dedicated to providing you with the
+								same high-quality tools used by professional financial advisors, without the hidden
+								fees and conflicts of interest that often accompany traditional advisory services.
+								At Portfolio Labs, our mission is to be your trusted partner on the path to
+								financial success.
 							</p>
 						</div>
 					</div>
@@ -232,61 +238,56 @@
 		<div class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
 			<div class="mx-auto max-w-2xl lg:mx-0">
 				<h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our values</h2>
-				<p class="mt-6 text-lg leading-8 text-gray-600">
-					Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate
-					veritatis in accusamus quisquam.
-				</p>
+				<p class="mt-6 text-lg leading-8 text-gray-600">Live life 1/4 mile at a time</p>
 			</div>
 			<dl
 				class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 text-base leading-7 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
 			>
 				<div>
-					<dt class="font-semibold text-gray-900">Be world-class</dt>
+					<dt class="font-semibold text-gray-900">Empower Investors</dt>
 					<dd class="mt-1 text-gray-600">
-						Aut illo quae. Ut et harum ea animi natus. Culpa maiores et sed sint et magnam
-						exercitationem quia. Ullam voluptas nihil vitae dicta molestiae et. Aliquid velit porro
-						vero.
+						Equipping users with advanced portfolio management tools, fostering financial
+						independence and confidence in their investment decisions.
 					</dd>
 				</div>
 
 				<div>
-					<dt class="font-semibold text-gray-900">Share everything you know</dt>
+					<dt class="font-semibold text-gray-900">Be Transparent</dt>
 					<dd class="mt-1 text-gray-600">
-						Mollitia delectus a omnis. Quae velit aliquid. Qui nulla maxime adipisci illo id
-						molestiae. Cumque cum ut minus rerum architecto magnam consequatur. Quia quaerat minima.
+						Providing clear, upfront pricing and maintaining open communication with users, ensuring
+						trust and fostering long-term relationships.
 					</dd>
 				</div>
 
 				<div>
-					<dt class="font-semibold text-gray-900">Always learning</dt>
+					<dt class="font-semibold text-gray-900">Foster Innovation</dt>
 					<dd class="mt-1 text-gray-600">
-						Aut repellendus et officiis dolor possimus. Deserunt velit quasi sunt fuga error labore
-						quia ipsum. Commodi autem voluptatem nam. Quos voluptatem totam.
+						Continuously refining and expanding product offerings by leveraging cutting-edge
+						technology to meet users' evolving needs and exceed expectations.
 					</dd>
 				</div>
 
 				<div>
-					<dt class="font-semibold text-gray-900">Be supportive</dt>
+					<dt class="font-semibold text-gray-900">Be Accessible</dt>
 					<dd class="mt-1 text-gray-600">
-						Magnam provident veritatis odit. Vitae eligendi repellat non. Eum fugit impedit
-						veritatis ducimus. Non qui aspernatur laudantium modi. Praesentium rerum error deserunt
-						harum.
+						Democratizing access to sophisticated investment tools for a diverse audience, breaking
+						down barriers and promoting financial inclusivity.
 					</dd>
 				</div>
 
 				<div>
-					<dt class="font-semibold text-gray-900">Take responsibility</dt>
+					<dt class="font-semibold text-gray-900">Security First</dt>
 					<dd class="mt-1 text-gray-600">
-						Sit minus expedita quam in ullam molestiae dignissimos in harum. Tenetur dolorem iure.
-						Non nesciunt dolorem veniam necessitatibus laboriosam voluptas perspiciatis error.
+						Upholding stringent data security practices and prioritizing user privacy, creating a
+						safe and reliable platform for managing investments.
 					</dd>
 				</div>
 
 				<div>
-					<dt class="font-semibold text-gray-900">Enjoy downtime</dt>
+					<dt class="font-semibold text-gray-900">Integrity</dt>
 					<dd class="mt-1 text-gray-600">
-						Ipsa in earum deserunt aut. Quos minus aut animi et soluta. Ipsum dicta ut quia eius.
-						Possimus reprehenderit iste aspernatur ut est velit consequatur distinctio.
+						Unwavering commitment to ethical business practices, avoiding the introduction of paid
+						features that could compromise the core offering.
 					</dd>
 				</div>
 			</dl>
@@ -373,24 +374,26 @@
 			<div class="mx-auto max-w-2xl lg:mx-0">
 				<h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our team</h2>
 				<p class="mt-6 text-lg leading-8 text-gray-600">
-					Sit facilis neque ab nulla vel. Cum eos in laudantium. Temporibus eos totam in dolorum.
-					Nemo vel facere repellendus ut eos dolores similique.
+					our world class team has been building and shipping software for over 20 years.
 				</p>
 			</div>
 			<ul
 				class="mx-auto mt-20 grid max-w-2xl grid-cols-2 gap-y-16 gap-x-8 text-center sm:grid-cols-3 md:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-5 xl:grid-cols-6"
 			>
-				<li>
-					<img
-						class="mx-auto h-24 w-24 rounded-full"
-						src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
-						alt=""
-					/>
-					<h3 class="mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
-						Michael Foster
-					</h3>
-					<p class="text-sm leading-6 text-gray-600">Co-Founder / CTO</p>
-				</li>
+				{#each orgChart as person}
+					<li>
+						<img
+							class="mx-auto h-24 w-24 rounded-full"
+							src={'/images/team/' + person.img + '.png'}
+							alt=""
+						/>
+						<h3 class="mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
+							{person.name}
+						</h3>
+						<p class="text-sm leading-6 text-gray-600">{person.title}</p>
+						<p class="text-xs leading-6 text-gray-600">{person.companies}</p>
+					</li>
+				{/each}
 
 				<!-- More people... -->
 			</ul>
