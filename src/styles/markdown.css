@@ -101,5 +101,5 @@ code.hljs {
 }
 
 .md img {
-	@apply w-full h-96 object-cover mt-8 mb-8 shadow-xl rounded-xl;
+	@apply w-11/12 h-72 mx-auto my-8 object-cover;
 }

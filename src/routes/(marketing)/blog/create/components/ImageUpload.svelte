@@ -69,13 +69,13 @@
 	}
 
 	const copyPasta = async (i: number) => {
-		console.log('COPY-PASTA', i);
 		files[i].imgClass = '';
 		files[i].showCopy = true;
 		setTimeout(() => {
 			files[i].showCopy = false;
 		}, 400);
-		await navigator.clipboard.writeText(files[i].url);
+		const text = `<img class='right' alt='funny' src='${files[i].url}'>`;
+		await navigator.clipboard.writeText(text);
 	};
 </script>
 
