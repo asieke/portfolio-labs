@@ -16,7 +16,7 @@
 	}, 3000);
 </script>
 
-<div class="bg-white -mt-24">
+<div class="bg-white">
 	<!-- Header -->
 
 	<main class="isolate">

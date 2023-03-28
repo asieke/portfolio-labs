@@ -5,3 +5,7 @@ Portfolio Labs is a fintech company focused on helping investors make smarter de
 Key milestones include an initial seed investment in March 2023, a beta launch in November 2023, and a public launch in December 2023. The technology stack consists of Rust for back-end, data aggregation, and API layers, and JavaScript, Svelte, Sveltekit, and Tailwind for front-end development. Portfolio Labs is a fully compliant site that regularly audits its data security practices to ensure user privacy and security.
 
 As a company that charges a transparent, easily cancelable monthly fee regardless of account size, Portfolio Labs aims to democratize advanced portfolio management tools. They prioritize keeping services affordable and are committed to avoiding the introduction of paid features that could compromise their core offering.
+
+## Generating Types
+
+npx supabase gen types typescript --project-id "dnbtoryovblfrfgptera" --schema public > src/lib/supabase.ts

@@ -5,7 +5,7 @@
 </script>
 
 <Container>
-	<div class="max-w-3xl mx-auto">
+	<div class="max-w-3xl mx-auto mt-20">
 		<h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">
 			Frequently asked questions
 		</h2>

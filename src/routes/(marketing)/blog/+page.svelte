@@ -15,7 +15,7 @@
 	// replace special url characters
 </script>
 
-<div class="max-w-4xl mx-auto p-3">
+<div class="max-w-4xl mx-auto p-3 mt-24">
 	<!-- <h1 class="font-extrabold mt-8 tracking-tight text-5xl text-center text-slate-900">
 			Portfolio Labs Blog
 		</h1>
