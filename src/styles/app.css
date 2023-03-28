@@ -38,10 +38,14 @@
 ***************************************/
 html {
 	@apply h-full;
+	margin: 0px;
+	padding: 0px;
 }
 
 body {
 	@apply h-full bg-slate-100 dark:bg-slate-700;
+	margin: 0px;
+	padding: 0px;
 }
 
 h3 {
@@ -50,15 +54,6 @@ h3 {
 
 p {
 	@apply text-gray-700 dark:text-gray-300;
-}
-
-form input[type='text'],
-form input[type='email'],
-form textarea,
-form select,
-form button {
-	@apply bg-slate-100 dark:bg-slate-700;
-	@apply px-2 py-1 focus:ring-1 focus:ring-offset-primary-300 ring-1 ring-slate-400;
 }
 
 span,

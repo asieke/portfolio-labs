@@ -23,7 +23,7 @@
 			<a href="/faq">FAQ</a>
 		</div>
 		<div class="top-links hidden sm:flex">
-			<a href="/">Log in <span aria-hidden="true">&rarr;</span></a>
+			<a href="/login">Log in <span aria-hidden="true">&rarr;</span></a>
 		</div>
 		<MenuMobile />
 	</nav>
