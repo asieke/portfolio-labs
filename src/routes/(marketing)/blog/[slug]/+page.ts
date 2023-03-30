@@ -27,8 +27,6 @@ interface LoadParams {
 }
 
 export async function load({ params }: LoadParams) {
-	console.log('SLUG.....', params.slug);
-
 	const { data, error: supabaseError } = await supabase
 		.from('blog')
 		.select('*')

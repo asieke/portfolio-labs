@@ -14,18 +14,15 @@
 	//create an interface for files
 
 	function onDragOver(event: DragEvent): void {
-		console.log('DRAGGING');
 		event.preventDefault();
 		uploadContainer.style.border = '2px dashed #60A5FA';
 	}
 
 	function onDragLeave(event: MouseEvent): void {
-		console.log('LEAVING');
 		uploadContainer.style.border = '2px dashed #ddd';
 	}
 
 	async function onDrop(event: DragEvent): Promise<void> {
-		console.log('DROPPPING');
 		uploadContainer.style.border = '2px dashed #ddd';
 		event.preventDefault();
 		if (event.dataTransfer) {

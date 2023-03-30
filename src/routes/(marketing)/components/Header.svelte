@@ -1,5 +1,6 @@
 <script lang="ts">
 	import MenuMobile from './MenuMobile.svelte';
+	import { page } from '$app/stores';
 </script>
 
 <header class="absolute inset-x-0 top-0 z-50">
@@ -23,7 +24,11 @@
 			<a href="/faq">FAQ</a>
 		</div>
 		<div class="top-links hidden sm:flex">
-			<a href="/login">Log in <span aria-hidden="true">&rarr;</span></a>
+			{#if $page.data.session}
+				<a href="/dashboard">Dashboard</a>
+			{:else}
+				<a href="/login">Log in <span aria-hidden="true">&rarr;</span></a>
+			{/if}
 		</div>
 		<MenuMobile />
 	</nav>

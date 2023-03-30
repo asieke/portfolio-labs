@@ -36,8 +36,6 @@ export const createBlogPost = async (blogPost: BlogPost) => {
 		if (error) {
 			throw error;
 		}
-
-		console.log('Data inserted successfully.');
 	} catch (error) {
 		console.error('Error inserting data:', error);
 	}

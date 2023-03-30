@@ -1,11 +1,15 @@
 <script lang="ts">
-	import Confirm from './Confirm.svelte';
+	import { handleLogin } from '$lib/supabaseClient';
+
 	let email = '';
 	let submitted = false;
 
 	let timer = 5;
 
 	const submitEmail = async () => {
+		//send magic link to email
+		await handleLogin(email);
+
 		submitted = true;
 
 		//set a timer for 30 seconds and clear the interval when timer = 0

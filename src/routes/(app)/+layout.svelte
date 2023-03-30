@@ -1,5 +1,9 @@
 <script lang="ts">
 	import '$styles/app.css';
+	import { page } from '$app/stores';
+
+	export let data;
+
 	import { Nav, Footer } from '$components/layout';
 </script>
 

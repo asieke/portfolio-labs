@@ -1,11 +1,24 @@
 <script lang="ts">
+	import { supabase } from '$lib/supabaseClient';
+	import { page } from '$app/stores';
 	export let callback: () => void;
 	export let view = 'mobile';
+
+	const signOut = async () => {
+		await $page.data.supabase.auth.signOut();
+		callback();
+	};
 </script>
 
 <a class={view} href="/profile" on:click|stopPropagation={callback}>Your Profile</a>
 <a class={view} href="/settings" on:click|stopPropagation={callback}>Settings</a>
-<a class={view} href="/signout" on:click|stopPropagation={callback}>Sign out</a>
+<a
+	href="/"
+	class={view}
+	on:click|preventDefault={() => {
+		signOut();
+	}}>Sign out</a
+>
 
 <style lang="postcss">
 	a.desktop {
