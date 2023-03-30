@@ -2,7 +2,6 @@
 	import '$styles/markdown.css';
 	import Container from '../../components/Container.svelte';
 
-	import { page } from '$app/stores';
 	/** @type {import('./$types').PageData} */
 	export let data: any;
 

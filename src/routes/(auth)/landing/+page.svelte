@@ -1,26 +1,11 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { redirect } from '@sveltejs/kit';
-
-	import { onMount } from 'svelte';
-	import type { ProfilesInsert, ProfilesRow } from '$lib/types';
-
-	import { page } from '$app/stores';
+	import type { ProfilesInsert } from '$lib/types';
 
 	import Stepper from './Stepper.svelte';
 	import FormProfile from './FormProfile.svelte';
 	import FormPlan from './FormPlan.svelte';
 	import FormPayment from './FormPayment.svelte';
 	import FormToS from './FormToS.svelte';
-
-	const { supabase, session } = $page.data;
-	export let data;
-	console.log(data);
-
-	if (!session) {
-		console.log('THERE IS NO SESSION');
-		redirect(303, '/');
-	}
 
 	let formData: ProfilesInsert = {
 		id: '',
@@ -33,26 +18,6 @@
 		username: '',
 		website: ''
 	};
-
-	onMount(async () => {
-		if (session) {
-			const id = session?.user?.id;
-			const { data: profiles, error } = await supabase.from('profiles').select('*').eq('id', id);
-			if (profiles && profiles.length > 0) {
-				formData = profiles[0] as ProfilesInsert;
-			} else {
-				formData.id = id;
-			}
-			if (error) {
-				goto('/');
-			}
-			console.log(formData);
-			if (formData && formData.is_active) {
-				goto('/dashboard');
-			}
-		}
-		console.log(formData);
-	});
 
 	let step = 1;
 	let complete = [false, false, false];
@@ -78,12 +43,6 @@
 
 	let submit = async () => {
 		console.log(formData);
-		let { error } = await supabase.from('profiles').upsert(formData);
-		if (error) {
-			console.log(error);
-		} else {
-			step = 5;
-		}
 	};
 </script>
 

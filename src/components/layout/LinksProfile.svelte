@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { supabase } from '$lib/supabaseClient';
-	import { page } from '$app/stores';
 	export let callback: () => void;
 	export let view = 'mobile';
 
 	const signOut = async () => {
-		await $page.data.supabase.auth.signOut();
+		console.log('Signing Out');
 		callback();
 	};
 </script>
