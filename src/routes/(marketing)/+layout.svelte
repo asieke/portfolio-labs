@@ -7,12 +7,16 @@
 <div class="marketing-container">
 	<slot />
 </div>
+
 <Footer />
 
 <style lang="postcss">
 	.marketing-container {
 		z-index: 1;
-		backdrop-filter: blur(100px);
+		height: 100%;
+		padding: 0;
+		margin: 0;
+		position: relative;
 	}
 
 	.marketing-container::before {
@@ -20,11 +24,16 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100%;
+		bottom: 0;
 		height: 100%;
+		width: 100%;
+		/* @apply blur-3xl; */
 		background-image: url('/images/bg.png');
-		opacity: 0.1;
+		/* stretch background image to fit 100% width */
+
+		background-size: 100%;
 		@apply blur-3xl;
+		opacity: 0.2;
 		z-index: -20;
 	}
 </style>

@@ -1,0 +1,26 @@
+export const blogDefault = {
+	author: '',
+	author_img: '',
+	created_at: '',
+	date: '',
+	description: '',
+	hero_img: '',
+	md: '',
+	tags: [],
+	title: '',
+	url: '',
+};
+export const profilesDefault = {
+	accepted_tos: false,
+	address: '',
+	dob: '',
+	employment_status: '',
+	full_name: '',
+	id: '',
+	income: null,
+	is_active: false,
+	job_title: '',
+	net_worth: null,
+	phone: '',
+	tax_filing_status: '',
+};

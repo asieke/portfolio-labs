@@ -18,7 +18,7 @@
 	console.log(data);
 </script>
 
-<div class="max-w-4xl mx-auto p-3">
+<div class="max-w-4xl mx-auto p-3 mt-24">
 	<article
 		class="py-0 px-12 bg-white rounded-lg border-gray-200 shadow-2xl mb-16 pb-10 pt-10 relative"
 	>

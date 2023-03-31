@@ -2,7 +2,7 @@
 	import { CheckMark } from '$svg';
 </script>
 
-<div class="bg-white py-24 sm:py-32" id="pricing">
+<div class="py-24 sm:py-32" id="pricing">
 	<div class="mx-auto max-w-7xl px-6 md:px-8">
 		<div class="mx-auto max-w-4xl text-center">
 			<h2>Pricing</h2>

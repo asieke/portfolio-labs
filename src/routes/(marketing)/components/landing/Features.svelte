@@ -1,5 +1,10 @@
-<div class="bg-gray-900 py-24 sm:py-32" id="features">
-	<div class="mx-auto max-w-7xl px-6 lg:px-8">
+<script lang="ts">
+	import Gradient from './Gradient.svelte';
+</script>
+
+<div class="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
+	<div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+		<Gradient />
 		<div class="mx-auto max-w-2xl lg:text-center">
 			<h2 class="text-base font-semibold leading-7 text-indigo-400">
 				Invest smarter with Portfolio Labs
