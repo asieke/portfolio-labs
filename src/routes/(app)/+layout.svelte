@@ -2,6 +2,9 @@
 	import '$styles/app.css';
 
 	import { Nav, Footer } from '$components/layout';
+
+	export let data;
+	console.log(data);
 </script>
 
 <div class="min-h-full">

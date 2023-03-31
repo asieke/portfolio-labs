@@ -16,15 +16,6 @@
 </script>
 
 <div class="max-w-4xl mx-auto p-3 mt-24">
-	<!-- <h1 class="font-extrabold mt-8 tracking-tight text-5xl text-center text-slate-900">
-			Portfolio Labs Blog
-		</h1>
-		<p class="font-light text-slate-700 text-center m-8 pb-8">
-			Get a handle on your finances with our expert advice and insights into the world of financial
-			services. Discover the latest trends, strategies, and solutions to achieve your financial
-			goals and secure your future.
-		</p> -->
-
 	{#each posts as post, i}
 		<article>
 			<div class="grid grid-cols-1 md:grid-cols-2 space-y-4 md:space-y-0">

@@ -1,33 +1,59 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	const { supabase } = $page.data;
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { invalidateAll } from '$app/navigation';
+
+	export let data;
+	const { supabase, session } = data;
+
+	console.log(data);
 
 	let email = 'asieke@gmail.com';
+	let state: 'form' | 'loading' | 'submitted' = 'form';
+
+	onMount(async () => {
+		await invalidateAll();
+		if (session) {
+			goto('/dashboard');
+		}
+	});
 
 	const submit = async () => {
+		state = 'loading';
 		const { data, error } = await supabase.auth.signInWithOtp({
 			email: email,
 			options: {
 				emailRedirectTo: 'http://localhost:5173/landing'
 			}
 		});
-		console.log(data, error);
+		state = 'submitted';
 	};
 </script>
 
 <div class="w-80 sm:w-96 mx-auto">
 	<img class="h-12 w-auto" src="/logo.png" alt="Your Company" />
 
-	<form on:submit|preventDefault={submit}>
-		<h2>Sign in to your account</h2>
-		<p class="text-gray-500 mb-8" />
-		<label for="email">Email address</label>
-		<input bind:value={email} type="email" autocomplete="off" required />
-		<!-- <label for="password">Password</label>
-				<input bind:value={formData.password} type="password" autocomplete="off" required /> -->
-
-		<input type="submit" value="Login" class="btn-primary mt-8 w-full" />
-	</form>
+	{#if state === 'form' || state === 'loading'}
+		<form on:submit|preventDefault={submit}>
+			<h2>Sign in to your account</h2>
+			<p class="text-gray-500 mb-8">
+				Portfolio Lab uses passwordless login for added security, please enter your email below and
+				a magic link will be sent to your email.
+			</p>
+			<label for="email">Email address</label>
+			<input bind:value={email} type="email" autocomplete="off" required />
+			{#if state === 'loading'}
+				<input disabled type="submit" value="Loading..." class="btn-disabled mt-8 w-full" />
+			{:else}
+				<input type="submit" value="Login" class="btn-primary mt-8 w-full" />
+			{/if}
+		</form>
+	{:else}
+		<h2>Check your Email</h2>
+		<p class="text-gray-500 mb-8">
+			Please submit another request in 60s if the email does not arrive.
+		</p>
+	{/if}
 </div>
 
 <style lang="postcss">

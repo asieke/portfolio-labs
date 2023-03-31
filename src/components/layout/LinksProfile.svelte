@@ -15,7 +15,7 @@
 <a
 	href="/"
 	class={view}
-	on:click|preventDefault={() => {
+	on:click={() => {
 		signOut();
 	}}>Sign out</a
 >

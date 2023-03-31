@@ -1,15 +1,4 @@
 <script lang="ts">
-	import { MapboxSearch, SearchSession } from '@mapbox/search-js-core';
-
-	const search = new MapboxSearch({
-		accessToken:
-			'pk.eyJ1IjoiYXNpZWtlIiwiYSI6ImNsZndweDJqYTBlc3UzcnJ5ajF2cnl6bGQifQ.75-tAbs2JyLMcEZ9YIWJRA'
-	});
-
-	const mapboxSession = new SearchSession(search);
-
-	console.log(search, mapboxSession);
-
 	import type { ProfilesInsert } from '$lib/types';
 	export let formData: ProfilesInsert;
 </script>

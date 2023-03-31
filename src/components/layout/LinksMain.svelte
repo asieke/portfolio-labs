@@ -3,7 +3,7 @@
 	export let callback = () => {};
 </script>
 
-<a class={view} on:click|stopPropagation={callback} href="/dashboard">Dashboard</a>
+<a class={view} on:click|stopPropagation={callback} href="/home">Dashboard</a>
 <a class={view} on:click|stopPropagation={callback} href="/accounts">Accounts</a>
 <a class={view} on:click|stopPropagation={callback} href="/taxes">Taxes</a>
 <a class={view} on:click|stopPropagation={callback} href="/recommendations">Recommendations</a>
