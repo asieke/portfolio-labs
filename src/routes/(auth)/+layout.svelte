@@ -4,7 +4,7 @@
 </script>
 
 <div class="grid grid-cols-1 md:grid-cols-[58%_42%] lg:grid-cols-2 h-full overflow-hidden">
-	<div class="pt-[15%] sm:pt-[25%] bg-white z-20 p-8 sm:pl-16">
+	<div class="pt-[15%] sm:pt-[20%] bg-white z-20 p-8 sm:pl-16">
 		<slot />
 	</div>
 	<div class="hidden md:block relative">

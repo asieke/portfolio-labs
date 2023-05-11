@@ -2,27 +2,26 @@
 <script lang="ts">
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import type { LayoutData } from './$types';
 
-	export let data: LayoutData;
+	export let data;
 
-	$: ({ supabase } = data);
+	$: ({ supabase, session } = data);
 
 	onMount(() => {
-		const {
-			data: { subscription }
-		} = supabase.auth.onAuthStateChange(async (event, session) => {
-			invalidate('supabase:auth');
+		const { data } = supabase.auth.onAuthStateChange((event, _session) => {
+			if (_session?.expires_at !== session?.expires_at) {
+				invalidate('supabase:auth');
+			}
 		});
 
-		return () => subscription.unsubscribe();
+		return () => data.subscription.unsubscribe();
 	});
 </script>
 
 <div class="h-18 bg-black text-white">
 	<pre class="text-xs w-full whitespace-pre-wrap">
-		User: {data?.session?.user?.email}
-		Session: {data?.session?.expires_in}
+		User:
+		Session:
 	</pre>
 </div>
 <slot />

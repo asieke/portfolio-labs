@@ -2,7 +2,6 @@
 	import '$styles/marketing.css';
 	import { Header, Footer } from './components';
 	import { page } from '$app/stores';
-	console.log($page);
 </script>
 
 <Header />

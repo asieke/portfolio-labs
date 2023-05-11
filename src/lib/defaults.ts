@@ -14,6 +14,7 @@ export const profilesDefault = {
 	accepted_tos: false,
 	address: '',
 	dob: '',
+	email: '',
 	employment_status: '',
 	full_name: '',
 	id: '',

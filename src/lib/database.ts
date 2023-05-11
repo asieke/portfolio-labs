@@ -55,6 +55,7 @@ export interface Database {
           accepted_tos: boolean
           address: string | null
           dob: string | null
+          email: string | null
           employment_status: string | null
           full_name: string | null
           id: string
@@ -69,6 +70,7 @@ export interface Database {
           accepted_tos?: boolean
           address?: string | null
           dob?: string | null
+          email?: string | null
           employment_status?: string | null
           full_name?: string | null
           id: string
@@ -83,6 +85,7 @@ export interface Database {
           accepted_tos?: boolean
           address?: string | null
           dob?: string | null
+          email?: string | null
           employment_status?: string | null
           full_name?: string | null
           id?: string

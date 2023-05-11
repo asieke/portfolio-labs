@@ -1,13 +1,13 @@
 // src/routes/+layout.ts
+// import { invalidate } from '$app/navigation';
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public';
 import { createSupabaseLoadClient } from '@supabase/auth-helpers-sveltekit';
 import type { LayoutLoad } from './$types';
-import type { Database } from '$lib/database';
 
 export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 	depends('supabase:auth');
 
-	const supabase = createSupabaseLoadClient<Database>({
+	const supabase = createSupabaseLoadClient({
 		supabaseUrl: PUBLIC_SUPABASE_URL,
 		supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
 		event: { fetch },
@@ -18,16 +18,13 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		data: { session }
 	} = await supabase.auth.getSession();
 
-	let profile = null;
-	if (session && session.user) {
-		const { data, error } = await supabase
-			.from('profiles')
-			.select('*')
-			.eq('id', session?.user?.id)
-			.single();
+	//select from profiles where profile.email = session.user.email
 
-		if (!error) {
-			profile = data;
+	let profile = null;
+	if (session && session.user.email) {
+		const { data } = await supabase.from('profiles').select('*').eq('email', session.user.email);
+		if (data && data[0]) {
+			profile = data[0];
 		}
 	}
 

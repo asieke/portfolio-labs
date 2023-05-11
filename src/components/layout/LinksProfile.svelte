@@ -1,11 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import Signout from '$components/svg/Signout.svelte';
 	const { supabase } = $page.data;
 	export let callback: () => void;
 	export let view = 'mobile';
 
 	const signOut = async () => {
-		await supabase.auth.signOut();
+		const { error } = await supabase.auth.signOut();
+		if (error) {
+			console.error(error);
+			return;
+		}
 		callback();
 	};
 </script>

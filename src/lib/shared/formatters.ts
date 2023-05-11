@@ -19,6 +19,37 @@ export const formatCurrency = (num: number): string => {
 };
 
 /**
+ * Formats a phone number as a string with dashes separating the area code, prefix, and suffix.
+ * param num The phone number to format.
+ * returns A string representation of the phone number with dashes separating the area code, prefix, and suffix.
+ */
+export const formatPhone = (num: string): string => {
+	// strip all non-numeric characters
+	const temp = num.replace(/\D/g, '');
+
+	// return the string formatted as (703) 244-3494
+	// if the input number is incomplete, partially format e.g. (703)
+	let output = '';
+	if (temp.length >= 1) {
+		output += '(';
+	}
+	output += temp.slice(0, 3);
+
+	if (temp.length > 3) {
+		output += ')';
+	}
+	output += temp.slice(3, 6);
+	if (temp.length > 6) {
+		output += '-';
+	}
+	output += temp.slice(6, 10);
+
+	console.log('formatting ', temp, output);
+
+	return output;
+};
+
+/**
  * Formats a number as a percentage string with one decimal place.
  * param num The number to format as a percentage.
  * returns A string representation of the number as a percentage value.

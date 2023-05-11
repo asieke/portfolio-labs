@@ -1,32 +1,23 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
-	import { invalidateAll } from '$app/navigation';
-
-	export let data;
-	const { supabase, session } = data;
-
-	console.log(data);
-
 	let email = 'asieke@gmail.com';
 	let state: 'form' | 'loading' | 'submitted' = 'form';
 
-	onMount(async () => {
-		await invalidateAll();
-		if (session) {
-			goto('/dashboard');
-		}
-	});
+	export let data;
+	$: ({ supabase, session } = data);
 
 	const submit = async () => {
 		state = 'loading';
+
 		const { data, error } = await supabase.auth.signInWithOtp({
 			email: email,
 			options: {
-				emailRedirectTo: 'http://localhost:5173/landing'
+				emailRedirectTo: 'http://localhost:5173/redir'
 			}
 		});
-		state = 'submitted';
+
+		setTimeout(() => {
+			state = 'submitted';
+		}, 1000);
 	};
 </script>
 
@@ -42,11 +33,7 @@
 			</p>
 			<label for="email">Email address</label>
 			<input bind:value={email} type="email" autocomplete="off" required />
-			{#if state === 'loading'}
-				<input disabled type="submit" value="Loading..." class="btn-disabled mt-8 w-full" />
-			{:else}
-				<input type="submit" value="Login" class="btn-primary mt-8 w-full" />
-			{/if}
+			<input type="submit" disabled={state === 'loading'} value="Login" />
 		</form>
 	{:else}
 		<h2>Check your Email</h2>
@@ -57,10 +44,6 @@
 </div>
 
 <style lang="postcss">
-	input[type='submit']:hover {
-		@apply bg-primary-400 cursor-pointer;
-	}
-
 	input[type='email'] {
 		@apply w-full px-3 py-2 rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600;
 	}
@@ -71,5 +54,13 @@
 
 	h2 {
 		@apply mt-4 mb-6 text-3xl font-bold tracking-tight text-gray-900;
+	}
+
+	input[type='submit'] {
+		@apply rounded-md mt-8 w-full px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90 bg-primary-600 cursor-pointer;
+	}
+
+	input[type='submit']:disabled {
+		@apply cursor-not-allowed bg-slate-500;
 	}
 </style>
