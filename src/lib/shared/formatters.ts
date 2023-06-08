@@ -6,6 +6,7 @@ import type { Format } from '$data/types';
  * returns A string representation of the number with commas separating the thousands places.
  */
 export const formatNumber = (num: number): string => {
+	num = Math.round(num * 100) / 100;
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 

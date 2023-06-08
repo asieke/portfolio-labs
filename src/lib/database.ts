@@ -9,6 +9,32 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      accounts: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: number
+          name: string | null
+          type: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          name?: string | null
+          type?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          name?: string | null
+          type?: string | null
+          user_id?: string | null
+        }
+      }
       blog: {
         Row: {
           author: string | null
@@ -48,6 +74,64 @@ export interface Database {
           tags?: Json[] | null
           title?: string | null
           url?: string | null
+        }
+      }
+      portfolios: {
+        Row: {
+          account_id: number | null
+          created_at: string | null
+          description: string | null
+          id: number
+          name: string | null
+        }
+        Insert: {
+          account_id?: number | null
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          name?: string | null
+        }
+        Update: {
+          account_id?: number | null
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          name?: string | null
+        }
+      }
+      positions: {
+        Row: {
+          cost_basis: number | null
+          created_at: string | null
+          id: number
+          market_value: number | null
+          name: string | null
+          portfolio_id: number | null
+          price: number | null
+          quantity: number | null
+          symbol: string | null
+        }
+        Insert: {
+          cost_basis?: number | null
+          created_at?: string | null
+          id?: number
+          market_value?: number | null
+          name?: string | null
+          portfolio_id?: number | null
+          price?: number | null
+          quantity?: number | null
+          symbol?: string | null
+        }
+        Update: {
+          cost_basis?: number | null
+          created_at?: string | null
+          id?: number
+          market_value?: number | null
+          name?: string | null
+          portfolio_id?: number | null
+          price?: number | null
+          quantity?: number | null
+          symbol?: string | null
         }
       }
       profiles: {
@@ -95,6 +179,44 @@ export interface Database {
           net_worth?: number | null
           phone?: string | null
           tax_filing_status?: string | null
+        }
+      }
+      transactions: {
+        Row: {
+          action: string | null
+          amount: number | null
+          date: string | null
+          description: string | null
+          fees: number | null
+          id: number
+          portfolio_id: number | null
+          price: number | null
+          quantity: number | null
+          symbol: string | null
+        }
+        Insert: {
+          action?: string | null
+          amount?: number | null
+          date?: string | null
+          description?: string | null
+          fees?: number | null
+          id?: number
+          portfolio_id?: number | null
+          price?: number | null
+          quantity?: number | null
+          symbol?: string | null
+        }
+        Update: {
+          action?: string | null
+          amount?: number | null
+          date?: string | null
+          description?: string | null
+          fees?: number | null
+          id?: number
+          portfolio_id?: number | null
+          price?: number | null
+          quantity?: number | null
+          symbol?: string | null
         }
       }
     }

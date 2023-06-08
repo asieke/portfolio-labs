@@ -11,7 +11,8 @@ const config = {
 			$lib: 'src/lib',
 			$stores: 'src/lib/stores',
 			$styles: 'src/styles',
-			$data: 'src/data'
+			$data: 'src/data',
+			$models: 'src/models'
 		}
 	},
 	preprocess: vitePreprocess()

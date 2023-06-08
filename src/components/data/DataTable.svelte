@@ -7,22 +7,7 @@
 	const total = getDataTotals(data);
 </script>
 
-<div class="data-table px-4 sm:px-6 lg:px-8">
-	<div class="sm:flex sm:items-center">
-		<div class="sm:flex-auto">
-			<h1 class="text-base font-semibold leading-6  ">Users</h1>
-			<p class="mt-2 text-sm">
-				A list of all the users in your account including their name, title, email and role.
-			</p>
-		</div>
-		<div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-			<button
-				type="button"
-				class="block rounded-md  py-2 px-3 text-center text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2  "
-				>Add user</button
-			>
-		</div>
-	</div>
+<div class="data-table">
 	<div class="mt-8 flow-root">
 		<div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
 			<div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
