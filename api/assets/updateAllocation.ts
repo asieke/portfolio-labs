@@ -11,6 +11,9 @@ export default function updateAllocation(request: VercelRequest, response: Verce
 	const incomingKey = process.env.INCOMING_KEY;
 	const requestApiKey = request.headers['api_key']; // Adjusted to accommodate your curl command
 
+	console.log('incomingKey', incomingKey);
+	console.log('requestApiKey', requestApiKey);
+
 	if (requestApiKey !== incomingKey) {
 		response.status(401).send('Unauthorized'); // 401 is the status code for Unauthorized
 		return;
