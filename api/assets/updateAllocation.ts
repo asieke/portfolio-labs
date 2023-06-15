@@ -1,10 +1,11 @@
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-
-import supabase from '../supabaseClient.ts';
+const supabase: SupabaseClient = createClient(
+	process.env.PUBLIC_SUPABASE_URL || '',
+	process.env.PUBLIC_SUPABASE_ANON_KEY || ''
+);
 
 export default async function updateAllocation(request: VercelRequest, response: VercelResponse) {
-	console.log(supabase);
-
 	// 1. Reject if not a POST request
 	if (request.method !== 'POST') {
 		response.status(405).send('Method Not Allowed'); // 405 is the status code for Method Not Allowed
@@ -27,13 +28,11 @@ export default async function updateAllocation(request: VercelRequest, response:
 		return;
 	}
 
-	console.log('HELLO THERE!!!', data);
-
 	// Continue processing...
 	response.status(200).json({
 		body: request.body,
 		query: request.query,
 		cookies: request.cookies,
-		data: JSON.stringify(data)
+		data: data
 	});
 }
