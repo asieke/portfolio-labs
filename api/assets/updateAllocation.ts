@@ -1,3 +1,11 @@
+/**
+ * This is a Vercel serverless function written in TypeScript. It's designed to handle
+ * requests to update allocations, specifically via POST requests. It uses the Supabase
+ * client for database operations, and is intended to be used with the `@supabase/supabase-js`
+ * and `@vercel/node` packages.
+ *
+ **/
+
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 const supabase: SupabaseClient = createClient(
@@ -5,12 +13,16 @@ const supabase: SupabaseClient = createClient(
 	process.env.PUBLIC_SUPABASE_ANON_KEY || ''
 );
 
+import { message } from '../_headers.js';
+
 export default async function updateAllocation(request: VercelRequest, response: VercelResponse) {
 	// 1. Reject if not a POST request
 	if (request.method !== 'POST') {
 		response.status(405).send('Method Not Allowed'); // 405 is the status code for Method Not Allowed
 		return;
 	}
+
+	console.log(message, 'my message');
 
 	// 2. Reject if API key doesn't match
 	const incomingKey = process.env.INCOMING_KEY;
