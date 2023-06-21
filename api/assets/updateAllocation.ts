@@ -8,8 +8,13 @@
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { supabase } from '../_supabaseClient.js';
+import { classifySecurities } from './_classifySecurities.js';
 
 export default async function updateAllocation(request: VercelRequest, response: VercelResponse) {
+	console.log('Running UPDATE_ALLOCATION');
+
+	const startTime = Date.now();
+
 	// 1. Reject if not a POST request
 	if (request.method !== 'POST') {
 		response.status(405).send('Method Not Allowed'); // 405 is the status code for Method Not Allowed
@@ -25,18 +30,31 @@ export default async function updateAllocation(request: VercelRequest, response:
 		return;
 	}
 
-	// get the number of rows in supabase transactions table
-	const { data, error } = await supabase.from('asset_classes').select('*');
+	// get all the rows that have not been updated in the last 24h
+	const oneDayAgo = new Date();
+	oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+	const { data, error } = await supabase
+		.from('assets')
+		.select('*')
+		.or(`last_updated.gt.${oneDayAgo.toISOString()},asset_class.is.null`)
+		.order('last_updated', { ascending: true })
+		.limit(50);
+
 	if (error) {
 		response.status(500).send('Internal Server Error');
 		return;
 	}
 
+	//there are no more assets to update
+	if (!data || data.length === 0) {
+		response.status(204).send('No assets to update');
+		return;
+	}
+
+	await classifySecurities(supabase, data);
+
+	const duration = Date.now() - startTime;
+
 	// Continue processing...
-	response.status(200).json({
-		body: request.body,
-		query: request.query,
-		cookies: request.cookies,
-		data: data
-	});
+	response.status(200).json({ duration });
 }

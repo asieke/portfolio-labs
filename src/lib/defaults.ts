@@ -5,6 +5,22 @@ export const accountsDefault = {
 	type: '',
 	user_id: '',
 };
+export const asset_classesDefault = {
+	cash: null,
+	commodities: null,
+	created_at: '',
+	crypto: null,
+	equityDeveloped: null,
+	equityEmerging: null,
+	equityOther: null,
+	equityUS: null,
+	fixedIncomeGlobal: null,
+	fixedIncomeUS: null,
+	other: null,
+	realEstateGlobal: null,
+	realEstateUS: null,
+	symbol: '',
+};
 export const blogDefault = {
 	author: '',
 	author_img: '',
@@ -19,8 +35,10 @@ export const blogDefault = {
 };
 export const portfoliosDefault = {
 	account_id: null,
+	cost_basis: null,
 	created_at: '',
 	description: '',
+	market_value: null,
 	name: '',
 };
 export const positionsDefault = {
@@ -31,6 +49,7 @@ export const positionsDefault = {
 	portfolio_id: null,
 	price: null,
 	quantity: null,
+	security_type: '',
 	symbol: '',
 };
 export const profilesDefault = {

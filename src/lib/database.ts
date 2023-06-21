@@ -34,6 +34,68 @@ export interface Database {
           type?: string | null
           user_id?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "accounts_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      asset_classes: {
+        Row: {
+          cash: number | null
+          commodities: number | null
+          created_at: string | null
+          crypto: number | null
+          equityDeveloped: number | null
+          equityEmerging: number | null
+          equityOther: number | null
+          equityUS: number | null
+          fixedIncomeGlobal: number | null
+          fixedIncomeUS: number | null
+          id: number
+          other: number | null
+          realEstateGlobal: number | null
+          realEstateUS: number | null
+          symbol: string | null
+        }
+        Insert: {
+          cash?: number | null
+          commodities?: number | null
+          created_at?: string | null
+          crypto?: number | null
+          equityDeveloped?: number | null
+          equityEmerging?: number | null
+          equityOther?: number | null
+          equityUS?: number | null
+          fixedIncomeGlobal?: number | null
+          fixedIncomeUS?: number | null
+          id?: number
+          other?: number | null
+          realEstateGlobal?: number | null
+          realEstateUS?: number | null
+          symbol?: string | null
+        }
+        Update: {
+          cash?: number | null
+          commodities?: number | null
+          created_at?: string | null
+          crypto?: number | null
+          equityDeveloped?: number | null
+          equityEmerging?: number | null
+          equityOther?: number | null
+          equityUS?: number | null
+          fixedIncomeGlobal?: number | null
+          fixedIncomeUS?: number | null
+          id?: number
+          other?: number | null
+          realEstateGlobal?: number | null
+          realEstateUS?: number | null
+          symbol?: string | null
+        }
+        Relationships: []
       }
       blog: {
         Row: {
@@ -75,29 +137,44 @@ export interface Database {
           title?: string | null
           url?: string | null
         }
+        Relationships: []
       }
       portfolios: {
         Row: {
           account_id: number | null
+          cost_basis: number | null
           created_at: string | null
           description: string | null
           id: number
+          market_value: number | null
           name: string | null
         }
         Insert: {
           account_id?: number | null
+          cost_basis?: number | null
           created_at?: string | null
           description?: string | null
           id?: number
+          market_value?: number | null
           name?: string | null
         }
         Update: {
           account_id?: number | null
+          cost_basis?: number | null
           created_at?: string | null
           description?: string | null
           id?: number
+          market_value?: number | null
           name?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "portfolios_account_id_fkey"
+            columns: ["account_id"]
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       positions: {
         Row: {
@@ -109,6 +186,7 @@ export interface Database {
           portfolio_id: number | null
           price: number | null
           quantity: number | null
+          security_type: string | null
           symbol: string | null
         }
         Insert: {
@@ -120,6 +198,7 @@ export interface Database {
           portfolio_id?: number | null
           price?: number | null
           quantity?: number | null
+          security_type?: string | null
           symbol?: string | null
         }
         Update: {
@@ -131,8 +210,17 @@ export interface Database {
           portfolio_id?: number | null
           price?: number | null
           quantity?: number | null
+          security_type?: string | null
           symbol?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "positions_portfolio_id_fkey"
+            columns: ["portfolio_id"]
+            referencedRelation: "portfolios"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       profiles: {
         Row: {
@@ -180,6 +268,14 @@ export interface Database {
           phone?: string | null
           tax_filing_status?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       transactions: {
         Row: {
@@ -218,6 +314,14 @@ export interface Database {
           quantity?: number | null
           symbol?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_portfolio_id_fkey"
+            columns: ["portfolio_id"]
+            referencedRelation: "portfolios"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {
