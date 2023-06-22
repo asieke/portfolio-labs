@@ -5,8 +5,8 @@ import type { Format } from '$data/types';
  * param num The number to format.
  * returns A string representation of the number with commas separating the thousands places.
  */
-export const formatNumber = (num: number): string => {
-	num = Math.round(num * 100) / 100;
+export const formatNumber = (num: number, places = 0): string => {
+	num = Math.round(num * Math.pow(10, places)) / Math.pow(10, places);
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
@@ -15,8 +15,8 @@ export const formatNumber = (num: number): string => {
  * param num The number to format.
  * returns A string representation of the number as a currency value.
  */
-export const formatCurrency = (num: number): string => {
-	return `$${formatNumber(num)}`;
+export const formatCurrency = (num: number, places = 0): string => {
+	return `$${formatNumber(num, places)}`;
 };
 
 /**

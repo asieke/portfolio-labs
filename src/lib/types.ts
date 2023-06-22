@@ -39,5 +39,6 @@ export type SchwabPositionCSV = {
 
 export type ProfilesInsert = Database['public']['Tables']['profiles']['Insert'];
 export type ProfilesRow = Database['public']['Tables']['profiles']['Row'];
-export type TransactionsInsert = Database['public']['Tables']['transactions']['Insert'];
 export type PositionsInsert = Database['public']['Tables']['positions']['Insert'];
+export type PortfoliosRow = Database['public']['Tables']['portfolios']['Row'];
+export type AccountsRow = Database['public']['Tables']['accounts']['Row'];

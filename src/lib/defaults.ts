@@ -1,24 +1,24 @@
 export const accountsDefault = {
+	asset_class: [],
+	cost_basis: null,
 	created_at: '',
 	description: '',
+	market_value: null,
 	name: '',
 	type: '',
 	user_id: '',
 };
-export const asset_classesDefault = {
-	cash: null,
-	commodities: null,
+export const assetsDefault = {
+	asset_class: [],
+	country: '',
 	created_at: '',
-	crypto: null,
-	equityDeveloped: null,
-	equityEmerging: null,
-	equityOther: null,
-	equityUS: null,
-	fixedIncomeGlobal: null,
-	fixedIncomeUS: null,
-	other: null,
-	realEstateGlobal: null,
-	realEstateUS: null,
+	cusip: '',
+	description: '',
+	industry: '',
+	last_updated: '',
+	name: '',
+	sector: '',
+	security_type: '',
 	symbol: '',
 };
 export const blogDefault = {
@@ -35,6 +35,7 @@ export const blogDefault = {
 };
 export const portfoliosDefault = {
 	account_id: null,
+	asset_class: [],
 	cost_basis: null,
 	created_at: '',
 	description: '',
@@ -42,6 +43,7 @@ export const portfoliosDefault = {
 	name: '',
 };
 export const positionsDefault = {
+	asset_class: [],
 	cost_basis: null,
 	created_at: '',
 	market_value: null,
@@ -66,15 +68,4 @@ export const profilesDefault = {
 	net_worth: null,
 	phone: '',
 	tax_filing_status: '',
-};
-export const transactionsDefault = {
-	action: '',
-	amount: null,
-	date: '',
-	description: '',
-	fees: null,
-	portfolio_id: null,
-	price: null,
-	quantity: null,
-	symbol: '',
 };
