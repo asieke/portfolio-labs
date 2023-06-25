@@ -6,6 +6,8 @@ import type { Format } from '$data/types';
  * returns A string representation of the number with commas separating the thousands places.
  */
 export const formatNumber = (num: number, places = 0): string => {
+	//if num is NaN then return 0
+	if (isNaN(num)) return '0';
 	num = Math.round(num * Math.pow(10, places)) / Math.pow(10, places);
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
@@ -56,6 +58,8 @@ export const formatPhone = (num: string): string => {
  * returns A string representation of the number as a percentage value.
  */
 export const formatPercent = (num: number): string => {
+	//if its not a number then return 0%
+	if (isNaN(num)) return '0%';
 	return `${(num * 100).toFixed(1)}%`;
 };
 
