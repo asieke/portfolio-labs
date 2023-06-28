@@ -17,6 +17,7 @@ export const assetsDefault = {
 	industry: '',
 	last_updated: '',
 	name: '',
+	primary_asset_class: '',
 	sector: '',
 	security_type: '',
 	symbol: '',
