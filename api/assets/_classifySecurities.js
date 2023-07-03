@@ -18,7 +18,8 @@ const classifySecurities = async (supabase, assets) => {
 			newRow = await getFixedIncomeData(assets[i], data);
 		} else if (
 			assets[i].security_type === 'Crypto' ||
-			assets[i].security_type === 'Cash and Money Market'
+			assets[i].security_type === 'Cash and Money Market' ||
+			assets[i].symbol === 'CASHX'
 		) {
 			newRow = await getOtherData(assets[i]);
 		} else {

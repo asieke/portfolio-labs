@@ -1,15 +1,20 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { supabase } from '../_supabaseClient.js';
 
-import { getBondPrice } from './_updateMuni.js';
+import { fetchPrices } from './_fetchPrices.js';
+import { benchmarks } from './_data.js';
+
+type FetchPricesReturn =
+	| {
+			date: string;
+			symbol: string;
+			price?: number;
+			pct?: number;
+	  }[]
+	| null;
 
 export default async function updateAllocation(request: VercelRequest, response: VercelResponse) {
 	console.log('Running UpdatePrices');
-
-	if (request.method !== 'POST') {
-		response.status(405).send('Method Not Allowed'); // 405 is the status code for Method Not Allowed
-		return;
-	}
 
 	// 1. Reject if not a POST request
 	if (request.method !== 'POST') {
@@ -26,18 +31,31 @@ export default async function updateAllocation(request: VercelRequest, response:
 		return;
 	}
 
-	// select from supabase, assets table, where primary_asset_class like 'Fixed Income'
-	const { data, error } = await supabase
-		.from('assets')
-		.select('*')
-		.ilike('primary_asset_class', '%Muni%');
+	// 3. Get the unique symbols from the transactions table
+	try {
+		const { data: transactions, error } = await supabase
+			.from('transactions')
+			.select('symbol')
+			.not('symbol', 'is', null);
+		if (error || !transactions) throw error;
 
-	if (error || !data) {
-		response.status(500).send('Internal Server Error');
-		return;
+		const symbols = [
+			...new Set([...benchmarks, ...transactions.map((transaction) => transaction.symbol)])
+		];
+
+		// 4. Get the current price for each symbol
+
+		for (let i = 0; i < symbols.length; i++) {
+			const symbol = symbols[i];
+			const prices: FetchPricesReturn = await fetchPrices(symbol);
+			const { error: deleteError } = await supabase.from('prices').delete().match({ symbol });
+			if (deleteError) throw deleteError;
+			const { error: priceError } = await supabase.from('prices').insert(prices);
+			if (priceError) throw priceError;
+		}
+
+		return response.status(200).json({ status: 'done' });
+	} catch (e) {
+		return response.status(500).json({ error: e.message });
 	}
-
-	const html = await getBondPrice(data[0]);
-
-	return response.status(200).json({ html });
 }

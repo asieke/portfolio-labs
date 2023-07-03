@@ -8,6 +8,8 @@
 	export let data;
 	const { account } = data;
 
+	console.log(data);
+
 	let state: 'error' | 'overview' | 'detail' = 'overview';
 
 	const rows = [

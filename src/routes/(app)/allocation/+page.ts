@@ -19,6 +19,9 @@ export const load: PageLoad = async ({ parent }) => {
 		.from('accounts')
 		.select('*, portfolios(id, name, description, market_value, cost_basis, asset_class)')
 		.eq('user_id', session.user.id);
+	//add a filter so that it excludes "Sieke Test Account"
+
+	console.log(data);
 
 	if (error || !data || !data[0]) {
 		return {};

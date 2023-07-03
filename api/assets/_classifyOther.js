@@ -15,6 +15,10 @@ const getOtherData = async (asset) => {
 		asset.asset_class['Crypto'] = 100;
 	}
 
+	if (asset.symbol === 'CASHX') {
+		asset.asset_class['Cash'] = 100;
+	}
+
 	return asset;
 };
 
