@@ -77,12 +77,13 @@ const getHistoricalBalance = async (supabase, portfolio_id) => {
 		let benchmarkCrypto = 0;
 
 		const output = [];
-		dates.forEach((date) => {
+		dates.forEach((date, i) => {
+			let netFlows = 0;
 			if (txns[date]) {
 				txns[date].forEach((txn) => {
-					if (txn.action === 'deposit') {
+					if (txn.action === 'deposit' || txn.action === 'withdraw') {
 						balances['CASHX'] += txn.amount;
-
+						netFlows += txn.amount;
 						//add to benchmarks
 						benchmarkVFIFX += txn.amount;
 						benchmarkUSEquity += txn.amount;
@@ -91,18 +92,6 @@ const getHistoricalBalance = async (supabase, portfolio_id) => {
 						benchmark8020 += txn.amount;
 						benchmarkCash += txn.amount;
 						benchmarkCrypto += txn.amount;
-					}
-					if (txn.action === 'withdraw') {
-						balances['CASHX'] -= txn.amount;
-
-						//add to benchmarks
-						benchmarkVFIFX -= txn.amount;
-						benchmarkUSEquity -= txn.amount;
-						benchmarkFixedIncome -= txn.amount;
-						benchmark6040 -= txn.amount;
-						benchmark8020 -= txn.amount;
-						benchmarkCash -= txn.amount;
-						benchmarkCrypto -= txn.amount;
 					}
 					if (txn.action === 'buy') {
 						basis[txn.symbol] += txn.amount;
@@ -133,26 +122,22 @@ const getHistoricalBalance = async (supabase, portfolio_id) => {
 			benchmark6040 *= 1 + (benchmarkPcts['BIGPX'][date] || 0);
 			benchmark8020 *= 1 + (benchmarkPcts['BIAPX'][date] || 0);
 			benchmarkCash *= 1 + (benchmarkPcts['CASHX'][date] || 0);
-
-			if (date >= '2012-01-01') {
-				benchmarkCrypto =
-					benchmarkCrypto * 0.05 * (1 + (benchmarkPcts['BTC'][date] || 0)) +
-					benchmarkCrypto * 0.95 * (1 + (benchmarkPcts['VTSMX'][date] || 0));
-			} else {
-				benchmarkCrypto *= 1 + (benchmarkPcts['VTSMX'][date] || 0);
-			}
+			benchmarkCrypto *= 1 + (benchmarkPcts['BTC'][date] || 0);
 
 			output.push({
 				date,
-				balance: total,
 				portfolio_id,
-				benchmark_total_allocation: benchmarkVFIFX,
-				benchmark_us_equity: benchmarkUSEquity,
-				benchmark_fixed_income: benchmarkFixedIncome,
-				benchmark_60_40: benchmark6040,
-				benchmark_80_20: benchmark8020,
-				benchmark_cash: benchmarkCash,
-				benchmark_crypto: benchmarkCrypto
+				balance: total,
+				flows: i === 0 ? 0 : netFlows,
+				benchmarks: {
+					'Vanguard 2050 Fund': benchmarkVFIFX,
+					'US Equity Total Market': benchmarkUSEquity,
+					'Fixed Income': benchmarkFixedIncome,
+					'60/40 Allocation': benchmark6040,
+					'80/20 Allocation': benchmark8020,
+					Cash: benchmarkCash,
+					Bitcoin: benchmarkCrypto
+				}
 			});
 		});
 

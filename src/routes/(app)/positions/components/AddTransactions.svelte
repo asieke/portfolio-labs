@@ -3,7 +3,7 @@
 	import type { SupabaseClient } from '@supabase/supabase-js';
 
 	export let supabase: SupabaseClient;
-	export let portfolioID: number;
+	export let accountID: number;
 
 	let state: 'initial' | 'loading' | 'error' | 'success' = 'initial';
 	let transactionData = '';
@@ -12,7 +12,7 @@
 		state = 'loading';
 
 		try {
-			await addTransactions(supabase, transactionData, portfolioID);
+			await addTransactions(supabase, transactionData, accountID);
 			state = 'success';
 			setTimeout(() => {
 				state = 'initial';
@@ -41,19 +41,19 @@
 
 {#if state === 'initial' || state === 'error'}
 	<div class="mt-5">
-		<label for="positions"
-			>Positions
+		<label for="transactions"
+			>Transactions
 			{#if state === 'error' && transactionData === ''}
 				<span class="text-red-500"> Required</span>
 			{/if}
 		</label>
-		<input type="file" name="positions" class="" on:change={(e) => handleFileChange(e)} />
-		<button on:click={handleSubmit}>Add Portfolio</button>
+		<input type="file" name="transactions" class="" on:change={(e) => handleFileChange(e)} />
+		<button on:click={handleSubmit}>Add Transactions</button>
 	</div>
 {:else if state === 'loading'}
-	<h3 class="mb-4 border-b-[1px] pb-2">Adding Positions...</h3>
+	<h3 class="mb-4 pb-2">Adding Transactions...</h3>
 {:else}
-	<h3 class="mb-4 border-b-[1px] pb-2">Positions Added</h3>
+	<h3 class="mb-4 pb-2">Transactions Added!</h3>
 {/if}
 
 <style lang="postcss">

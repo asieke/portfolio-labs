@@ -16,6 +16,8 @@ const getMutualFundData = async (asset, data) => {
 
 	asset.description = data.General.Fund_Summary;
 	asset.cusip = data.General.CUSIP;
+	asset.security_type = 'Mutual Fund';
+	asset.name = data.General.Name;
 
 	// Check if the Mutual Fund belongs to the Commodities category
 	if (data.General.Fund_Category.toLowerCase().includes('commodities')) {
@@ -33,25 +35,6 @@ const getMutualFundData = async (asset, data) => {
 
 	// Get the percentage of emerging market equity
 	const emergingPct = getEmergingPct(data.MutualFund_Data.World_Regions) || 0;
-
-	/*
-  {
-  "Cash": 1.0011,
-  "Other": 0,
-  "Crypto": 0,
-  "Equity US": 86.92628,
-  "Commodities": 0,
-  "Equity Other": 0,
-  "Real Estate US": 0,
-  "Equity Emerging": 1.743150919580423,
-  "Equity Developed": 9.523609080419577,
-  "Real Estate Global": 0,
-  "Fixed Income General": 0,
-  "Fixed Income US Munis": 0,
-  "Fixed Income US Corporates": 0,
-  "Fixed Income US Treasuries": 0
-}
-  */
 
 	//Get the relative weights of the bond asset classes
 	if (data.General.Fund_Category.toLowerCase().includes('muni')) {

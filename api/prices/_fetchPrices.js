@@ -1,7 +1,7 @@
 import axios from 'axios';
 const FRED_API_KEY = process.env.FRED;
 const EOD_API_KEY = process.env.EOD;
-const START_DATE = '2008-07-01';
+const START_DATE = '2008-01-01';
 
 // This function generates an array of dates from 2008-07-01 to today's date
 import { generateDates } from '../_lib/_utils.js';
@@ -9,11 +9,12 @@ import { generateDates } from '../_lib/_utils.js';
 const fetchFredPrices = async () => {
 	const url = `https://api.stlouisfed.org/fred/series/observations?series_id=DFF&observation_start=${START_DATE}&api_key=${FRED_API_KEY}&file_type=json`;
 
-	const dates = generateDates(START_DATE);
-
 	try {
 		const response = await axios.get(url);
 		const observations = response.data.observations;
+		observations[0].value = 0;
+
+		const dates = generateDates(START_DATE, observations[observations.length - 1].date);
 
 		return dates.map((date, i) => ({
 			symbol: 'CASHX',
@@ -38,8 +39,7 @@ const fetchPrices = async (symbol) => {
 	}
 
 	// Define the API endpoint
-	const urlSymbol = symbol === 'BTC' ? 'BTC-USD.CC' : symbol;
-	const apiEndpoint = `https://eodhistoricaldata.com/api/eod/${urlSymbol}?api_token=${EOD_API_KEY}&fmt=json&from=2008-07-01`;
+	const apiEndpoint = `https://eodhistoricaldata.com/api/eod/${symbol}?api_token=${EOD_API_KEY}&fmt=json&from=${START_DATE}`;
 
 	// Make a GET request to the API
 	const response = await axios.get(apiEndpoint);
@@ -51,7 +51,7 @@ const fetchPrices = async (symbol) => {
 	}, {});
 
 	// Generate the dates array
-	const dates = generateDates(START_DATE);
+	const dates = generateDates(START_DATE, response.data[response.data.length - 1].date);
 
 	// Generate the output array with dates, symbol, and prices
 	let lastPrice = 0;

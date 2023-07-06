@@ -10,7 +10,7 @@ const benchmarks = [
 	'VGSIX',
 	'CSSPX',
 	'PCRAX',
-	'BTC',
+	'BTC-USD.CC',
 	'CASHX',
 	'VFIFX',
 	'BIAPX',

@@ -4821,7 +4821,28 @@ export const fakeTransactions = `"Transactions  for account Direct Index ...321 
 "Transactions Total","","","","","","","-$1782.58",
 `;
 
-export const sampleTransactions = [
+const transactionsCrypto = [
+	{
+		date: '2014-01-01',
+		action: 'deposit',
+		amount: 33000,
+		symbol: null
+	},
+	{
+		date: '2014-04-14',
+		action: 'buy',
+		amount: 30000,
+		symbol: 'BTC-USD.CC'
+	},
+	{
+		date: '2017-01-06',
+		action: 'buy',
+		amount: 3000,
+		symbol: 'ETH-USD.CC'
+	}
+];
+
+const transactionsEquity = [
 	{
 		date: '2008-07-01',
 		action: 'deposit',
@@ -6068,4 +6089,9 @@ export const sampleTransactions = [
 		symbol: null
 	},
 	{ date: '2023-06-17', action: 'buy', amount: 10000, symbol: 'MCD' }
+];
+
+export const sampleTransactions = [
+	...transactionsEquity.map((t) => ({ ...t, portfolio_id: 92 })),
+	...transactionsCrypto.map((t) => ({ ...t, portfolio_id: 93 }))
 ];

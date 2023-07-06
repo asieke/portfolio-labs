@@ -9,7 +9,8 @@ const getEquityData = async (asset, data) => {
 	asset.industry = data.General.Industry;
 	asset.asset_class = { ...assetClasses };
 	asset.cusip = data.General.CUSIP;
-
+	asset.security_type = 'Equity';
+	asset.name = data.General.Name;
 	// Checks if data contains cryptocurrency-related terms
 	if (
 		cryptoTerms.some(

@@ -31,14 +31,11 @@ export default async function updateAllocation(request: VercelRequest, response:
 	}
 
 	// get all the rows that have not been updated in the last 24h
-	const oneDayAgo = new Date();
-	oneDayAgo.setDate(oneDayAgo.getDate() - 1);
 	const { data, error } = await supabase
 		.from('assets')
 		.select('*')
-		.or(`last_updated.gt.${oneDayAgo.toISOString()},asset_class.is.null`)
-		.order('last_updated', { ascending: true })
-		.limit(50);
+		//only when asset_class is null
+		.is('asset_class', null);
 
 	if (error) {
 		response.status(500).send('Internal Server Error');

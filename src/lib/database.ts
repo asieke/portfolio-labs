@@ -3,7 +3,7 @@ export type Json =
   | number
   | boolean
   | null
-  | { [key: string]: Json }
+  | { [key: string]: Json | undefined }
   | Json[]
 
 export interface Database {
@@ -99,6 +99,43 @@ export interface Database {
           symbol?: string | null
         }
         Relationships: []
+      }
+      balances: {
+        Row: {
+          balance: number
+          benchmarks: Json
+          created_at: string | null
+          date: string
+          flows: number
+          id: number
+          portfolio_id: number
+        }
+        Insert: {
+          balance: number
+          benchmarks: Json
+          created_at?: string | null
+          date: string
+          flows: number
+          id?: number
+          portfolio_id: number
+        }
+        Update: {
+          balance?: number
+          benchmarks?: Json
+          created_at?: string | null
+          date?: string
+          flows?: number
+          id?: number
+          portfolio_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "balances_portfolio_id_fkey"
+            columns: ["portfolio_id"]
+            referencedRelation: "portfolios"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       blog: {
         Row: {
@@ -231,6 +268,33 @@ export interface Database {
           }
         ]
       }
+      prices: {
+        Row: {
+          created_at: string | null
+          date: string | null
+          id: number
+          pct: number | null
+          price: number | null
+          symbol: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          date?: string | null
+          id?: number
+          pct?: number | null
+          price?: number | null
+          symbol?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          date?: string | null
+          id?: number
+          pct?: number | null
+          price?: number | null
+          symbol?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           accepted_tos: boolean
@@ -282,6 +346,43 @@ export interface Database {
             foreignKeyName: "profiles_id_fkey"
             columns: ["id"]
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      transactions: {
+        Row: {
+          action: string | null
+          amount: number | null
+          created_at: string | null
+          date: string | null
+          id: number
+          portfolio_id: number | null
+          symbol: string | null
+        }
+        Insert: {
+          action?: string | null
+          amount?: number | null
+          created_at?: string | null
+          date?: string | null
+          id?: number
+          portfolio_id?: number | null
+          symbol?: string | null
+        }
+        Update: {
+          action?: string | null
+          amount?: number | null
+          created_at?: string | null
+          date?: string | null
+          id?: number
+          portfolio_id?: number | null
+          symbol?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_portfolio_id_fkey"
+            columns: ["portfolio_id"]
+            referencedRelation: "portfolios"
             referencedColumns: ["id"]
           }
         ]

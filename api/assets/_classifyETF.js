@@ -16,6 +16,8 @@ const getETFData = async (asset, data) => {
 
 	asset.description = data.General.Description;
 	asset.cusip = data.General.CUSIP;
+	asset.security_type = 'ETF';
+	asset.name = data.General.Name;
 
 	// Check if the Mutual Fund belongs to the Commodities category
 	if (data.General.Category.toLowerCase().includes('commodities')) {

@@ -2,6 +2,7 @@ import { assetClasses } from './_data.js';
 
 const getFixedIncomeData = async (asset, data) => {
 	asset.asset_class = { ...assetClasses };
+	asset.security_type = 'Fixed Income';
 
 	if (data === null) return asset;
 

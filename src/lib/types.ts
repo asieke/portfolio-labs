@@ -75,3 +75,9 @@ export type ProfilesRow = Database['public']['Tables']['profiles']['Row'];
 export type PositionsInsert = Database['public']['Tables']['positions']['Insert'];
 export type PortfoliosRow = Database['public']['Tables']['portfolios']['Row'];
 export type AccountsRow = Database['public']['Tables']['accounts']['Row'];
+
+type BalancesOriginal = Database['public']['Tables']['balances']['Row'];
+
+export type Balances = Omit<BalancesOriginal, 'benchmarks'> & {
+	benchmarks: Record<string, number>;
+};

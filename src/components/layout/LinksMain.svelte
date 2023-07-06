@@ -5,7 +5,8 @@
 
 <a class={view} on:click|stopPropagation={callback} href="/home">Dashboard</a>
 <a class={view} on:click|stopPropagation={callback} href="/accounts">Accounts</a>
-<a class={view} on:click|stopPropagation={callback} href="/benchmarks">Benchmarks</a>
+<a class={view} on:click|stopPropagation={callback} href="/positions">Positions</a>
+<a class={view} on:click|stopPropagation={callback} href="/performance">Performance</a>
 <a class={view} on:click|stopPropagation={callback} href="/allocation">Allocation</a>
 
 <style lang="postcss">

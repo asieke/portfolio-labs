@@ -22,6 +22,14 @@ export const assetsDefault = {
 	security_type: '',
 	symbol: '',
 };
+export const balancesDefault = {
+	balance: null,
+	benchmarks: [],
+	created_at: '',
+	date: '',
+	flows: null,
+	portfolio_id: null,
+};
 export const blogDefault = {
 	author: '',
 	author_img: '',
@@ -55,6 +63,13 @@ export const positionsDefault = {
 	security_type: '',
 	symbol: '',
 };
+export const pricesDefault = {
+	created_at: '',
+	date: '',
+	pct: null,
+	price: null,
+	symbol: '',
+};
 export const profilesDefault = {
 	accepted_tos: false,
 	address: '',
@@ -69,4 +84,12 @@ export const profilesDefault = {
 	net_worth: null,
 	phone: '',
 	tax_filing_status: '',
+};
+export const transactionsDefault = {
+	action: '',
+	amount: null,
+	created_at: '',
+	date: '',
+	portfolio_id: null,
+	symbol: '',
 };

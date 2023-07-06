@@ -43,6 +43,8 @@ export default async function updateAllocation(request: VercelRequest, response:
 			...new Set([...benchmarks, ...transactions.map((transaction) => transaction.symbol)])
 		];
 
+		console.log('FETCHING THE FOLLOWING SYMBOLS: ', symbols);
+
 		// 4. Get the current price for each symbol
 
 		for (let i = 0; i < symbols.length; i++) {

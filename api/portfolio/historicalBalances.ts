@@ -3,7 +3,7 @@ import { supabase } from '../_supabaseClient.js';
 
 import { getHistoricalBalance } from './_getHistoricalBalances.js';
 
-const portfolio_id = 92;
+const account_id = 4;
 
 export default async function historicalBalances(request: VercelRequest, response: VercelResponse) {
 	console.log('Running Update Historical Balances');
@@ -25,25 +25,36 @@ export default async function historicalBalances(request: VercelRequest, respons
 
 	// 3. Get the unique symbols from the transactions table
 	try {
-		const { error, output, positions } = await getHistoricalBalance(supabase, portfolio_id);
+		const { data: portfolios, error: portfolioSelectError } = await supabase
+			.from('portfolios')
+			.select('id')
+			.eq('account_id', account_id);
+		if (portfolioSelectError || !portfolios) throw portfolioSelectError;
 
-		if (error) throw error;
+		const ids = portfolios.map((portfolio) => portfolio.id);
 
-		const { error: deleteError } = await supabase
-			.from('balances')
-			.delete()
-			.match({ portfolio_id: portfolio_id });
-		if (deleteError) throw deleteError;
-		const { error: priceError } = await supabase.from('balances').insert(output);
-		if (priceError) throw priceError;
+		for (let i = 0; i < ids.length; i++) {
+			console.log('setting balances & positions for portfolio: ', ids[i]);
+			const { error, output, positions } = await getHistoricalBalance(supabase, ids[i]);
 
-		const { error: deleteError2 } = await supabase
-			.from('positions')
-			.delete()
-			.match({ portfolio_id: portfolio_id });
-		if (deleteError2) throw deleteError2;
-		const { error: priceError2 } = await supabase.from('positions').insert(positions);
-		if (priceError2) throw priceError2;
+			if (error) throw error;
+
+			const { error: deleteError } = await supabase
+				.from('balances')
+				.delete()
+				.match({ portfolio_id: ids[i] });
+			if (deleteError) throw deleteError;
+			const { error: priceError } = await supabase.from('balances').insert(output);
+			if (priceError) throw priceError;
+
+			const { error: deleteError2 } = await supabase
+				.from('positions')
+				.delete()
+				.match({ portfolio_id: ids[i] });
+			if (deleteError2) throw deleteError2;
+			const { error: priceError2 } = await supabase.from('positions').insert(positions);
+			if (priceError2) throw priceError2;
+		}
 
 		return response.status(200).json({ status: 'done' });
 	} catch (e) {
