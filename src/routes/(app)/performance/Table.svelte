@@ -1,83 +1,31 @@
 <script lang="ts">
-	import type { Balances } from '$lib/types';
+	import type { BalanceYearly } from './types';
 	import { formatPercent } from '$lib/shared/formatters';
 
-	export let balances: Balances[] = [];
+	export let data: BalanceYearly[];
 
-	type YearDetail = {
-		minDate: string;
-		maxDate: string;
-		startPortfolios: number[];
-		endPortfolios: number[];
-		flows: number;
-	};
-	let years: Record<string, YearDetail> = {};
-
-	let labels = Object.keys(balances[0].benchmarks as Record<string, number>);
-
-	for (let i = 0; i < balances.length; i++) {
-		//get the year part of balances.date
-		let year = balances[i].date.substring(0, 4);
-
-		if (!years[year]) {
-			years[year] = {
-				minDate: '9999-99-99',
-				maxDate: '0000-00-00',
-				startPortfolios: [],
-				endPortfolios: [],
-				flows: 0
-			};
-		}
-
-		years[year].flows += balances[i].flows;
-
-		if (balances[i].date < years[year].minDate) {
-			years[year].minDate = balances[i].date;
-			years[year].startPortfolios = [
-				balances[i].balance,
-				...labels.map((label) => balances[i].benchmarks[label])
-			];
-		}
-
-		if (balances[i].date > years[year].maxDate) {
-			years[year].maxDate = balances[i].date;
-			years[year].endPortfolios = [
-				balances[i].balance,
-				...labels.map((label) => balances[i].benchmarks[label])
-			];
-		}
-	}
-
-	labels = ['My Portfolio', ...labels];
-
-	const displayPct = (i: number, y: string) => {
-		return formatPercent(
-			(years[y].endPortfolios[i] - years[y].flows * 0.5) /
-				(years[y].startPortfolios[i] + years[y].flows * 0.5) -
-				1
-		);
+	const displayPct = (start: number, end: number, flow: number) => {
+		return formatPercent((end - 0.5 * flow) / (start + 0.5 * flow) - 1);
 	};
 </script>
 
 <table>
-	<thead>
+	<tr>
+		<td>Headers</td>
+		<td>My Portfolio</td>
+		{#each Object.keys(data[0].start_benchmarks) as label}
+			<td>{label}</td>
+		{/each}
+	</tr>
+	{#each data as row}
 		<tr>
-			<th>Year</th>
-			{#each labels as label (label)}
-				<th>{label}</th>
+			<td>{row.year}</td>
+			<td>{displayPct(row.start_balance, row.end_balance, row.total_flows)}</td>
+			{#each Object.keys(row.end_benchmarks) as key}
+				<td>{displayPct(row.start_benchmarks[key], row.end_benchmarks[key], row.total_flows)}</td>
 			{/each}
 		</tr>
-	</thead>
-	<tbody>
-		{#each Object.entries(years) as [year, data] (year)}
-			<tr>
-				<td>{year}</td>
-				{#each data.endPortfolios as value, i}
-					<td>{displayPct(i, year)}</td>
-				{/each}
-			</tr>
-		{/each}
-	</tbody>
+	{/each}
 </table>
 
 <style>

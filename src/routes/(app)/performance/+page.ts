@@ -1,73 +1,103 @@
 // src/routes/profile/+page.ts
 import type { PageLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
-import type { Balances } from '$lib/types';
+import type { Balance, BalanceYearly } from './types';
 
 export const load: PageLoad = async (context) => {
 	const { session, supabase } = await context.parent();
 
-	//if !session then redirect to login
+	// If no session or no user in the session, redirect to the home page
 	if (!session || !session.user) {
 		throw redirect(303, '/');
 	}
 
-	//set the portfolio id from the id slug - should be http://example.com/performance/:id
-
-	// use supabase to get rows from accounts table where id = session.user.id
-	// merge the portfolios that match the account_ids
-
 	try {
-		const { data: accounts, error: error0 } = await supabase
+		// Retrieve user's accounts
+		const { data: userAccounts, error: accountsError } = await supabase
 			.from('accounts')
 			.select('id')
 			.eq('user_id', session.user.id);
-		if (error0) throw error0;
-		if (!accounts) throw new Error('No accounts found');
 
-		const { id } = accounts[0];
+		// Throw error if it exists or if no accounts were found
+		if (accountsError) throw accountsError;
+		if (!userAccounts) throw new Error('No accounts found');
 
-		const { data: portfolios, error: error3 } = await supabase
+		// Get the user's account ID
+		const { id: accountId } = userAccounts[0];
+
+		// Retrieve the portfolios associated with the account ID
+		const { data: portfolioData, error: portfolioError } = await supabase
 			.from('portfolios')
 			.select('*')
-			.eq('account_id', id);
-		if (error3) throw error3;
-		if (!portfolios) throw new Error('No portfolios found');
+			.eq('account_id', accountId);
 
-		const portfolio_id = context.url.searchParams.get('id') || portfolios[0].id;
-		const portfolioMetaData = portfolios.reduce((acc, cur) => {
-			acc[cur.id] = { name: cur.name, description: cur.description };
+		// Throw error if it exists or if no portfolios were found
+		if (portfolioError) throw portfolioError;
+		if (!portfolioData) throw new Error('No portfolios found');
+
+		//create a map of portfolio ids to portfolio data
+		const portfolioMap = portfolioData.reduce((acc, portfolio) => {
+			acc[portfolio.id] = portfolio;
 			return acc;
 		}, {});
 
-		const { data: balances, error: error1 } = await supabase
-			.from('balances')
-			.select('*')
-			.eq('portfolio_id', portfolio_id)
-			.order('date', { ascending: true });
-		if (error1) throw error1;
-		if (!balances) throw new Error('No balances found');
-		const { data: transactions, error: error2 } = await supabase
-			.from('transactions')
-			.select('*')
-			.eq('portfolio_id', portfolio_id);
-		if (error2) throw error2;
+		// Get an array of portfolio IDs
+		const portfolioIds = portfolioData.map((portfolio) => portfolio.id);
 
+		// Retrieve balances associated with the portfolio IDs
+		const { data: balanceData, error: balancesError } = await supabase
+			.from('balances')
+			.select('date, balance, benchmarks, flows, portfolio_id')
+			.in('portfolio_id', portfolioIds)
+			.order('date', { ascending: true });
+
+		// Throw error if it exists or if no balances were found
+		if (balancesError) throw balancesError;
+		if (!balanceData) throw new Error('No balances found');
+
+		const balances: Record<string, Balance[]> = {};
+
+		balanceData.forEach((balance) => {
+			const id = balance.portfolio_id;
+			balances[id] = balances[id] ? [...balances[id], balance] : [balance];
+		});
+
+		const { data: yearlyData, error: yearlyError } = await supabase
+			.from('balances_yearly')
+			.select('*')
+			.in('portfolio_id', portfolioIds);
+
+		if (yearlyError) throw yearlyError;
+		if (!yearlyData) throw new Error('No yearly data found');
+
+		const yearly: Record<string, BalanceYearly[]> = {};
+
+		yearlyData.forEach((row) => {
+			const id = row.portfolio_id;
+			const temp = row as BalanceYearly;
+			yearly[id] = yearly[id] ? [...yearly[id], temp] : [temp];
+		});
+
+		//labels
+		const labels = Object.keys(balanceData[0].benchmarks);
+
+		// If successful, return the relevant data
 		return {
 			user: session.user,
-			balances: balances as Balances[],
-			transactions: transactions,
-			//convert portfolios to an object with key = id and value = {name, description}
-			portfolios: portfolioMetaData,
-			portfolio_id: portfolio_id
+			balances: balances,
+			portfolios: portfolioMap,
+			balancesYearly: yearly,
+			labels: labels
 		};
 	} catch (e) {
 		console.log(e);
+		// If any error occurs, return an object with empty arrays for balances, transactions and portfolios
 		return {
 			user: session.user,
 			balances: [],
-			transactions: [],
-			portfolios: {},
-			portfolio_id: null
+			portfolios: [],
+			balancesYearly: [],
+			labels: {}
 		};
 	}
 };

@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import Highcharts from 'highcharts/highstock';
 
+	import { writable } from 'svelte/store';
+
 	export let balances;
 	export let visibility;
 
