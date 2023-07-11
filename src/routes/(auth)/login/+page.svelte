@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PUBLIC_APP_URL } from '$env/static/public';
 	let email = 'asieke@gmail.com';
 	let state: 'form' | 'loading' | 'submitted' = 'form';
 
@@ -8,12 +9,16 @@
 	const submit = async () => {
 		state = 'loading';
 
+		console.log(PUBLIC_APP_URL, 'LOGGING IN***********');
+
 		const { data, error } = await supabase.auth.signInWithOtp({
 			email: email,
 			options: {
-				emailRedirectTo: 'http://localhost:5173/redir'
+				emailRedirectTo: PUBLIC_APP_URL + '/redir'
 			}
 		});
+
+		console.log(data, error, 'LOGGING IN***********');
 
 		setTimeout(() => {
 			state = 'submitted';
