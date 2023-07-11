@@ -9,16 +9,15 @@
 	const submit = async () => {
 		state = 'loading';
 
-		console.log(PUBLIC_APP_URL, 'LOGGING IN***********');
+		const redirectURL = PUBLIC_APP_URL + '/redir';
+		console.log(redirectURL, 'LOGGING IN***********');
 
 		const { data, error } = await supabase.auth.signInWithOtp({
 			email: email,
 			options: {
-				emailRedirectTo: PUBLIC_APP_URL + '/redir'
+				emailRedirectTo: redirectURL
 			}
 		});
-
-		console.log(data, error, 'LOGGING IN***********');
 
 		setTimeout(() => {
 			state = 'submitted';
