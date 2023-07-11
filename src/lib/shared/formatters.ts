@@ -7,7 +7,7 @@ import type { Format } from '$data/types';
  */
 export const formatNumber = (num: number, places = 0): string => {
 	//if num is NaN then return 0
-	if (isNaN(num)) return '0';
+	if (isNaN(num) || typeof num === 'string') return '';
 	num = Math.round(num * Math.pow(10, places)) / Math.pow(10, places);
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
@@ -18,6 +18,7 @@ export const formatNumber = (num: number, places = 0): string => {
  * returns A string representation of the number as a currency value.
  */
 export const formatCurrency = (num: number, places = 0): string => {
+	if (isNaN(num) || typeof num === 'string') return '';
 	return `$${formatNumber(num, places)}`;
 };
 
@@ -59,7 +60,7 @@ export const formatPhone = (num: string): string => {
  */
 export const formatPercent = (num: number): string => {
 	//if its not a number then return 0%
-	if (isNaN(num)) return '0%';
+	if (isNaN(num) || typeof num !== 'number' || num === Infinity) return '';
 	return `${(num * 100).toFixed(1)}%`;
 };
 
