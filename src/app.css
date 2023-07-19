@@ -18,7 +18,7 @@ h2 {
 }
 
 h3 {
-	@apply my-2 text-2xl font-semibold text-gray-700 dark:text-gray-300;
+	@apply my-2  text-2xl font-semibold text-gray-700 dark:text-gray-300;
 }
 
 h4,
