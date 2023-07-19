@@ -7,15 +7,15 @@
 </script>
 
 {#if layout === 'full'}
-	<div class="w-full rounded-xl bg-slate-100 p-8 shadow-lg dark:bg-black-900">
+	<div class="w-full rounded-xl bg-slate-50 p-8 shadow-lg dark:bg-dark-900">
 		<slot />
 	</div>
 {:else}
 	<div class={gridClass}>
-		<div class="rounded-xl bg-slate-100 p-8 shadow-lg dark:bg-black-900">
+		<div class="rounded-xl bg-slate-50 p-8 shadow-lg dark:bg-dark-900">
 			<slot name="left" />
 		</div>
-		<div class="rounded-xl bg-slate-100 p-8 shadow-lg dark:bg-black-900">
+		<div class="rounded-xl bg-slate-50 p-8 shadow-lg dark:bg-dark-900">
 			<slot name="right" />
 		</div>
 	</div>

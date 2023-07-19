@@ -4,7 +4,7 @@
 
 html,
 body {
-	@apply h-full bg-gray-100 dark:bg-black-700;
+	@apply h-full;
 	font-family: 'Source Sans 3', sans-serif;
 }
 
@@ -32,16 +32,6 @@ p {
 	@apply my-2 text-base leading-6 text-gray-600 dark:text-gray-400;
 }
 
-/* List styles */
-ul,
-ol {
-	@apply my-2 list-outside list-disc pl-5;
-}
-
-li {
-	@apply my-1 text-base text-gray-600 dark:text-gray-400;
-}
-
 /* Table styles */
 table {
 	@apply my-4 w-full border-collapse;
@@ -54,4 +44,46 @@ td {
 
 th {
 	@apply font-semibold text-gray-700 dark:text-gray-300;
+}
+
+/* Form Styles */
+form input[type='text'],
+form input[type='email'] {
+	@apply block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6;
+	@apply text-gray-900 ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600 dark:bg-slate-800 dark:text-gray-100 dark:ring-gray-700;
+}
+
+form select {
+	@apply block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6;
+	@apply dark:bg-slate-800 dark:text-gray-100 dark:ring-gray-700;
+}
+
+form input[type='radio'],
+form input[type='checkbox'] {
+	@apply h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600;
+	@apply dark:border-gray-600 dark:bg-slate-800;
+}
+
+form legend {
+	@apply text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100;
+}
+
+form h2 {
+	@apply text-base font-semibold leading-7 text-gray-900 dark:text-gray-100;
+}
+
+form p {
+	@apply mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400;
+}
+
+form label {
+	@apply block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100;
+}
+
+button.cancel {
+	@apply text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100;
+}
+
+button.submit {
+	@apply rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
 }

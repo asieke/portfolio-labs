@@ -3,8 +3,8 @@
 	import { Nav, Footer } from '$components/layout';
 </script>
 
-<div class="flex min-h-full flex-col">
-	<div class="bg-gray-800 pb-32 dark:bg-black-800">
+<div class="flex min-h-full flex-col bg-gray-100 dark:bg-dark-700">
+	<div class="bg-gray-800 pb-32 dark:bg-dark-800">
 		<Nav />
 	</div>
 
@@ -19,9 +19,6 @@
 
 <svelte:head>
 	<script>
-		// On page load or when changing themes, best to add inline in `head` to avoid FOUC
-		console.log('DARK MODE: ', localStorage.getItem('darkMode'));
-
 		if (localStorage.getItem('darkMode') === 'true') {
 			console.log('true');
 			document.documentElement.classList.add('dark');

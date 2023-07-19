@@ -1,17 +1,14 @@
 <script lang="ts">
 	import { profileLinks } from '$lib/layoutData';
-	import { IconBell } from '$components/svg';
 	import { menuDesktopShowing } from '$lib/stores/menuDesktop';
 	import { page } from '$app/stores';
+	import { Notifications } from '$components/layout';
 
 	$: pathname = $page.url.pathname;
 </script>
 
 <div class="ml-4 flex items-center md:ml-6">
-	<button type="button" class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white">
-		<span class="sr-only">View notifications</span>
-		<IconBell />
-	</button>
+	<Notifications />
 	<div class="relative ml-3">
 		<div id="menuDesktop">
 			<button
@@ -31,7 +28,7 @@
 		</div>
 		{#if $menuDesktopShowing}
 			<div
-				class="absolute -right-2 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+				class="absolute -right-2 z-10 mt-2 w-48 origin-top-right rounded-xl bg-white py-3 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-dark-950 dark:ring-gray-700"
 				role="menu"
 				aria-orientation="vertical"
 				aria-labelledby="user-menu-button"
@@ -40,7 +37,7 @@
 				{#each profileLinks as { label, href }, i}
 					<a
 						{href}
-						class={pathname === href ? 'bg-gray-200' : 'hover:bg-gray-100'}
+						class={pathname === href ? 'bg-gray-200 dark:bg-gray-800' : 'hover:bg-gray-100 dark:hover:bg-gray-900'}
 						on:click|stopPropagation={() => menuDesktopShowing.set(false)}
 						role="menuitem"
 						tabindex="-1"
@@ -54,6 +51,6 @@
 
 <style lang="postcss">
 	a {
-		@apply block px-4 py-2 text-sm text-gray-700;
+		@apply block px-4 py-2 text-sm text-gray-700 dark:text-gray-300;
 	}
 </style>

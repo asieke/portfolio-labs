@@ -1,8 +1,4 @@
 <script lang="ts">
-	import { Container } from '$components/layout';
 </script>
 
-<Container layout="left">
-	<div slot="left"><h3>Sidebar</h3></div>
-	<div slot="right"><h3>Accounts</h3></div>
-</Container>
+<h3>Accounts</h3>

@@ -5,7 +5,7 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				black: {
+				dark: {
 					700: '#1e1b4b',
 					800: '#000',
 					900: 'rgb(30,30,30)',
@@ -19,5 +19,5 @@ export default {
 			}
 		}
 	},
-	plugins: []
+	plugins: [require('@tailwindcss/forms')]
 };
