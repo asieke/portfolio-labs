@@ -1,5 +1,5 @@
-import IconHamburger from './IconHamburger.svelte';
-import IconClose from './IconClose.svelte';
+import IconHamburger from './IconClose.svelte';
+import IconClose from './IconHamburger.svelte';
 import IconBell from './IconBell.svelte';
 
 export { IconClose, IconHamburger, IconBell };
