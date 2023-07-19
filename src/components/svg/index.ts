@@ -11,7 +11,7 @@ import IconPeople from './IconPeople.svelte';
 import IconReports from './IconReports.svelte';
 import IconSignOut from './IconSignOut.svelte';
 import IconAdjustments from './IconAdjustments.svelte';
-import IconLock from './iconLock.svelte';
+import IconLock from './IconLock.svelte';
 
 export {
 	IconBell,
