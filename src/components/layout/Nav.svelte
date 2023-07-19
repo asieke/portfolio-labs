@@ -2,8 +2,6 @@
 	import { MenuDesktop, MenuMobile, Links } from '$components/layout';
 	import { IconHamburger, IconClose, IconBell } from '$components/svg';
 	import { menuMobileShowing } from '$lib/stores/menuMobile';
-
-	console.log('NAV MOBILE MENU', $menuMobileShowing);
 </script>
 
 <nav class="bg-gray-800 dark:bg-black-950">

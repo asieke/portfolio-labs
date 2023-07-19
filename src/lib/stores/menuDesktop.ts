@@ -10,7 +10,6 @@ export const menuDesktopShowing = writable(false);
 // It checks if the clicked element is inside an element with the id 'menuDesktop'
 // If the clicked element is not inside '#menuDesktop', it sets the 'menuDesktopShowing' store to false
 const menuDesktopClickHandler = (event: Event) => {
-	console.log('CLICK HANDLER', event.target);
 	const target = event.target as HTMLElement;
 	if (!target.closest('#menuDesktop')) {
 		menuDesktopShowing.set(false);
@@ -23,7 +22,6 @@ const menuDesktopClickHandler = (event: Event) => {
 // If the store value is false (meaning the menu should not be shown), it removes the click event listener from the document
 // This ensures that we only listen for clicks when the menu is visible, so we can hide the menu if a click is detected outside the menu
 menuDesktopShowing.subscribe((value) => {
-	console.log('handler triggered');
 	if (browser) {
 		if (value === true) {
 			document.addEventListener('click', menuDesktopClickHandler);

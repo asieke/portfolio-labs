@@ -2,8 +2,6 @@
 	import { Container } from '$components/layout';
 	import { darkMode } from '$lib/stores/darkMode';
 
-	console.log($darkMode);
-
 	import { Toggle } from '$components/form';
 </script>
 

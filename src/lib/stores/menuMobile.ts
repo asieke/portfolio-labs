@@ -24,10 +24,8 @@ const menuMobileClickHandler = (event: Event) => {
 menuMobileShowing.subscribe((value) => {
 	if (browser) {
 		if (value === true) {
-			console.log('subscribe, true');
 			document.addEventListener('click', menuMobileClickHandler);
 		} else {
-			console.log('subscribe, false');
 			document.removeEventListener('click', menuMobileClickHandler);
 		}
 	}

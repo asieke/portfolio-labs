@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '../app.css';
 	import { Nav, Footer } from '$components/layout';
-	import { LOGNAME } from '$env/static/private';
 </script>
 
 <div class="flex min-h-full flex-col">
@@ -17,6 +16,21 @@
 
 	<Footer />
 </div>
+
+<svelte:head>
+	<script>
+		// On page load or when changing themes, best to add inline in `head` to avoid FOUC
+		console.log('DARK MODE: ', localStorage.getItem('darkMode'));
+
+		if (localStorage.getItem('darkMode') === 'true') {
+			console.log('true');
+			document.documentElement.classList.add('dark');
+		} else {
+			console.log('false');
+			document.documentElement.classList.remove('dark');
+		}
+	</script>
+</svelte:head>
 
 <style>
 </style>
