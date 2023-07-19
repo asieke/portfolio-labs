@@ -4,30 +4,34 @@ export const navLinks = [
 		href: '/dashboard'
 	},
 	{
-		label: 'Profile',
-		href: '/profile'
-	},
-	{
-		label: 'Accounts',
-		href: '/accounts'
+		label: 'Positions',
+		href: '/positions'
 	},
 	{
 		label: 'Performance',
 		href: '/performance'
+	},
+	{
+		label: 'Modeling',
+		href: '/modeling'
 	}
 ];
 
 export const profileLinks = [
 	{
 		label: 'Profile',
-		href: '/profile'
+		href: '/settings/profile'
 	},
 	{
 		label: 'Settings',
 		href: '/settings'
 	},
 	{
+		label: 'Accounts',
+		href: '/settings/accounts'
+	},
+	{
 		label: 'Logout',
-		href: '/logout'
+		href: '/settings/logout'
 	}
 ];
