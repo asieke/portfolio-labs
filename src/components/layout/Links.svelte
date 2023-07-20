@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { navLinks } from '$lib/layoutData';
 	import { page } from '$app/stores';
+	import { Logo } from '$components/brand';
 
 	$: pathname = $page.url.pathname;
 </script>
 
 <div class="flex-shrink-0">
-	<a href="/">
-		<img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
-	</a>
+	<a href="/"><Logo /></a>
 </div>
 <div class="hidden md:block">
 	<div class="ml-10 flex items-baseline space-x-4">

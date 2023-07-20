@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { Container } from '$components/layout';
-	import { SignIn } from '$components/auth';
 	export let data;
 	const { session } = data;
 
@@ -12,7 +10,7 @@
 	<header class="absolute inset-x-0 top-0 z-50">
 		<nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
 			<div class="flex lg:flex-1">
-				<a href="#" class="-m-1.5 p-1.5">
+				<a href="/" class="-m-1.5 p-1.5">
 					<span class="sr-only">Your Company</span>
 					<img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="" />
 				</a>
@@ -33,14 +31,14 @@
 				</button>
 			</div>
 			<div class="hidden lg:flex lg:gap-x-12">
-				<a href="#" class="text-sm font-semibold leading-6 text-white">Product</a>
-				<a href="#" class="text-sm font-semibold leading-6 text-white">Features</a>
-				<a href="#" class="text-sm font-semibold leading-6 text-white">Marketplace</a>
-				<a href="#" class="text-sm font-semibold leading-6 text-white">Company</a>
+				<a href="/" class="text-sm font-semibold leading-6 text-white">Product</a>
+				<a href="/" class="text-sm font-semibold leading-6 text-white">Features</a>
+				<a href="/" class="text-sm font-semibold leading-6 text-white">Marketplace</a>
+				<a href="/" class="text-sm font-semibold leading-6 text-white">Company</a>
 			</div>
 			<div class="hidden lg:flex lg:flex-1 lg:justify-end">
 				{#if !session}
-					<a href="/auth/signin" class="text-sm font-semibold leading-6 text-white"
+					<a href="/signin" class="text-sm font-semibold leading-6 text-white"
 						>Log in <span aria-hidden="true">&rarr;</span></a
 					>
 				{:else}
@@ -58,7 +56,7 @@
 				class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
 			>
 				<div class="flex items-center justify-between">
-					<a href="#" class="-m-1.5 p-1.5">
+					<a href="/" class="-m-1.5 p-1.5">
 						<span class="sr-only">Your Company</span>
 						<img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
 					</a>
@@ -80,29 +78,29 @@
 					<div class="-my-6 divide-y divide-gray-500/10">
 						<div class="space-y-2 py-6">
 							<a
-								href="#"
+								href="/"
 								class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
 								>Product</a
 							>
 							<a
-								href="#"
+								href="/"
 								class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
 								>Features</a
 							>
 							<a
-								href="#"
+								href="/"
 								class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
 								>Marketplace</a
 							>
 							<a
-								href="#"
+								href="/"
 								class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
 								>Company</a
 							>
 						</div>
 						<div class="py-6">
 							<a
-								href="#"
+								href="/"
 								class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
 								>Log in</a
 							>
@@ -136,7 +134,7 @@
 						<div
 							class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20"
 						>
-							Announcing our next round of funding. <a href="#" class="font-semibold text-white"
+							Announcing our next round of funding. <a href="/" class="font-semibold text-white"
 								><span class="absolute inset-0" aria-hidden="true" />Read more <span aria-hidden="true">&rarr;</span></a
 							>
 						</div>
@@ -151,11 +149,11 @@
 						</p>
 						<div class="mt-10 flex items-center justify-center gap-x-6">
 							<a
-								href="#"
+								href="/"
 								class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
 								>Get started</a
 							>
-							<a href="#" class="text-sm font-semibold leading-6 text-white"
+							<a href="/" class="text-sm font-semibold leading-6 text-white"
 								>Live demo <span aria-hidden="true">→</span></a
 							>
 						</div>
@@ -490,7 +488,7 @@
 						</li>
 					</ul>
 					<a
-						href="#"
+						href="/"
 						aria-describedby="tier-hobby"
 						class="mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:mt-10"
 						>Get started today</a
@@ -566,7 +564,7 @@
 						</li>
 					</ul>
 					<a
-						href="#"
+						href="/"
 						aria-describedby="tier-enterprise"
 						class="mt-8 block rounded-md bg-indigo-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 sm:mt-10"
 						>Get started today</a
@@ -650,16 +648,16 @@
 							<h3 class="text-sm font-semibold leading-6 text-white">Solutions</h3>
 							<ul role="list" class="mt-6 space-y-4">
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Marketing</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Marketing</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Analytics</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Analytics</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Commerce</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Commerce</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Insights</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Insights</a>
 								</li>
 							</ul>
 						</div>
@@ -667,16 +665,16 @@
 							<h3 class="text-sm font-semibold leading-6 text-white">Support</h3>
 							<ul role="list" class="mt-6 space-y-4">
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Pricing</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Pricing</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Documentation</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Documentation</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Guides</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Guides</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">API Status</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">API Status</a>
 								</li>
 							</ul>
 						</div>
@@ -686,19 +684,19 @@
 							<h3 class="text-sm font-semibold leading-6 text-white">Company</h3>
 							<ul role="list" class="mt-6 space-y-4">
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">About</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">About</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Blog</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Blog</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Jobs</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Jobs</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Press</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Press</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Partners</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Partners</a>
 								</li>
 							</ul>
 						</div>
@@ -706,13 +704,13 @@
 							<h3 class="text-sm font-semibold leading-6 text-white">Legal</h3>
 							<ul role="list" class="mt-6 space-y-4">
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Claim</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Claim</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Privacy</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Privacy</a>
 								</li>
 								<li>
-									<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Terms</a>
+									<a href="/" class="text-sm leading-6 text-gray-300 hover:text-white">Terms</a>
 								</li>
 							</ul>
 						</div>
