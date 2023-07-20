@@ -32,7 +32,7 @@ export const profileLinks = [
 	},
 	{
 		label: 'Logout',
-		href: '/settings/logout'
+		href: '/auth/signout'
 	}
 ];
 
@@ -66,7 +66,7 @@ export const settingsLinks = [
 	},
 	{
 		label: 'Logout',
-		href: '/settings/logout',
+		href: '/auth/signout',
 		icon: IconSignOut
 	}
 ];

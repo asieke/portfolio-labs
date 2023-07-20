@@ -3,6 +3,10 @@
 	import { darkMode } from '$lib/stores/darkMode';
 
 	import { Toggle } from '$components/form';
+
+	export let data;
+
+	console.log(data);
 </script>
 
 <Container layout="even">
