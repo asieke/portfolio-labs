@@ -35,22 +35,12 @@ export const getDashboardPortfolios = async (supabase: SupabaseClient, user_id: 
  * *******************************************************************
  */
 export const getDashboardBalances = async (supabase: SupabaseClient, user_id: string) => {
-	const { data: portfolios, error: portfoliosError } = await supabase
-		.from('portfolios')
-		.select('*')
-		.eq('user_id', user_id);
-
-	if (portfoliosError || portfolios.length === 0) return [];
-
 	const { data: balances, error: balancesError } = await supabase
 		.from('balances_weekly')
 		.select('*')
-		.in(
-			'portfolio_id',
-			portfolios.map((p) => p.id)
-		);
+		.eq('user_id', user_id);
 
-	if (balancesError || balances.length === 0) return { balances: [] };
+	if (balancesError || balances.length === 0) return null;
 
 	return balances as Balance[];
 };

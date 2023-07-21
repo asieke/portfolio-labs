@@ -1,5 +1,4 @@
 // import { loadTransactions } from './transactions/transactions.js';
-import { supabase } from './_lib/supabase.js';
 import { initializeAccounts } from './accounts/accounts.js';
 import { initializeAssets } from './assets/assets.js';
 import { initializePrices } from './prices/prices.js';

@@ -35,6 +35,8 @@ export const initializeAccounts = async (userId) => {
 
 				const transactionData = portfolio.transactions.map((transaction) => ({
 					portfolio_id: portfolio_id,
+					user_id: userId,
+					account_id: account_id,
 					...transaction
 				}));
 				await supabase.from('transactions').insert(transactionData);

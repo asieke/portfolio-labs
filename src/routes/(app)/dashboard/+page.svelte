@@ -1,17 +1,27 @@
 <script lang="ts">
 	import { Container } from '$components/layout';
+	import Table from './components/Table.svelte';
+	import Summary from './components/Summary.svelte';
 
 	export let data;
+	const { balances, portfolios } = data;
+	const total = portfolios ? portfolios[portfolios.length - 1] : null;
 
-	console.log(data);
+	console.log(total);
+
+	console.log(balances, portfolios);
 </script>
 
 <Container layout="right">
 	<div slot="left">
-		<h3>Content</h3>
+		{#if balances && portfolios}
+			<Table {portfolios} />
+		{/if}
 	</div>
 
 	<div slot="right">
-		<h3>Sidebar</h3>
+		{#if total}
+			<Summary portfolio={total} />
+		{/if}
 	</div>
 </Container>

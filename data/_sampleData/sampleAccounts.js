@@ -2,6 +2,19 @@ import { direct, global, retirement, crypto } from './sampleTransactions.js';
 
 export const sampleAccounts = [
 	{
+		name: 'Total - All Accounts',
+		description: 'All Accounts',
+		type: 'Total',
+		portfolios: [
+			{
+				name: 'Total',
+				description: 'Total',
+				type: 'Total',
+				transactions: [...direct, ...global, ...retirement, ...crypto]
+			}
+		]
+	},
+	{
 		name: 'Schwab Account',
 		description: 'Schwab Investing and Retirement Accounts',
 		type: 'Brokerage',

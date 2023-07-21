@@ -1,10 +1,7 @@
 import { supabase } from '../_lib/supabase.js';
 import { generateDates } from '../_lib/utils.js';
-import { getDistinctSymbols } from '../_lib/database.js';
 
 export const initializePortfolios = async (USER_ID) => {
-	const symbols = await getDistinctSymbols();
-
 	//get the portfolios for the user
 	const { data } = await supabase.from('portfolios').select().eq('user_id', USER_ID);
 
@@ -16,18 +13,30 @@ export const initializePortfolios = async (USER_ID) => {
 		await supabase.from('balances').delete().match({ portfolio_id: portfolio.id });
 		await supabase.from('positions').delete().match({ portfolio_id: portfolio.id });
 
-		await supabase.from('balances').insert(balances);
-		await supabase.from('positions').insert(positions);
+		const balanceData = balances.map((b) => ({
+			...b,
+			portfolio_id: portfolio.id,
+			user_id: portfolio.user_id,
+			account_id: portfolio.account_id
+		}));
+
+		const positionData = positions.map((p) => ({
+			...p,
+			portfolio_id: portfolio.id,
+			user_id: portfolio.user_id,
+			account_id: portfolio.account_id
+		}));
+
+		await supabase.from('balances').insert(balanceData);
+		await supabase.from('positions').insert(positionData);
 
 		console.log('....portfolio inserted: ', portfolio.name);
-
-		//delete from balances
 	}
 };
 
 const getHistoricalBalance = async (portfolio_id) => {
 	// 1. Fetch transactions from supabase
-	const { data: transactions, error: error1 } = await supabase
+	const { data: transactions } = await supabase
 		.from('transactions')
 		.select('date, action, symbol, amount')
 		.eq('portfolio_id', portfolio_id)
@@ -43,7 +52,7 @@ const getHistoricalBalance = async (portfolio_id) => {
 	];
 
 	// 4. Fetch historical prices from supabase
-	const { data: historicalPrices, error: error2 } = await supabase
+	const { data: historicalPrices } = await supabase
 		.from('prices')
 		.select('symbol, date, pct')
 		.in('symbol', symbols)
@@ -58,7 +67,7 @@ const getHistoricalBalance = async (portfolio_id) => {
 	});
 
 	// 4. Fetch historical prices from supabase
-	const { data: benchmarkPrices, error: error3 } = await supabase
+	const { data: benchmarkPrices } = await supabase
 		.from('prices')
 		.select('symbol, date, pct')
 		.in('symbol', ['VFIFX', 'VTSMX', 'VBMFX', 'BIAPX', 'BIGPX', 'CASHX', 'BTC-USD.CC'])
