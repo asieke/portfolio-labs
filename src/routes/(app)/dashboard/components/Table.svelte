@@ -50,19 +50,19 @@
 	}
 
 	th:first-child {
-		@apply rounded-tl-lg;
+		@apply rounded-tl-md;
 	}
 
 	th:last-child {
-		@apply rounded-tr-lg;
+		@apply rounded-tr-md;
 	}
 
 	tr:last-child td:first-child {
-		@apply rounded-bl-lg;
+		@apply rounded-bl-md;
 	}
 
 	tr:last-child td:last-child {
-		@apply rounded-br-lg;
+		@apply rounded-br-md;
 	}
 
 	td {
@@ -70,7 +70,7 @@
 	}
 
 	th {
-		@apply bg-indigo-500 px-2 py-2 text-left text-white;
+		@apply bg-primary-300 px-2 py-1 text-left text-white dark:bg-primary-600;
 	}
 
 	tr:not(:last-child) {
@@ -78,6 +78,6 @@
 	}
 
 	tr:last-child td {
-		@apply border-b-0 bg-slate-200 dark:bg-slate-700;
+		@apply border-b-0 bg-slate-200 dark:bg-slate-800;
 	}
 </style>

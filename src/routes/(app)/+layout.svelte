@@ -20,10 +20,8 @@
 <svelte:head>
 	<script>
 		if (localStorage.getItem('darkMode') === 'true') {
-			console.log('true');
 			document.documentElement.classList.add('dark');
 		} else {
-			console.log('false');
 			document.documentElement.classList.remove('dark');
 		}
 	</script>

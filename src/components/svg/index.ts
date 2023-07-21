@@ -12,6 +12,7 @@ import IconReports from './IconReports.svelte';
 import IconSignOut from './IconSignOut.svelte';
 import IconAdjustments from './IconAdjustments.svelte';
 import IconLock from './IconLock.svelte';
+import IconSpinner from './IconSpinner.svelte';
 
 export {
 	IconBell,
@@ -27,5 +28,6 @@ export {
 	IconReports,
 	IconSignOut,
 	IconAdjustments,
-	IconLock
+	IconLock,
+	IconSpinner
 };

@@ -118,3 +118,23 @@ public.assets (
   constraint assets_pkey primary key (id),
   constraint assets_symbol_key unique (symbol)
 ) tablespace pg_default;
+
+create table
+  public.profiles (
+    id uuid not null,
+    full_name text null,
+    dob date null,
+    accepted_tos boolean not null default false,
+    is_active boolean null default false,
+    phone text null,
+    address text null,
+    income bigint null,
+    employment_status text null,
+    job_title text null,
+    net_worth bigint null,
+    tax_filing_status text null,
+    email text null,
+    settings jsonb null,
+    constraint profiles_pkey primary key (id),
+    constraint profiles_id_fkey foreign key (id) references auth.users (id) on delete cascade
+  ) tablespace pg_default;
