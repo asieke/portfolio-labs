@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { MenuDesktop, MenuMobile, Links } from '$components/layout';
-	import { IconHamburger, IconClose, IconBell } from '$components/svg';
-	import { menuMobileShowing } from '$lib/stores/menuMobile';
+	import { fade } from 'svelte/transition';
+	import { MenuDesktop, MenuMobile, Links, Toast } from '$components/layout';
 	import { page } from '$app/stores';
 	const { session } = $page.data;
 
@@ -28,4 +27,5 @@
 			</div>
 		</div>
 	</div>
+	<Toast />
 </nav>

@@ -13,8 +13,16 @@ import IconSignOut from './IconSignOut.svelte';
 import IconAdjustments from './IconAdjustments.svelte';
 import IconLock from './IconLock.svelte';
 import IconSpinner from './IconSpinner.svelte';
+import IconWarning from './IconWarning.svelte';
+import IconError from './IconError.svelte';
+import IconSuccess from './IconSuccess.svelte';
+import IconInfo from './IconInfo.svelte';
 
 export {
+	IconWarning,
+	IconError,
+	IconSuccess,
+	IconInfo,
 	IconBell,
 	IconClose,
 	IconGear,

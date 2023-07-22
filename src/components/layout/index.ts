@@ -6,5 +6,6 @@ import MenuMobile from './MenuMobile.svelte';
 import MenuDesktop from './MenuDesktop.svelte';
 import Container from './Container.svelte';
 import Notifications from './Notifications.svelte';
+import Toast from './Toast.svelte';
 
-export { Footer, Nav, Links, MenuMobile, MenuDesktop, Container, Notifications };
+export { Footer, Nav, Links, MenuMobile, MenuDesktop, Container, Notifications, Toast };

@@ -7,8 +7,8 @@
 
 	export let profile: Profile;
 	export let next = async () => {};
-	let loading = false;
 
+	let loading = false;
 	const handleClick = async () => {
 		loading = true;
 		await next();
