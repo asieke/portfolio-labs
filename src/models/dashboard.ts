@@ -1,5 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Portfolio } from '$types/portfolio';
+import type { Portfolio } from '$types/portfolios';
 import type { Balance } from '$types/balances';
 import { formatAssetClass } from '$models/assets';
 

@@ -9,7 +9,7 @@
 
 	import { formatCurrency, formatPercent, color } from '$lib/utils/format';
 	import { AssetClassPieChart } from '$components/chart';
-	import type { Portfolio } from '$types/portfolio';
+	import type { Portfolio } from '$types/portfolios';
 	export let portfolio: Portfolio;
 </script>
 

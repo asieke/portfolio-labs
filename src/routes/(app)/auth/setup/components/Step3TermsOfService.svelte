@@ -1,7 +1,7 @@
 <script lang="ts">
 	// import { phone } from '$lib/stores/phone';
 	// import { updatePhone } from '$lib/utils/phone';
-	import type { Profile } from '$types/profile';
+	import type { Profile } from '$types/profiles';
 	import { IconSpinner } from '$components/svg';
 	import { tos } from '$lib/data/tos';
 
