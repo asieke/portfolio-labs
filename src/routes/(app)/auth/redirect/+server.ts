@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { URL } from 'url';
-import type { Profile } from '$types/profile';
+import type { Profile } from '$types/profiles';
 
 interface Params {
 	url: URL;

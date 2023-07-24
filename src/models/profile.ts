@@ -1,4 +1,4 @@
-import type { Profile } from '$types/profile';
+import type { Profile } from '$types/profiles';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 export const updateProfile = async (supabase: SupabaseClient, profile: Profile | null) => {
