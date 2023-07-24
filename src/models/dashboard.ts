@@ -1,5 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Portfolio, Balance } from '$types/dashboard';
+import type { Portfolio } from '$types/portfolio';
+import type { Balance } from '$types/balances';
+import { formatAssetClass } from '$models/assets';
 
 /**
  * *******************************************************************
@@ -21,7 +23,7 @@ export const getDashboardPortfolios = async (supabase: SupabaseClient, user_id: 
 		return 0;
 	});
 
-	return data as Portfolio[];
+	return data.map((p) => ({ ...p, asset_class: formatAssetClass(p.asset_class) })) as Portfolio[];
 };
 
 /**
@@ -37,8 +39,11 @@ export const getDashboardPortfolios = async (supabase: SupabaseClient, user_id: 
 export const getDashboardBalances = async (supabase: SupabaseClient, user_id: string) => {
 	const { data: balances, error: balancesError } = await supabase
 		.from('balances_weekly')
-		.select('*')
-		.eq('user_id', user_id);
+		.select('*, portfolios!inner(id, name)')
+		.eq('user_id', user_id)
+		.eq('portfolios.name', 'Total');
+
+	console.log(balancesError);
 
 	if (balancesError || balances.length === 0) return null;
 

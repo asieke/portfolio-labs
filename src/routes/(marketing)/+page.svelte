@@ -1,8 +1,6 @@
 <script lang="ts">
 	export let data;
 	const { session } = data;
-
-	console.log(data);
 </script>
 
 <div class="bg-white">

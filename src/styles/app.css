@@ -93,12 +93,7 @@ form label {
 	@apply flex cursor-not-allowed flex-row items-center justify-center gap-x-2 rounded-md bg-gray-300 px-3 py-2 text-sm font-semibold text-gray-600 shadow-sm;
 }
 
-/* const themeColors = {
-	success: colors['green']['500'],
-	warning: colors['yellow']['500'],
-	error: colors['red']['500'],
-	info: colors['blue']['500']
-}; */
+/* Statuses */
 
 /* TOS */
 

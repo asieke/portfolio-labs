@@ -1,5 +1,4 @@
 import { writable } from 'svelte/store';
-//import colors from tailwind
 
 type Toast = {
 	message: string;

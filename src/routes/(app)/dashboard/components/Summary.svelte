@@ -8,8 +8,8 @@
 	 ***********************/
 
 	import { formatCurrency, formatPercent, color } from '$lib/utils/format';
-	// import PieChart from '$components/data/PieChart.svelte';
-	import type { Portfolio } from '$types/dashboard';
+	import { AssetClassPieChart } from '$components/chart';
+	import type { Portfolio } from '$types/portfolio';
 	export let portfolio: Portfolio;
 </script>
 
@@ -39,8 +39,8 @@
 		{formatPercent(portfolio.return_week)}
 	</div>
 </div>
-<!-- <h3 class="section-header mt-6">My Asset Allocation</h3>
-<PieChart data={account.asset_class} /> -->
+<!-- <h3 class="section-header mt-6">My Asset Allocation</h3> -->
+<AssetClassPieChart data={portfolio.asset_class} />
 <p class="mt-3">
 	The portfolio currently holds a market value of around $7.6M, a significant increase from the initial investment of
 	$2.2M, yielding an impressive year-to-date return of 40.93%. The portfolio is diversified with a major allocation in
