@@ -1,6 +1,7 @@
 import type { AssetClass } from './assets';
 
 export type Portfolio = {
+	id: number;
 	account_id: number;
 	account_pct: number;
 	asset_class: AssetClass[];

@@ -1,5 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Position } from '$types/positions';
+import type { Portfolio } from '$types/portfolios';
 import { formatAssetClass } from '$models/assets';
 
 /**
@@ -10,25 +10,22 @@ import { formatAssetClass } from '$models/assets';
  * This function fetches position data for the provided user from a Supabase database.
  * ******************************************************************
  */
-export const getPositions = async (supabase: SupabaseClient, user_id: string) => {
+export const getPortfolios = async (supabase: SupabaseClient, user_id: string) => {
 	if (!supabase || !user_id) return [];
 
-	const { data: positions, error: positionsError } = await supabase
-		.from('positions')
-		.select('*, portfolios!inner(id, name, accounts!inner(id, user_id))')
-		.match({ 'portfolios.accounts.user_id': user_id });
+	const { data, error } = await supabase.from('portfolios').select('*').eq('user_id', user_id);
 
-	if (positionsError || !positions) return null;
+	if (error || !data) return null;
 
 	//sort positions so that Total is always last
-	positions.sort((a, b) => {
+	data.sort((a, b) => {
 		if (a.portfolio_name === 'Total') return 1;
 		if (b.portfolio_name === 'Total') return -1;
 		return 0;
 	});
 
-	return positions.map((p) => ({
+	return data.map((p) => ({
 		...p,
 		asset_class: formatAssetClass(p.asset_class)
-	})) as Position[];
+	})) as Portfolio[];
 };

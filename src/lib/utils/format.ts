@@ -1,15 +1,27 @@
 // import { formatCurrency, formatPercent, color } from '$lib/utils/format';
 
-export const formatCurrency = (num: number) => {
+export const formatCurrency = (num: number | null | undefined) => {
+	if (!num || num === Infinity) return '';
+
 	return new Intl.NumberFormat('en-US', {
 		style: 'currency',
 		currency: 'USD'
 	}).format(num);
 };
 
-export const formatPercent = (num: number) => {
+export const formatPercent = (num: number | null | undefined) => {
+	if (!num || num === Infinity) return '';
+
 	return new Intl.NumberFormat('en-US', {
 		style: 'percent',
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2
+	}).format(num);
+};
+
+export const formatNumber = (num: number | null | undefined) => {
+	if (!num || num === Infinity) return '';
+	return new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: 2,
 		maximumFractionDigits: 2
 	}).format(num);
