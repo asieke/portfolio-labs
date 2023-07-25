@@ -8,10 +8,13 @@ export type Position = {
 	name: string;
 	quantity?: number;
 	price?: number;
+	price_7d?: number;
+	price_1d?: number;
 	market_value: number;
+	market_value_7d: number;
+	market_value_1d: number;
 	cost_basis: number;
 	security_type?: string;
 	asset_class?: AssetClass[];
-	price_7d?: number;
 	portfolios?: Record<string, unknown>;
 };
