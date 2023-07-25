@@ -6,7 +6,7 @@
 	 * cost basis, and returns over different time frames. The list of portfolios is received as a prop.
 	 ***********************/
 	import { color } from '$lib/utils/format';
-	import type { Portfolio } from '$types/dashboard';
+	import type { Portfolio } from '$types/portfolios';
 
 	export let portfolios: Portfolio[];
 </script>
@@ -70,7 +70,7 @@
 	}
 
 	th {
-		@apply bg-primary-300 px-2 py-1 text-left text-white dark:bg-primary-600;
+		@apply bg-primary-500 px-2 py-1 text-left text-white dark:bg-primary-800;
 	}
 
 	tr:not(:last-child) {

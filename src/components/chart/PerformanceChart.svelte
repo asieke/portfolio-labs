@@ -29,7 +29,7 @@
 			{
 				name: 'Your Performance',
 				data: balances.map((b) => [new Date(b.date).getTime(), b.end_balance]),
-				lineWidth: 5
+				lineWidth: 3
 			}
 		];
 
@@ -50,6 +50,10 @@
 		const data = getData();
 
 		chart = Highcharts.stockChart(container, {
+			chart: {
+				backgroundColor: undefined,
+				plotBorderWidth: undefined
+			},
 			rangeSelector: {
 				enabled: false
 			},
@@ -62,8 +66,21 @@
 			credits: {
 				enabled: false
 			},
+			xAxis: {
+				labels: {
+					style: {
+						color: '#aaa', // Change the color of the x-axis labels
+						fontSize: '12px' // Change the font size of the x-axis labels
+					}
+				},
+				lineColor: '#707073', // Change the color of the line
+				tickColor: '#707073' // Change the color of the ticks
+			},
 			yAxis: {
 				labels: {
+					style: {
+						color: '#aaa'
+					},
 					//add commas and dollar signs
 
 					formatter: function () {
