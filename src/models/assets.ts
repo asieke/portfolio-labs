@@ -1,4 +1,16 @@
 import colors from 'tailwindcss/colors';
+import type { SupabaseClient } from '@supabase/supabase-js';
+import type { Asset } from '$types/assets';
+
+export const getAsset = async (supabase: SupabaseClient, symbol: string) => {
+	const { data, error } = await supabase.from('assets').select('*').eq('symbol', symbol);
+	if (error || data.length === 0) return null;
+
+	data[0].asset_class = formatAssetClass(data[0].asset_class);
+
+	return data[0] as Asset;
+};
+
 export const formatAssetClass = (obj: Record<string, number>) => {
 	const output = [
 		{
@@ -47,11 +59,7 @@ export const formatAssetClass = (obj: Record<string, number>) => {
 		},
 		{
 			name: 'Fixed Income',
-			total:
-				obj['Fixed Income General'] +
-				obj['Fixed Income US Munis'] +
-				obj['Fixed Income US Corporates'] +
-				obj['Fixed Income US Treasuries'],
+			total: obj['Fixed Income General'] + obj['Fixed Income US Munis'] + obj['Fixed Income US Corporates'] + obj['Fixed Income US Treasuries'],
 			color: colors['emerald']['500'],
 			breakdown: [
 				{

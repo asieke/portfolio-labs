@@ -32,3 +32,20 @@ export const getPositions = async (supabase: SupabaseClient, user_id: string) =>
 		asset_class: formatAssetClass(p.asset_class)
 	})) as Position[];
 };
+
+export const getPositionBySymbol = async (supabase: SupabaseClient, user_id: string | undefined, symbol: string) => {
+	if (!supabase || !user_id || !symbol) return null;
+
+	const { data: positions, error: positionsError } = await supabase
+		.from('positions')
+		.select('*, portfolios!inner(id, name)')
+		.eq('portfolios.name', 'Total')
+		.eq('symbol', symbol)
+		.eq('user_id', user_id);
+
+	if (positionsError || !positions) return null;
+
+	positions[0].asset_class = formatAssetClass(positions[0].asset_class);
+
+	return positions[0] as Position;
+};

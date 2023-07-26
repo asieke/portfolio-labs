@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Container } from '$components/layout';
 	import Table from './components/Table.svelte';
+	import Detail from './components/Detail.svelte';
 
 	export let data;
 
@@ -14,18 +15,21 @@
 
 	const onClick = (s: string | null) => {
 		symbol = s;
-		console.log(symbol);
 	};
 </script>
 
-<Container>
-	{#if portfolios && positions}
-		<h3>Positions</h3>
-		<select class="w-full" bind:value={portfolio_id}>
-			{#each portfolios as portfolio}
-				<option value={portfolio.id}>{portfolio.name}</option>
-			{/each}
-		</select>
-		<Table positions={displayPositions} {onClick} />
+{#if portfolios && positions}
+	{#if symbol}
+		<Detail {symbol} onClick={() => (symbol = null)} />
+	{:else}
+		<Container>
+			<h3>Positions</h3>
+			<select class="w-full" bind:value={portfolio_id}>
+				{#each portfolios as portfolio}
+					<option value={portfolio.id}>{portfolio.name}</option>
+				{/each}
+			</select>
+			<Table positions={displayPositions} {onClick} />
+		</Container>
 	{/if}
-</Container>
+{/if}

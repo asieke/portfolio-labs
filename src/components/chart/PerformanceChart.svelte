@@ -9,46 +9,70 @@
 	import { onMount } from 'svelte';
 	import Highcharts from 'highcharts/highstock';
 	import type { Balance } from '$types/balances';
+	import { chartDates } from '$lib/utils/dates';
+	import { balanceDisplayData } from '$models/balances';
+	import { hexToRGBA } from '$lib/utils/colors';
 
 	// Received as a prop from the parent component
 	export let balances: Balance[];
 
-	console.log('Balances....', balances);
+	console.log('CHART', balances);
+
+	const benchmarks = balanceDisplayData.map((b) => b.name);
+	let selectedBenchmarks = benchmarks.map((b) => false);
+
+	let displayBalances = [...balances];
 
 	// References to the div container for the chart and the chart object itself
 	let container: HTMLElement;
-	let chart;
+	let chart: Highcharts.Chart | null = null;
+	let selectedDate = chartDates[0].value;
+
+	const updateDate = (date: string) => {
+		selectedDate = date;
+		displayBalances = balances.filter((b) => b.date > selectedDate);
+		drawChart();
+	};
+
+	const updateBenchmarks = (index: number) => {
+		selectedBenchmarks[index] = !selectedBenchmarks[index];
+		drawChart();
+	};
 
 	// Function to format the input data for use in the Highcharts chart
 	function getData() {
 		// Define labels for the benchmarks
-		const labels = ['Vanguard 2050 Fund', 'Cash', 'US Equity Total Market'];
 
 		// Initialize data with user performance
 		const data = [
 			{
 				name: 'Your Performance',
-				data: balances.map((b) => [new Date(b.date).getTime(), b.end_balance]),
-				lineWidth: 3
+				data: displayBalances.map((b) => [new Date(b.date).getTime(), b.end_balance]),
+				lineWidth: 4,
+				dashStyle: 'Solid' as Highcharts.DashStyleValue,
+				color: balanceDisplayData[0].color
 			}
 		];
 
 		// Add each benchmark to the data array
-		labels.forEach((label) => {
+		balanceDisplayData.forEach((label, i) => {
+			if (!selectedBenchmarks[i]) return;
+			const baseline = displayBalances[0].end_balance / displayBalances[0].end_benchmarks[label.name];
 			data.push({
-				name: label,
-				data: balances.map((b) => [new Date(b.date).getTime(), b.end_benchmarks[label]]),
-				lineWidth: 1
+				name: label.name,
+				data: displayBalances.map((b) => [new Date(b.date).getTime(), baseline * b.end_benchmarks[label.name]]),
+				lineWidth: 1,
+				//set the style to dashed
+				dashStyle: 'Dash' as Highcharts.DashStyleValue,
+				color: label.color
 			});
 		});
 
 		return data;
 	}
 
-	// When the component mounts, create the Highcharts chart
-	onMount(async () => {
+	const drawChart = () => {
 		const data = getData();
-
 		chart = Highcharts.stockChart(container, {
 			chart: {
 				backgroundColor: undefined,
@@ -89,8 +113,45 @@
 				}
 			}
 		});
+	};
+
+	// When the component mounts, create the Highcharts chart
+	onMount(async () => {
+		drawChart();
 	});
 </script>
 
+<div class="mt-3 flex flex-row space-x-2">
+	{#each chartDates as date}
+		{#if date.value === selectedDate}
+			<button class="selected">{date.label}</button>
+		{:else}
+			<button on:click={() => updateDate(date.value)}>{date.label}</button>
+		{/if}
+	{/each}
+</div>
+
 <!-- Div container for the Highcharts stock chart -->
 <div class="h-[440px]" bind:this={container} />
+
+<!-- Create a row of buttons for each of the dates in chartDate -->
+<div class="flex flex-row space-x-2">
+	{#each balanceDisplayData as label, i}
+		{#if label.name !== 'Your Performance'}
+			{#if selectedBenchmarks[i]}
+				<button style="background-color: {hexToRGBA(label.color, 1)}" on:click={() => updateBenchmarks(i)}>{label.name}</button>
+			{:else}
+				<button style="background-color: {hexToRGBA(label.color, 0.1)}" on:click={() => updateBenchmarks(i)}>{label.name}</button>
+			{/if}
+		{/if}
+	{/each}
+</div>
+
+<style lang="postcss">
+	button {
+		@apply rounded-lg bg-slate-300 px-3 py-1 text-xs font-medium  dark:bg-slate-600 dark:text-white;
+	}
+	button.selected {
+		@apply bg-primary-500 text-white dark:bg-primary-700;
+	}
+</style>

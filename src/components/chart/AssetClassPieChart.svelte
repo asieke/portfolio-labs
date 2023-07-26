@@ -20,8 +20,6 @@
 		});
 	});
 
-	console.log('PIE CHART', displayData);
-
 	let container: HTMLElement;
 
 	//calculate the total value of all y
