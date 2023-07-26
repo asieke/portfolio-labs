@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	console.log($page);
-
 	const { status: statusCode } = $page;
 	let errorMessage = '';
 
@@ -36,11 +34,7 @@
 			</p>
 		</div>
 		<div class="flex w-full justify-center">
-			<a
-				href="/"
-				class="block w-[200px] rounded-lg bg-indigo-600 px-3 py-2 text-center font-medium text-white shadow-md hover:bg-indigo-700"
-				>Go back to home</a
-			>
+			<a href="/" class="block w-[200px] rounded-lg bg-indigo-600 px-3 py-2 text-center font-medium text-white shadow-md hover:bg-indigo-700">Go back to home</a>
 		</div>
 	</div>
 </section>

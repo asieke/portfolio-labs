@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { Container } from '$components/layout';
-	import { PerformanceChart } from '$components/chart';
+	import { PerformanceChart, PerformanceTable } from '$components/chart';
 	import type { Balance } from '$types/balances';
+	import { chartSelectedDate, chartSelectedBenchmarks } from '$lib/stores/performanceChart';
 
 	export let data;
 	const { portfolios, balancesWeekly } = data;
@@ -12,9 +13,14 @@
 
 <Container layout="right">
 	<div slot="left">
-		<h4>My Performance</h4>
 		{#if displayBalances}
 			<PerformanceChart balances={displayBalances} />
+			<p class="mt-6 text-sm font-thin tracking-wide">
+				This chart provides a visual comparison of your investment portfolio's performance against selected benchmarks. Each benchmark represents a standard, like a market sector or the overall
+				market, which you can use to gauge the effectiveness of your investment strategy. The chart factors in your personal investment activity, including any deposits and withdrawals you've made,
+				allowing for a more personalized evaluation. By examining this chart, you can understand how your portfolio would have performed if the same deposits and withdrawals had been made in the
+				benchmark investments, offering insights into your investment choices relative to market standards.
+			</p>
 		{/if}
 	</div>
 	<div slot="right">
@@ -25,6 +31,9 @@
 					<option value={portfolio.id}>{portfolio.name}</option>
 				{/each}
 			</select>
+		{/if}
+		{#if displayBalances}
+			<PerformanceTable balances={displayBalances} />
 		{/if}
 	</div>
 </Container>

@@ -19,10 +19,11 @@ export const getDailyBalances = async (supabase: SupabaseClient, user_id: string
 
 	// return balances as Balance[];
 
-	return balances.map((b) => ({
+	return balances.map((b, i) => ({
 		...b,
 		end_balance: b.balance,
-		end_benchmarks: b.benchmarks
+		end_benchmarks: b.benchmarks,
+		pct: i === 0 ? 0 : (b.balance - 0.5 + b.flows) / (balances[i - 1].balance + 0.5 * b.flows) - 1
 	})) as Balance[];
 };
 
@@ -48,6 +49,12 @@ export const getYearlyBalances = async (supabase: SupabaseClient, user_id: strin
 	if (balancesError || balances.length === 0) return null;
 
 	return balances as Balance[];
+};
+
+export const getReturn = (balances: number[]) => {
+	const geomean = balances.reduce((acc, val) => acc * (1 + val), 1) - 1;
+
+	return geomean;
 };
 
 export const balanceDisplayData = [

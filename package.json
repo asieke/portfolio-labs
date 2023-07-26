@@ -36,6 +36,7 @@
 	"dependencies": {
 		"@supabase/auth-helpers-sveltekit": "^0.10.1",
 		"@supabase/supabase-js": "^2.26.0",
+		"@types/highcharts": "^7.0.0",
 		"axios": "^1.4.0",
 		"dotenv": "^16.3.1",
 		"highcharts": "^11.1.0"

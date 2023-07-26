@@ -32,6 +32,10 @@ p {
 	@apply my-2 text-base leading-6 text-gray-600 dark:text-gray-400;
 }
 
+span {
+	@apply text-gray-600 dark:text-gray-400;
+}
+
 /* Table styles */
 table {
 	@apply my-4 w-full border-collapse;
