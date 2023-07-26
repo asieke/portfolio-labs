@@ -12,6 +12,7 @@
 <Container layout="right">
 	<div slot="left">
 		{#if balances && portfolios}
+			<h4>Account Dashboard</h4>
 			<Table {portfolios} />
 			<PerformanceChart {balances} />
 		{/if}
@@ -19,6 +20,7 @@
 
 	<div slot="right">
 		{#if total}
+			<h4>Account Summary</h4>
 			<Summary portfolio={total} />
 		{/if}
 	</div>

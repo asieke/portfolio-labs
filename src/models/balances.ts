@@ -27,7 +27,23 @@ export const getDailyBalances = async (supabase: SupabaseClient, user_id: string
 };
 
 export const getWeeklyBalances = async (supabase: SupabaseClient, user_id: string) => {
-	const { data: balances, error: balancesError } = await supabase.from('balances_weekly').select('*, portfolios!inner(id, name)').eq('user_id', user_id).eq('portfolios.name', 'Total');
+	const { data: balances, error: balancesError } = await supabase.from('balances_weekly').select('*').eq('user_id', user_id);
+
+	if (balancesError || balances.length === 0) return null;
+
+	return balances as Balance[];
+};
+
+export const getMonthlyBalances = async (supabase: SupabaseClient, user_id: string) => {
+	const { data: balances, error: balancesError } = await supabase.from('balances_monthly').select('*').eq('user_id', user_id);
+
+	if (balancesError || balances.length === 0) return null;
+
+	return balances as Balance[];
+};
+
+export const getYearlyBalances = async (supabase: SupabaseClient, user_id: string) => {
+	const { data: balances, error: balancesError } = await supabase.from('balances_yearly').select('*').eq('user_id', user_id);
 
 	if (balancesError || balances.length === 0) return null;
 
@@ -66,5 +82,17 @@ export const balanceDisplayData = [
 	{
 		name: 'US Equity Total Market',
 		color: colors['lime']['600']
+	},
+	{
+		name: 'Global Equity',
+		color: colors['pink']['600']
+	},
+	{
+		name: 'Developed Markets',
+		color: colors['cyan']['600']
+	},
+	{
+		name: 'Emerging Markets',
+		color: colors['indigo']['600']
 	}
 ];

@@ -23,7 +23,7 @@
 		<Detail {symbol} onClick={() => (symbol = null)} />
 	{:else}
 		<Container>
-			<h3>Positions</h3>
+			<h4>Positions</h4>
 			<select class="w-full" bind:value={portfolio_id}>
 				{#each portfolios as portfolio}
 					<option value={portfolio.id}>{portfolio.name}</option>

@@ -16,17 +16,19 @@
 	// Received as a prop from the parent component
 	export let balances: Balance[];
 
-	console.log('CHART', balances);
-
 	const benchmarks = balanceDisplayData.map((b) => b.name);
-	let selectedBenchmarks = benchmarks.map((b) => false);
+	let selectedDate = chartDates[0].value;
 
-	let displayBalances = [...balances];
+	$: selectedBenchmarks = benchmarks.map((b) => false);
+
+	$: displayBalances = [...balances].filter((b) => b.date > selectedDate);
+	$: if (container && displayBalances) {
+		drawChart();
+	}
 
 	// References to the div container for the chart and the chart object itself
 	let container: HTMLElement;
 	let chart: Highcharts.Chart | null = null;
-	let selectedDate = chartDates[0].value;
 
 	const updateDate = (date: string) => {
 		selectedDate = date;
@@ -121,6 +123,7 @@
 	});
 </script>
 
+<h2>{selectedDate}</h2>
 <div class="mt-3 flex flex-row space-x-2">
 	{#each chartDates as date}
 		{#if date.value === selectedDate}

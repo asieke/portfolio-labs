@@ -13,7 +13,7 @@ import { formatAssetClass } from '$models/assets';
 export const getPortfolios = async (supabase: SupabaseClient, user_id: string) => {
 	if (!supabase || !user_id) return [];
 
-	const { data, error } = await supabase.from('portfolios').select('*').eq('user_id', user_id);
+	const { data, error } = await supabase.from('portfolios').select('*').eq('user_id', user_id).order('id', { ascending: true });
 
 	if (error || !data) return null;
 
