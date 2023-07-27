@@ -1,50 +1,37 @@
 <script lang="ts">
 	import type { Balance } from '$types/balances';
-	import { getReturn } from '$models/balances';
-	import { formatPercent, color, formatCurrency } from '$lib/utils/format';
-	import { balanceDisplayData, chartSelectedDate } from '$lib/stores/performanceChart';
-
-	// Define the prop for the component
+	import { aggregateBalances } from '$models/balances';
+	import { chartSelectedDate } from '$lib/stores/performanceChart';
+	import { color, formatCurrency, formatPercent } from '$lib/utils/format';
 	export let balances: Balance[];
-
-	$: filteredData = balances.filter((b) => b.date >= $chartSelectedDate);
-	$: start = filteredData[0];
-	$: end = filteredData[filteredData.length - 1];
-
-	let pct: Record<string, number> = {};
-	let gain: Record<string, number> = {};
-
-	$: {
-		balanceDisplayData.forEach((label) => {
-			const pcts = filteredData.map((b) => b.benchmark_returns[label.name]);
-			pct[label.name] = getReturn(pcts);
-
-			const ratio = start.end_balance / start.end_benchmarks[label.name];
-			const v1 = ratio * start.end_benchmarks[label.name];
-			const v2 = ratio * end.end_benchmarks[label.name];
-
-			gain[label.name] = ratio * (end.end_benchmarks[label.name] - start.end_benchmarks[label.name]);
-		});
-
-		pct['Your Performance'] = getReturn(filteredData.map((b) => b.pct));
-		gain['Your Performance'] = end.end_balance - start.end_balance;
-	}
+	$: tableData = aggregateBalances(balances.filter((b) => b.date >= $chartSelectedDate));
+	$: console.log(tableData);
 </script>
 
-<div class="mt-6">
-	<!-- Create a table that has a row for every value in balanceDisplayData and a bg color -->
-	<!-- that corresponds to the color in balanceDisplayData -->
-	{#each balanceDisplayData as label, i}
-		<div class="flex items-center justify-between py-1 text-xs">
-			<div class="">
-				<div class="h-3 w-3" style="background-color: {label.color}" />
-			</div>
-			<div class="w-5/12 text-left"><span>{label.name}</span></div>
-			<div class="w-3/12 text-center"><span>{formatCurrency(gain[label.name])}</span></div>
-			<div class="w-3/12 text-right {color(pct[label.name])}">{formatPercent(pct[label.name])}</div>
-		</div>
-		{#if label.name === 'Your Performance'}
-			<hr class="my-2 border-slate-700 dark:border-slate-300" />
-		{/if}
-	{/each}
+<h4>Performance Summary</h4>
+
+<div class="flex items-center justify-between rounded-tl-md rounded-tr-md bg-primary-600 px-2 py-2 text-xs font-bold dark:bg-primary-700">
+	<div class="w-2/12"><span>Date</span></div>
+	<div class="w-2/12 text-left"><span>Starting Balance</span></div>
+	<div class="w-2/12 text-left"><span>Ending Balance</span></div>
+	<div class="w-2/12 text-left"><span>Net Inflows</span></div>
+	<div class="w-2/12 text-left"><span>Performance</span></div>
 </div>
+{#each tableData as row}
+	<div class="row">
+		<div class="w-2/12"><span>{row.date}</span></div>
+		<div class="w-2/12 text-left"><span>{formatCurrency(row.start_balance)}</span></div>
+		<div class="w-2/12 text-left"><span>{formatCurrency(row.end_balance)}</span></div>
+		<div class="w-2/12 text-left"><span>{formatCurrency(row.total_flows)}</span></div>
+		<div class="w-2/12 text-left"><span class={color(row.pct)}>{formatPercent(row.pct)}</span></div>
+	</div>
+{/each}
+
+<style>
+	.row {
+		@apply flex items-center justify-between border-b-[1px] border-b-slate-500 px-2 py-1.5 text-xs;
+	}
+	.row:last-child {
+		@apply border-none;
+	}
+</style>

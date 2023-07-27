@@ -29,3 +29,12 @@ export const chartDates = [
 		value: new Date(new Date().setMonth(new Date().getMonth() - 1)).toISOString().split('T')[0]
 	}
 ];
+
+export const getDisplayMonth = (date: string) => {
+	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+	//split the date into an array
+	const dateArray = date.split('-');
+
+	return months[parseInt(dateArray[1]) - 1] + ' ' + dateArray[0];
+};
