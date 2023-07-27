@@ -113,7 +113,7 @@
 </script>
 
 <!-- Display the selected date -->
-<h3>My Performance: <span class={color(performancePct)}>{formatPercent(performancePct)}</span></h3>
+<h4>My Performance: <span class={color(performancePct)}>{formatPercent(performancePct)}</span></h4>
 <p>
 	vs US Total Equity Benchmark: <span class={color(benchmarkPct)}>{formatPercent(benchmarkPct)}</span>
 	<span>({(performancePct / benchmarkPct).toFixed(1)}x)</span>

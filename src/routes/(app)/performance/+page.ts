@@ -2,7 +2,7 @@
 import type { PageLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 import { getPortfolios } from '$models/portfolios';
-import { getYearlyBalances, getWeeklyBalances } from '$models/balances';
+import { getDailyBalances } from '$models/balances';
 
 export const load: PageLoad = async ({ parent }) => {
 	const { session, supabase } = await parent();
@@ -14,12 +14,10 @@ export const load: PageLoad = async ({ parent }) => {
 
 	// Fetch portfolios and balances for the current user
 	const portfolios = await getPortfolios(supabase, session.user.id);
-	const balancesYearly = await getYearlyBalances(supabase, session.user.id);
-	const balancesWeekly = await getWeeklyBalances(supabase, session.user.id);
+	const balances = await getDailyBalances(supabase, session.user.id);
 
 	return {
 		portfolios,
-		balancesWeekly,
-		balancesYearly
+		balances
 	};
 };

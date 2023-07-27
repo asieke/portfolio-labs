@@ -1,58 +1,34 @@
-import { browser } from '$app/environment';
+import { getCache, putCache } from '$lib/utils/cache';
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Balance } from '$types/balances';
 import colors from 'tailwindcss/colors';
 
-const putCache = async () => {
-	if (!browser) return null;
-	const localForage = import('localforage');
+// export const getDailyBalancesCached = async (supabase: SupabaseClient, user_id: string) => {
+// 	const cachedData = await getCache(user_id, 'Daily Balances');
+// 	if (cachedData) {
+// 		return cachedData.data as Balance[];
+// 	}
 
-	(await localForage).setItem('balances', 'hello there');
-};
+// 	const { data: balances, error: balancesError } = await supabase.from('balances_daily').select('*').eq('user_id', user_id);
+// 	if (balancesError || balances.length === 0) return null;
 
-export const getDailyBalancesCached = async (supabase: SupabaseClient, user_id: string) => {
-	const { data: balances, error: balancesError } = await supabase.from('balances_daily').select('*').eq('user_id', user_id);
-	if (balancesError || balances.length === 0) return null;
+// 	await putCache(user_id, 'Daily Balances', balances);
 
-	await putCache();
-
-	return balances as Balance[];
-};
-
-// let db: IDBPDatabase<{ weeklyBalances: { balances: Balance[]; timestamp: number } }> | undefined;
-// let cachedData: {
-// 	balances: Balance[];
-// 	timestamp: number;
+// 	return balances as Balance[];
 // };
 
-// if (browser) {
-// 	db = await openDB('myDatabase', 1, {
-// 		upgrade(db) {
-// 			db.createObjectStore('weeklyBalances');
-// 		}
-// 	});
-
-// 	cachedData = await db.get('weeklyBalances', user_id);
-// 	if (cachedData && new Date().getTime() - cachedData.timestamp < 24 * 60 * 60 * 1000) {
-// 		return cachedData.balances as Balance[];
-// 	}
-// }
-
-// const { data: balances, error: balancesError } = await supabase.from('balances_daily').select('*').eq('user_id', user_id);
-// if (balancesError || balances.length === 0) return null;
-
-// if (browser && db) {
-// 	console.log('stashing the balances in indexedDB');
-// 	await db.put('weeklyBalances', { balances, timestamp: new Date().getTime() }, user_id);
-// }
-
-// return balances as Balance[];
-
 export const getDailyBalances = async (supabase: SupabaseClient, user_id: string) => {
-	const { data: balances, error: balancesError } = await supabase.from('balances_daily').select('*, portfolios!inner(id, name)').eq('user_id', user_id).eq('portfolios.name', 'Total');
+	const cachedData = await getCache(user_id, 'Daily Balances');
+	if (cachedData) {
+		return cachedData.data as Balance[];
+	}
 
+	const { data: balances, error: balancesError } = await supabase.from('balances_daily').select('*, portfolios(id, name)').eq('user_id', user_id);
 	if (balancesError || balances.length === 0) return null;
+
+	await putCache(user_id, 'Daily Balances', balances);
+
 	return balances as Balance[];
 };
 

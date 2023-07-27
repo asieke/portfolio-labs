@@ -12,9 +12,13 @@
 <Container layout="right">
 	<div slot="left">
 		{#if balances && portfolios}
-			<h4>Account Dashboard</h4>
-			<Table {portfolios} />
-			<PerformanceChart {balances} />
+			<h4>Portfolio Summary</h4>
+			<section class="mb-8">
+				<Table {portfolios} />
+			</section>
+			<section class="mb-4">
+				<PerformanceChart {balances} />
+			</section>
 		{/if}
 	</div>
 

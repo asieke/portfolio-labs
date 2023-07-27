@@ -5,10 +5,10 @@
 	import { chartSelectedDate, chartSelectedBenchmarks } from '$lib/stores/performanceChart';
 
 	export let data;
-	const { portfolios, balancesWeekly } = data;
+	const { portfolios, balances } = data;
 
 	let portfolio_id = portfolios?.[0].id;
-	$: displayBalances = balancesWeekly?.filter((b) => b.portfolio_id === portfolio_id);
+	$: displayBalances = balances?.filter((b) => b.portfolio_id === portfolio_id);
 </script>
 
 <Container layout="right">

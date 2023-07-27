@@ -9,4 +9,8 @@ export type Balance = {
 	pct: number;
 	id: number;
 	benchmark_returns: Record<string, number>;
+	portfolios?: {
+		id: number;
+		name: string;
+	};
 };
