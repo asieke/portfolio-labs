@@ -31,11 +31,8 @@
 
 	$: {
 		displayBalances = [...balances].filter((b) => b.date > $chartSelectedDate);
-
-		console.log(displayBalances);
-
-		performancePct = 11; //getReturn(displayBalances.map((b) => b.pct));
-		benchmarkPct = 11; //getReturn(displayBalances.map((b) => b.benchmark_returns[defaultBenchmark]));
+		performancePct = getReturn(displayBalances.map((b) => b.pct));
+		benchmarkPct = getReturn(displayBalances.map((b) => b.benchmark_returns[defaultBenchmark]));
 
 		const temp = [
 			{

@@ -34,6 +34,11 @@
 		{/if}
 		{#if displayBalances}
 			<PerformanceTable balances={displayBalances} />
+			<p class="mt-6 text-sm font-thin tracking-wide">
+				This data compares the performance of your portfolio against various investment benchmarks, assuming the same deposits and withdrawals were made. The figures represent the dollar value gained
+				or lost during a specified period if you had invested in these benchmarks instead of your actual portfolio. In other words, it shows how different investment strategies would have performed
+				under the same cash flow conditions as your actual portfolio.
+			</p>
 		{/if}
 	</div>
 </Container>
