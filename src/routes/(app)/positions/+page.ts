@@ -3,6 +3,7 @@ import type { PageLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 import { getPositions } from '$models/positions';
 import { getPortfolios } from '$models/portfolios';
+import { getAssets } from '$models/assets';
 
 export const load: PageLoad = async ({ parent }) => {
 	const { session, supabase } = await parent();
@@ -14,9 +15,11 @@ export const load: PageLoad = async ({ parent }) => {
 
 	const positions = await getPositions(supabase, session.user.id);
 	const portfolios = await getPortfolios(supabase, session.user.id);
+	const assets = await getAssets(supabase, session.user.id);
 
 	return {
 		positions,
-		portfolios
+		portfolios,
+		assets
 	};
 };

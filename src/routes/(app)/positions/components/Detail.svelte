@@ -13,16 +13,9 @@
 
 	const { supabase, session } = $page.data;
 
-	export let symbol: string;
+	export let asset: Asset | null;
+	export let position: Position | null;
 	export let onClick = () => {};
-
-	let asset: Asset | null;
-	let position: Position | null;
-
-	onMount(async () => {
-		asset = await getAsset($page.data.supabase, symbol);
-		position = await getPositionBySymbol(supabase, session?.user?.id, symbol);
-	});
 </script>
 
 <Container layout="right">
@@ -30,7 +23,7 @@
 		<h4>
 			<button on:click={onClick}>Positions</button>
 			<span class="mx-2">&gt;</span>
-			<span>{symbol}</span>
+			<span>{asset?.symbol}</span>
 		</h4>
 		{#if asset && position && position.asset_class}
 			<DetailAsset {asset} />

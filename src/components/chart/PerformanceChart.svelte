@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { color, formatPercent } from '$lib/utils/format';
+	import { getCAGR } from '$lib/utils/financial';
 	import Highcharts from 'highcharts/highstock';
 	import type { Balance } from '$types/balances';
 	import { chartDates, chartSelectedDate, chartSelectedBenchmarks, balanceDisplayData } from '$lib/stores/performanceChart';
@@ -30,7 +31,7 @@
 	let benchmarkPct: number;
 
 	$: {
-		displayBalances = [...balances].filter((b) => b.date > $chartSelectedDate);
+		displayBalances = [...balances].filter((b) => b.date >= $chartSelectedDate);
 		performancePct = getReturn(displayBalances.map((b) => b.pct));
 		benchmarkPct = getReturn(displayBalances.map((b) => b.benchmark_returns[defaultBenchmark]));
 
@@ -76,6 +77,9 @@
 				backgroundColor: undefined,
 				plotBorderWidth: undefined
 			},
+			accessibility: {
+				enabled: false
+			},
 			rangeSelector: {
 				enabled: false
 			},
@@ -113,11 +117,17 @@
 </script>
 
 <!-- Display the selected date -->
-<h4>My Performance: <span class={color(performancePct)}>{formatPercent(performancePct)}</span></h4>
-<p>
-	vs US Total Equity Benchmark: <span class={color(benchmarkPct)}>{formatPercent(benchmarkPct)}</span>
-	<span>({(performancePct / benchmarkPct).toFixed(1)}x)</span>
-</p>
+<section class="mb-6">
+	<h4>My Total Performance: <span class={color(performancePct)}>{formatPercent(performancePct)}</span></h4>
+	<p>
+		CAGR: {formatPercent(getCAGR(performancePct, $chartSelectedDate))}
+	</p>
+
+	<p>
+		US Total Equity Benchmark: <span class={color(benchmarkPct)}>{formatPercent(benchmarkPct)}</span>
+		<span class="text-sm">({formatPercent(Math.abs(performancePct / benchmarkPct - 1))} {performancePct > benchmarkPct ? 'higher' : 'lower'})</span>
+	</p>
+</section>
 
 <!-- Include date picker and benchmark picker components, redraw chart on date change -->
 {#if datePicker}

@@ -16,8 +16,6 @@ export const load: PageLoad = async ({ parent }) => {
 	const portfolios = await getDashboardPortfolios(supabase, session.user.id);
 	const balances = await getDailyBalances(supabase, session.user.id);
 
-	console.log(balances);
-
 	return {
 		portfolios,
 		balances: balances?.filter((b) => b.portfolios?.name === 'Total') || []

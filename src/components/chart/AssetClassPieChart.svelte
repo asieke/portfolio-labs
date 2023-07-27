@@ -53,7 +53,8 @@
 			accessibility: {
 				point: {
 					valueSuffix: '%'
-				}
+				},
+				enabled: false
 			},
 			plotOptions: {
 				pie: {
