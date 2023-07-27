@@ -23,7 +23,7 @@ export const balanceDisplayData = [
 		color: colors['amber']['600']
 	},
 	{
-		name: '80/20 Allocation',
+		name: 'NASDAQ QQQ',
 		color: colors['fuchsia']['600']
 	},
 	{

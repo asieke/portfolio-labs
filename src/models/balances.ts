@@ -12,27 +12,28 @@ import colors from 'tailwindcss/colors';
  * with an empty balances array.
  * *******************************************************************
  */
-export const getDailyBalances = async (supabase: SupabaseClient, user_id: string) => {
-	const { data: balances, error: balancesError } = await supabase.from('balances').select('*, portfolios!inner(id, name)').eq('user_id', user_id).eq('portfolios.name', 'Total');
-
-	if (balancesError || balances.length === 0) return null;
-
-	// return balances as Balance[];
-
-	return balances.map((b, i) => ({
-		...b,
-		end_balance: b.balance,
-		end_benchmarks: b.benchmarks,
-		pct: i === 0 ? 0 : (b.balance - 0.5 + b.flows) / (balances[i - 1].balance + 0.5 * b.flows) - 1
-	})) as Balance[];
+export const getDailyBalances = async (supabase: SupabaseClient, user_id: string, onlyTotal = true) => {
+	if (onlyTotal) {
+		const { data: balances, error: balancesError } = await supabase.from('balances_daily').select('*, portfolios!inner(id, name)').eq('user_id', user_id).eq('portfolios.name', 'Total');
+		if (balancesError || balances.length === 0) return null;
+		return balances as Balance[];
+	} else {
+		const { data: balances, error: balancesError } = await supabase.from('balances_daily').select('*').eq('user_id', user_id);
+		if (balancesError || balances.length === 0) return null;
+		return balances as Balance[];
+	}
 };
 
-export const getWeeklyBalances = async (supabase: SupabaseClient, user_id: string) => {
-	const { data: balances, error: balancesError } = await supabase.from('balances_weekly').select('*').eq('user_id', user_id);
-
-	if (balancesError || balances.length === 0) return null;
-
-	return balances as Balance[];
+export const getWeeklyBalances = async (supabase: SupabaseClient, user_id: string, onlyTotal = true) => {
+	if (onlyTotal) {
+		const { data: balances, error: balancesError } = await supabase.from('balances_weekly').select('*, portfolios!inner(id, name)').eq('user_id', user_id).eq('portfolios.name', 'Total');
+		if (balancesError || balances.length === 0) return null;
+		return balances as Balance[];
+	} else {
+		const { data: balances, error: balancesError } = await supabase.from('balances_weekly').select('*').eq('user_id', user_id);
+		if (balancesError || balances.length === 0) return null;
+		return balances as Balance[];
+	}
 };
 
 export const getMonthlyBalances = async (supabase: SupabaseClient, user_id: string) => {

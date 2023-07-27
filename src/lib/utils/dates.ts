@@ -29,11 +29,3 @@ export const chartDates = [
 		value: new Date(new Date().setMonth(new Date().getMonth() - 1)).toISOString().split('T')[0]
 	}
 ];
-
-export const getDateGranularity = (start: string, end: string) => {
-	//the dates are formatted like '2022-01-01',
-	//calculate the difference in days between the two dates
-	const diff = Math.floor((new Date(end).getTime() - new Date(start).getTime()) / (1000 * 60 * 60 * 24));
-
-	return diff;
-};

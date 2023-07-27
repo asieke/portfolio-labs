@@ -7,7 +7,7 @@ export const getDistinctSymbols = async () => {
 	return ['CASHX', ...Object.keys(symbols)];
 };
 
-export const benchmarkSymbols = ['CASHX', 'VFIFX', 'VTSMX', 'VBMFX', 'BIAPX', 'BIGPX', 'BTC-USD.CC', 'IOO', 'VEA', 'VWO'];
+export const benchmarkSymbols = ['CASHX', 'QQQ', 'VFIFX', 'VTSMX', 'VBMFX', 'BIAPX', 'BIGPX', 'BTC-USD.CC', 'IOO', 'VEA', 'VWO'];
 
 //update so that the actual benchmarks flow thru8gh to the database
 //update the balances tables

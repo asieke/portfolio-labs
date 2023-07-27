@@ -15,7 +15,7 @@ export const load: PageLoad = async ({ parent }) => {
 	// Fetch portfolios and balances for the current user
 	const portfolios = await getPortfolios(supabase, session.user.id);
 	const balancesYearly = await getYearlyBalances(supabase, session.user.id);
-	const balancesWeekly = await getWeeklyBalances(supabase, session.user.id);
+	const balancesWeekly = await getWeeklyBalances(supabase, session.user.id, false);
 
 	return {
 		portfolios,

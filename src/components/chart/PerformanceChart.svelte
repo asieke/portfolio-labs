@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { color, formatPercent } from '$lib/utils/format';
-	import { onMount } from 'svelte';
 	import Highcharts from 'highcharts/highstock';
 	import type { Balance } from '$types/balances';
 	import { chartDates, chartSelectedDate, chartSelectedBenchmarks, balanceDisplayData } from '$lib/stores/performanceChart';
 	import DatePicker from './DatePicker.svelte';
 	import BenchmarkPicker from './BenchmarkPicker.svelte';
 	import { getReturn } from '$models/balances';
-	import { getDateGranularity } from '$lib/utils/dates';
 
 	// Define the prop for the component
 	export let balances: Balance[];
@@ -32,16 +30,12 @@
 	let benchmarkPct: number;
 
 	$: {
-		//Figure out the time granularity of the chart
 		displayBalances = [...balances].filter((b) => b.date > $chartSelectedDate);
 
 		console.log(displayBalances);
 
-		const diff = getDateGranularity(displayBalances[0].date, displayBalances[1].date);
-		performancePct = getReturn(displayBalances.map((b) => b.pct));
-		benchmarkPct = getReturn(displayBalances.map((b) => b.benchmark_returns[defaultBenchmark]));
-
-		console.log(performancePct, benchmarkPct);
+		performancePct = 11; //getReturn(displayBalances.map((b) => b.pct));
+		benchmarkPct = 11; //getReturn(displayBalances.map((b) => b.benchmark_returns[defaultBenchmark]));
 
 		const temp = [
 			{

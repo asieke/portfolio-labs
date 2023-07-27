@@ -83,7 +83,7 @@ const getHistoricalBalance = async (portfolio_id) => {
 	let benchmarkUSEquity = 0;
 	let benchmarkFixedIncome = 0;
 	let benchmark6040 = 0;
-	let benchmark8020 = 0;
+	let benchmarkQQQ = 0;
 	let benchmarkCash = 0;
 	let benchmarkCrypto = 0;
 	let benchmarkGlobal = 0;
@@ -104,7 +104,7 @@ const getHistoricalBalance = async (portfolio_id) => {
 					benchmarkUSEquity += txn.amount;
 					benchmarkFixedIncome += txn.amount;
 					benchmark6040 += txn.amount;
-					benchmark8020 += txn.amount;
+					benchmarkQQQ += txn.amount;
 					benchmarkCash += txn.amount;
 					benchmarkCrypto += txn.amount;
 					benchmarkGlobal += txn.amount;
@@ -138,7 +138,7 @@ const getHistoricalBalance = async (portfolio_id) => {
 		benchmarkUSEquity *= 1 + (benchmarkPcts['VTSMX'][date] || 0);
 		benchmarkFixedIncome *= 1 + (benchmarkPcts['VBMFX'][date] || 0);
 		benchmark6040 *= 1 + (benchmarkPcts['BIGPX'][date] || 0);
-		benchmark8020 *= 1 + (benchmarkPcts['BIAPX'][date] || 0);
+		benchmarkQQQ *= 1 + (benchmarkPcts['QQQ'][date] || 0);
 		benchmarkCash *= 1 + (benchmarkPcts['CASHX'][date] || 0);
 		benchmarkCrypto *= 1 + (benchmarkPcts['BTC-USD.CC'][date] || 0);
 		benchmarkGlobal *= 1 + (benchmarkPcts['IOO'][date] || 0);
@@ -153,9 +153,9 @@ const getHistoricalBalance = async (portfolio_id) => {
 			benchmarks: {
 				'Vanguard 2050 Fund': benchmarkVFIFX,
 				'US Equity Total Market': benchmarkUSEquity,
+				'NASDAQ QQQ': benchmarkQQQ,
 				'Fixed Income': benchmarkFixedIncome,
 				'60/40 Allocation': benchmark6040,
-				'80/20 Allocation': benchmark8020,
 				Cash: benchmarkCash,
 				Bitcoin: benchmarkCrypto,
 				'Global Equity': benchmarkGlobal,
