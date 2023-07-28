@@ -1,7 +1,7 @@
 // import { formatCurrency, formatPercent, color } from '$lib/utils/format';
 
 export const formatCurrency = (num: number | null | undefined | string, digits = 2) => {
-	if (!num || num === Infinity || typeof num !== 'number') return '';
+	if (num !== 0 && (!num || num === Infinity || typeof num !== 'number')) return '';
 
 	return new Intl.NumberFormat('en-US', {
 		style: 'currency',
@@ -12,7 +12,7 @@ export const formatCurrency = (num: number | null | undefined | string, digits =
 };
 
 export const formatPercent = (num: number | null | undefined | string, digits = 2) => {
-	if (!num || num === Infinity || typeof num !== 'number') return '';
+	if (num !== 0 && (!num || num === Infinity || typeof num !== 'number')) return '';
 
 	return new Intl.NumberFormat('en-US', {
 		style: 'percent',
@@ -22,7 +22,7 @@ export const formatPercent = (num: number | null | undefined | string, digits = 
 };
 
 export const formatNumber = (num: number | null | undefined | string, digits = 2) => {
-	if (!num || num === Infinity || typeof num !== 'number') return '';
+	if (num !== 0 && (!num || num === Infinity || typeof num !== 'number')) return '';
 	return new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: digits,
 		maximumFractionDigits: digits

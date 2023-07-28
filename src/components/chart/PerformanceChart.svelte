@@ -7,20 +7,22 @@
 	import DatePicker from './DatePicker.svelte';
 	import BenchmarkPicker from './BenchmarkPicker.svelte';
 	import { getReturn } from '$models/balances';
+	import { BenchmarkTable } from '$components/chart';
 
 	// Define the prop for the component
 	export let balances: Balance[];
 	export let options: {
 		datePicker?: boolean;
 		benchmarkPicker?: boolean;
+		benchmarkTable?: boolean;
 	} = {};
-	const { datePicker = true, benchmarkPicker = true } = options;
+	const { datePicker = true, benchmarkPicker = true, benchmarkTable = true } = options;
 
 	const defaultBenchmark = 'US Equity Total Market';
 
 	// Initialize the selected date and benchmarks using data from the store
 	chartSelectedDate.set(balances[0].date);
-	chartSelectedBenchmarks.set(balanceDisplayData.map((d) => (d.name === defaultBenchmark ? true : false)));
+	chartSelectedBenchmarks.set(balanceDisplayData.map((d, i) => (i === 0 || d.name === defaultBenchmark ? true : false)));
 	chartDates[0].value = balances[0].date;
 
 	// Create a reactive statement to update displayBalances when chartSelectedDate changes
@@ -29,6 +31,20 @@
 	let data: Highcharts.SeriesLineOptions[] = [];
 	let performancePct: number;
 	let benchmarkPct: number;
+
+	$: benchmarkBalances = [...displayBalances].filter((b) => b.date <= '2099-01-01');
+
+	const onChartMouseMove = (x: number) => {
+		const date = new Date(x).toISOString().split('T')[0];
+		benchmarkBalances = [...displayBalances].filter((b) => b.date <= date);
+		if (benchmarkBalances.length === 0) {
+			benchmarkBalances = [displayBalances[0]];
+		}
+	};
+
+	const onChartMouseOut = () => {
+		benchmarkBalances = [...displayBalances];
+	};
 
 	$: {
 		displayBalances = [...balances].filter((b) => b.date >= $chartSelectedDate);
@@ -85,10 +101,6 @@
 			},
 			title: {},
 			series: data,
-			tooltip: {
-				valueDecimals: 2,
-				valuePrefix: '$'
-			},
 			credits: {
 				enabled: false
 			},
@@ -100,7 +112,12 @@
 					}
 				},
 				lineColor: '#707073',
-				tickColor: '#707073'
+				tickColor: '#707073',
+				crosshair: {
+					color: '#ccc',
+					width: 1,
+					dashStyle: 'Dash' as Highcharts.DashStyleValue
+				}
 			},
 			yAxis: {
 				labels: {
@@ -109,6 +126,68 @@
 					},
 					formatter: function () {
 						return '$' + this.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+					}
+				}
+			},
+			tooltip: {
+				positioner: function (labelWidth, labelHeight, point) {
+					if (point.plotX < labelWidth / 2) {
+						return { x: 5, y: 5 };
+					} else if (point.plotX > this.chart.chartWidth - 10 - labelWidth / 2) {
+						return { x: this.chart.chartWidth - labelWidth - 10, y: 5 };
+					}
+
+					return { x: point.plotX - labelWidth / 2, y: 5 };
+				},
+				enabled: true,
+				formatter: function () {
+					// Format the date using Highcharts.dateFormat function
+					if (this.x === undefined || typeof this.x !== 'number') {
+						return 'Error: Invalid date';
+					}
+					return `<div class='px-3 py-2 shadow rounded-full text-xs dark:bg-slate-600 bg-white text-slate-500 dark:text-slate-300'>${Highcharts.dateFormat('%b %e, %Y', this.x)}</div>`;
+				},
+				backgroundColor: undefined,
+				borderWidth: 0,
+				borderColor: '#ccc',
+				shadow: false,
+				borderRadius: 0,
+				padding: 0,
+				distance: 0,
+				useHTML: true,
+				shape: 'rect' as Highcharts.TooltipShapeValue,
+
+				style: {
+					// CSS properties for the text in the tooltip box
+					color: '#333333',
+					fontSize: '11px'
+				}
+			},
+			plotOptions: {
+				series: {
+					animation: {
+						duration: 0,
+						easing: 'easeInOutSine'
+					},
+					events: {
+						mouseOut: () => {
+							onChartMouseOut();
+						}
+					},
+					states: {
+						hover: {
+							enabled: false
+						},
+						inactive: {
+							opacity: 1
+						}
+					},
+					point: {
+						events: {
+							mouseOver: function () {
+								onChartMouseMove(this.x);
+							}
+						}
 					}
 				}
 			}
@@ -140,4 +219,8 @@
 <!-- Include benchmark picker component -->
 {#if benchmarkPicker}
 	<BenchmarkPicker />
+{/if}
+
+{#if benchmarkTable}
+	<BenchmarkTable balances={displayBalances.length - benchmarkBalances.length >= 2 ? benchmarkBalances : displayBalances} />
 {/if}

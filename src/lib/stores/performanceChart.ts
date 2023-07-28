@@ -81,4 +81,5 @@ export const chartDates = [
 ];
 
 export const chartSelectedDate = writable('2000-01-01');
-export const chartSelectedBenchmarks = writable(balanceDisplayData.map(() => false));
+
+export const chartSelectedBenchmarks = writable(balanceDisplayData.map((b, i) => (i === 0 ? true : false)));

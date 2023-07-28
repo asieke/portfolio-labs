@@ -2,7 +2,6 @@
 	import { Container } from '$components/layout';
 	import ToolTip from './components/ToolTip.svelte';
 	import TableRow from './components/TableRow.svelte';
-	import Targets from './components/Targets.svelte';
 	import { roundToSum } from '$lib/utils/numbers';
 
 	export let data;
@@ -106,7 +105,6 @@
 				{/each}
 			</select>
 		{/if}
-		<Targets targets={targetAllocation} />
 	</div>
 </Container>
 

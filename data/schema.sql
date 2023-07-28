@@ -1,4 +1,3 @@
-DROP table if exits accounts, portfolios, balances, positions, transactions;
 
 create table
 public.accounts (

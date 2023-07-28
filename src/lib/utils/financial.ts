@@ -6,7 +6,5 @@ export const getCAGR = (roi: number, date: string) => {
 
 	const diff = Math.floor(Math.abs(today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 
-	console.log('calculating CAGR: ', diff);
-
 	return Math.pow(1 + roi, 365 / diff) - 1;
 };
