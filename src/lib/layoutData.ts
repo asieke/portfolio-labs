@@ -14,6 +14,10 @@ export const navLinks = [
 	{
 		label: 'Modeling',
 		href: '/modeling'
+	},
+	{
+		label: 'Allocation',
+		href: '/allocation'
 	}
 ];
 

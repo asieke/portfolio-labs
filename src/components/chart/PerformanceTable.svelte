@@ -10,7 +10,7 @@
 
 <h4>Performance Summary</h4>
 
-<div class="flex items-center justify-between rounded-tl-md rounded-tr-md bg-primary-600 px-2 py-2 text-xs font-bold dark:bg-primary-700">
+<div class="flex items-center justify-between rounded-tl-md rounded-tr-md bg-primary-600 px-2 py-2 text-xs font-bold text-white dark:bg-primary-700">
 	<div class="w-2/12"><span>Date</span></div>
 	<div class="w-2/12 text-left"><span>Starting Balance</span></div>
 	<div class="w-2/12 text-left"><span>Ending Balance</span></div>
