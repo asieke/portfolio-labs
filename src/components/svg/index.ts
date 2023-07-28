@@ -17,6 +17,7 @@ import IconWarning from './IconWarning.svelte';
 import IconError from './IconError.svelte';
 import IconSuccess from './IconSuccess.svelte';
 import IconInfo from './IconInfo.svelte';
+import IconCalculator from './IconCalculator.svelte';
 
 export {
 	IconWarning,
@@ -37,5 +38,8 @@ export {
 	IconSignOut,
 	IconAdjustments,
 	IconLock,
-	IconSpinner
+	IconSpinner,
+	IconCalculator
 };
+
+//Source: https://heroicons.com/

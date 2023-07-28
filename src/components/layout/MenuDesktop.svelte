@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { profileLinks } from '$lib/layoutData';
+	import { profileLinks } from '$lib/data/layoutData';
 	import { menuDesktopShowing } from '$lib/stores/menuDesktop';
 	import { page } from '$app/stores';
 	import { Notifications } from '$components/layout';

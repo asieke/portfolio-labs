@@ -40,7 +40,7 @@ export const profileLinks = [
 	}
 ];
 
-import { IconLock, IconSignOut, IconGear, IconProfile, IconAdjustments, IconWallet } from '$components/svg';
+import { IconLock, IconSignOut, IconGear, IconProfile, IconAdjustments, IconWallet, IconCalculator } from '$components/svg';
 
 export const settingsLinks = [
 	{
@@ -62,6 +62,11 @@ export const settingsLinks = [
 		label: 'Asset Classifications',
 		href: '/settings/assets',
 		icon: IconAdjustments
+	},
+	{
+		label: 'Allocation Targets',
+		href: '/settings/targets',
+		icon: IconCalculator
 	},
 	{
 		label: 'Security',

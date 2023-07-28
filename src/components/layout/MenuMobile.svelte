@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { IconHamburger, IconClose } from '$components/svg';
-	import { navLinks, profileLinks } from '$lib/layoutData';
+	import { navLinks, profileLinks } from '$lib/data/layoutData';
 	import { page } from '$app/stores';
 	import { menuMobileShowing } from '$lib/stores/menuMobile';
 
@@ -9,22 +9,14 @@
 
 {#if !$menuMobileShowing}
 	<div id="menuMobile">
-		<button
-			on:click={() => menuMobileShowing.set(true)}
-			type="button"
-			class="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white"
-		>
+		<button on:click={() => menuMobileShowing.set(true)} type="button" class="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white">
 			<span class="sr-only">Open main menu</span>
 			<IconHamburger />
 		</button>
 	</div>
 {:else}
 	<div id="menuMobile">
-		<button
-			on:click={() => menuMobileShowing.set(false)}
-			type="button"
-			class="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white"
-		>
+		<button on:click={() => menuMobileShowing.set(false)} type="button" class="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white">
 			<span class="sr-only">Open main menu</span>
 			<IconClose />
 		</button>
@@ -33,11 +25,7 @@
 		<div class="space-y-1 px-2 py-3 sm:px-3">
 			<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 			{#each navLinks as { label, href }, i}
-				<a
-					{href}
-					class={pathname === href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}
-					aria-current="page">{label}</a
-				>
+				<a {href} class={pathname === href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'} aria-current="page">{label}</a>
 			{/each}
 		</div>
 		<div class="border-t border-gray-700 pb-3 pt-4">
@@ -58,14 +46,7 @@
 					class="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
 				>
 					<span class="sr-only">View notifications</span>
-					<svg
-						class="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						aria-hidden="true"
-					>
+					<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -76,11 +57,7 @@
 			</div>
 			<div class="mt-3 space-y-1 px-2">
 				{#each profileLinks as { label, href }, i}
-					<a
-						{href}
-						class={pathname === href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}
-						aria-current="page">{label}</a
-					>
+					<a {href} class={pathname === href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'} aria-current="page">{label}</a>
 				{/each}
 			</div>
 		</div>

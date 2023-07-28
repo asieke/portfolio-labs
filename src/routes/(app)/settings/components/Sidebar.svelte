@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { settingsLinks } from '$lib/layoutData';
+	import { settingsLinks } from '$lib/data/layoutData';
 	$: pathname = $page.url.pathname;
 </script>
 
@@ -9,17 +9,10 @@
 		{#each settingsLinks as { href, label, icon }, i}
 			<li>
 				<!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-				<a
-					{href}
-					class={href === pathname
-						? 'bg-gray-200 text-indigo-600 dark:bg-gray-700 dark:text-indigo-200'
-						: 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-200'}
-				>
+				<a {href} class={href === pathname ? 'bg-gray-200 text-indigo-600 dark:bg-gray-700 dark:text-indigo-200' : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-200'}>
 					<svelte:component
 						this={icon}
-						class="h-6 w-6 shrink-0  {href === pathname
-							? 'text-indigo-600 dark:text-indigo-200'
-							: 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-200'}"
+						class="h-6 w-6 shrink-0  {href === pathname ? 'text-indigo-600 dark:text-indigo-200' : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-200'}"
 					/>
 					{label}
 				</a>
