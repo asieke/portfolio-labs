@@ -1,21 +1,27 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
 	import { Container } from '$components/layout';
 	import { onMount } from 'svelte';
-	import { getAsset } from '$models/assets';
 	import { page } from '$app/stores';
 	import { AssetClassPieChart } from '$components/chart';
 	import type { Asset } from '$types/assets';
 	import type { Position } from '$types/positions';
-	import { getPositionBySymbol } from '$models/positions';
 	import DetailPosition from './DetailPosition.svelte';
 	import DetailAsset from './DetailAsset.svelte';
+	import { getPrices } from '$models/prices';
+	import { PriceChart } from '$components/chart';
 
-	const { supabase, session } = $page.data;
+	const { supabase } = $page.data;
 
 	export let asset: Asset | null;
 	export let position: Position | null;
 	export let onClick = () => {};
+	let prices: any;
+
+	onMount(async () => {
+		if (asset && asset.symbol) {
+			prices = await getPrices(supabase, asset.symbol);
+		}
+	});
 </script>
 
 <Container layout="right">
@@ -27,8 +33,9 @@
 		</h4>
 		{#if asset && position && position.asset_class}
 			<DetailAsset {asset} />
-		{:else}
-			<p>...Loading</p>
+		{/if}
+		{#if prices}
+			<PriceChart {prices} />
 		{/if}
 	</div>
 	<div slot="right">
@@ -37,8 +44,6 @@
 			<DetailPosition {position} />
 			<h4 class="mt-4">Asset Allocation</h4>
 			<AssetClassPieChart data={position.asset_class} />
-		{:else}
-			<p>...Loading</p>
 		{/if}
 	</div>
 </Container>

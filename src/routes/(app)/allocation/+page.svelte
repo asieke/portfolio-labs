@@ -105,12 +105,20 @@
 	{/if}
 </Container>
 
-<style>
+<style lang="postcss">
 	button {
 		@apply cursor-default;
 	}
 
 	.cell {
 		@apply flex items-center justify-center text-xs;
+	}
+
+	a {
+		@apply text-indigo-600 dark:text-indigo-400;
+	}
+
+	a:hover {
+		@apply text-indigo-500 dark:text-indigo-300;
 	}
 </style>
