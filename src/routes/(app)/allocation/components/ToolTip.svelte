@@ -11,6 +11,8 @@
 			color: string;
 		}[];
 	};
+
+	console.log(asset);
 </script>
 
 <!-- Create a small triagle in the upper right of this with the same color -->
@@ -40,12 +42,12 @@
 	</div>
 </div>
 
-<style>
+<style lang="postcss">
 	table {
 		@apply w-full text-xs font-light;
 	}
 
 	td {
-		@apply px-2 py-1 text-white;
+		@apply px-2 py-1 font-normal text-white dark:text-white;
 	}
 </style>

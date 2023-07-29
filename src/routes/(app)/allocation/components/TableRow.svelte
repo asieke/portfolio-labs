@@ -2,6 +2,15 @@
 	import { color, formatCurrency, formatPercent } from '$lib/utils/format';
 	import { hexToRGBA } from '$lib/utils/colors';
 
+	export let targets: {
+		name: string;
+		total: number;
+		breakdown: {
+			name: string;
+			total: number;
+		}[];
+	}[];
+
 	export let asset: {
 		name: string;
 		total: number;
@@ -11,7 +20,16 @@
 	export let bgcolor: string;
 	export let total: number;
 
-	let background = 'background-color: ' + (label === 'Total' ? hexToRGBA(bgcolor, 0.3) : hexToRGBA(bgcolor, 0.1));
+	let background = 'background-color: ' + (label === 'Total' ? hexToRGBA(bgcolor, 0.15) : hexToRGBA(bgcolor, 0.05));
+
+	let t = 0;
+	if (label === 'Total' && targets) {
+		t = (targets.find((t) => t.name === asset.name)?.total || 0) / 100;
+	} else {
+		const temp = targets?.find((t) => t.name === label);
+		const temp2 = temp?.breakdown.find((b) => b.name === asset.name);
+		t = (((temp2?.total || 0) / 100) * (temp?.total || 0)) / 100;
+	}
 </script>
 
 <div class="row" style={background}>
@@ -22,8 +40,9 @@
 	<div class="w-2/12 text-left"><span>{asset.name}</span></div>
 	<div class="w-2/12 text-left"><span>{formatCurrency(asset.total, 0)}</span></div>
 	<div class="w-2/12 text-left"><span />{formatPercent(asset.total / total, 1)}</div>
-	<div class="w-2/12 text-left"><span>asdfasdf</span></div>
-	<div class="w-1/12 text-left"><span>asdfasdf</span></div>
+	<div class="w-2/12 text-left"><span>{formatPercent(t, 1)}</span></div>
+	<div class="w-2/12 text-left"><span>{formatCurrency(t * total)}</span></div>
+	<div class="w-2/12 text-left {color(t * total - asset.total)}">{formatCurrency(t * total - asset.total)}</div>
 </div>
 
 <style lang="postcss">

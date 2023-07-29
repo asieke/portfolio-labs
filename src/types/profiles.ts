@@ -1,3 +1,5 @@
+import type { AssetClass } from '$types/assets';
+
 export type Profile = {
 	id: string; // UUIDs are represented as strings in JavaScript/TypeScript
 	full_name: string | null;
@@ -9,4 +11,5 @@ export type Profile = {
 	email: string | null;
 	financial_information: Record<string, string> | null; // JSONB is represented as any in JavaScript/TypeScript
 	settings: Record<string, string> | null; // JSONB is represented as any in JavaScript/TypeScript
+	allocation_targets: AssetClass[] | null;
 };

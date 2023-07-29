@@ -41,6 +41,14 @@ table {
 	@apply my-4 w-full border-collapse;
 }
 
+a {
+	@apply text-indigo-600 dark:text-indigo-400;
+}
+
+a:hover {
+	@apply text-indigo-500 dark:text-indigo-300;
+}
+
 th,
 td {
 	@apply px-4 py-2 text-gray-600  dark:text-gray-400;
@@ -51,6 +59,7 @@ th {
 }
 
 /* Form Styles */
+form input[type='number'],
 form input[type='text'],
 form input[type='email'] {
 	@apply block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6;
