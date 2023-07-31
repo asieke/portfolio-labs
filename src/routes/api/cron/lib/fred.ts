@@ -22,6 +22,8 @@ export const getFredData = async (START_DATE: string) => {
 
 		const dates = generateDates(START);
 
+		console.log('I GOT FRED DATA');
+
 		return dates
 			.map((date, i) => ({
 				symbol: 'CASHX',

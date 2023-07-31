@@ -26,7 +26,10 @@ export const POST = async (req) => {
 
 	await supabase.from('prices').delete().gt('date', startDate);
 
+	console.log('GETTING PRICES');
 	const prices = await getPriceData(symbols.map((r: Record<string, string>) => r.symbol) as string[], startDate);
+	console.log(prices);
+	console.log('GETTING CASH');
 	const cash = await getFredData(maxDate[0].max);
 
 	if (prices && cash) {
