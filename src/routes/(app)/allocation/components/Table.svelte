@@ -46,16 +46,15 @@
 </script>
 
 <table>
-	<tr class="bg-slate-700 text-slate-200">
-		<td />
-		<td>Asset Class</td>
+	<tr class="bg-primary-700 text-slate-200">
+		<td class="rounded-tl-lg" /><td>Asset Class</td>
 		<td>Category</td>
 		<td>Total Amount</td>
 		<td>Percent</td>
 		<td>Target Percent<br /> (of Asset Class)</td>
 		<td>Target Percent<br /> (of Total)</td>
 		<td>Target Dollar<br /></td>
-		<td>Asset Delta</td>
+		<td class="rounded-tr-lg">Asset Delta</td>
 	</tr>
 
 	{#each display as row}
@@ -89,6 +88,6 @@
 	}
 
 	td {
-		@apply border border-gray-300 px-2 py-1 text-left text-sm;
+		@apply border-b-[1px] border-b-slate-500 px-2 py-1 text-left text-sm;
 	}
 </style>

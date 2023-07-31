@@ -10,7 +10,13 @@
 	export let next = async () => {};
 
 	let loading = false;
+	let error = '';
+
 	const handleClick = async () => {
+		if (!profile.accepted_tos) {
+			error = 'Please accept terms';
+			return;
+		}
 		loading = true;
 		await next();
 		loading = false;
@@ -28,8 +34,12 @@
 				type="checkbox"
 				class="ml-1 outline-none focus:outline-none focus:ring-0"
 				bind:checked={profile.accepted_tos}
+				on:click={() => {
+					error = '';
+				}}
 			/>
 			I accept the terms of service
+			<span class="text-red-600">{error}</span>
 		</div>
 
 		<div class="flex flex-row pt-3">
