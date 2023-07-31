@@ -1,18 +1,8 @@
 <script lang="ts">
 	import { formatPercent, formatCurrency } from '$lib/utils/format';
+	import type { AssetClass } from '$types/assets';
 
-	export let asset: {
-		name: string;
-		total: number;
-		color: string;
-		breakdown: {
-			name: string;
-			total: number;
-			color: string;
-		}[];
-	};
-
-	console.log(asset);
+	export let asset: AssetClass;
 </script>
 
 <!-- Create a small triagle in the upper right of this with the same color -->

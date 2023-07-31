@@ -1,6 +1,6 @@
 html,
 body {
-	@apply h-full;
+	@apply h-full text-slate-700 dark:text-slate-300;
 	font-family: 'Source Sans 3', sans-serif;
 }
 
@@ -43,11 +43,11 @@ table {
 
 th,
 td {
-	@apply px-4 py-2 text-gray-600  dark:text-gray-400;
+	@apply px-4 py-2;
 }
 
 th {
-	@apply font-semibold text-gray-700 dark:text-gray-300;
+	@apply font-semibold;
 }
 
 /* Form Styles */
