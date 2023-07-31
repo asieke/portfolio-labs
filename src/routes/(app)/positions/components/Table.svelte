@@ -79,7 +79,7 @@
 
 <style lang="postcss">
 	table {
-		@apply mt-5 w-full rounded-xl text-xs text-slate-600;
+		@apply mt-5 w-full rounded-xl text-xs;
 	}
 	td {
 		@apply p-2;

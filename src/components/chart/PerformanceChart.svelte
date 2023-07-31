@@ -70,7 +70,7 @@
 		data = temp;
 
 		if (container) {
-			drawChart({ container, data, onMouseOver, onMouseOut, showY: false });
+			drawChart({ container, data, onMouseOver, onMouseOut, showY: false, color: balanceDisplayData[0].color });
 		}
 	}
 

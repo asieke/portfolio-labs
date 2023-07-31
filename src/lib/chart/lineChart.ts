@@ -9,9 +9,10 @@ type ChartProps = {
 	container: HTMLElement;
 	showX?: boolean;
 	showY?: boolean;
+	color?: string;
 };
 
-export const drawChart = ({ container, data, onMouseOver, onMouseOut, showX = true, showY = true }: ChartProps) => {
+export const drawChart = ({ container, data, onMouseOver, onMouseOut, showX = true, showY = true, color = '#ffcc33' }: ChartProps) => {
 	// Create a Highcharts stock chart in the given container with the specified configuration
 
 	Highcharts.stockChart(container, {
@@ -80,21 +81,19 @@ export const drawChart = ({ container, data, onMouseOver, onMouseOut, showX = tr
 				const dataPointX = this.point.plotX || 0;
 				const dataPointY = this.point.plotY || 0;
 
-				let left = 55;
-				if (dataPointX < 50) left = dataPointX + 5;
-				if (dataPointX > chartWidth - 50) left = 105 - (chartWidth - dataPointX);
+				let left = 50;
+				if (dataPointX < 50) left = dataPointX;
+				if (dataPointX > chartWidth - 50) left = 100 - (chartWidth - dataPointX);
 
-				const top = dataPointY - 8;
-
-				console.log(dataPointX, dataPointY, chartWidth);
+				const top = dataPointY - 13;
 
 				return `
           <div class='z-10 opacity-80 absolute top-[5px] left-[10px] w-[100px] rounded-xl text-center px-3 py-2 text-xs dark:bg-slate-600 bg-slate-200 text-slate-500 dark:text-slate-300'>
             ${showX ? Highcharts.dateFormat('%b %e, %Y', this.x) : ''}
 						${showY ? `<div>${formatCurrency(this.y)}</div>` : ''}
           </div>
-					<div class='z-5 absolute w-[10px] h-[10px] rounded-full bg-blue-500' style='left: ${left}px; top: ${top}px'>
-
+					<div class='z-5 absolute w-[20px] h-[20px] rounded-full bg-slate-600' style='left: ${left}px; top: ${top}px; opacity: 0.5'></div>
+					<div class="z-5 absolute w-[12px] h-[12px] shadow-xl rounded-full ml-[4px] mt-[4px]" style="background-color: ${color}; left: ${left}px; top: ${top}px;" />
         `;
 			},
 			backgroundColor: undefined,
