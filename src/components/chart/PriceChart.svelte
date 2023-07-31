@@ -2,14 +2,12 @@
 	import { onMount } from 'svelte';
 	import { drawChart } from '$lib/chart/lineChart';
 	import type { DashStyleValue } from 'highcharts';
+	import type { Price } from '$types/prices';
 
-	export let prices: {
-		date: string;
-		price: number;
-	}[];
+	export let prices: Price[];
 
 	let temp = prices.filter((p) => p.price > 0);
-	let ratio = 10000 / temp[0].price;
+	let ratio = 10000 / temp[0].price || 1;
 
 	// Initialize container and chart variables
 	let container: HTMLElement;

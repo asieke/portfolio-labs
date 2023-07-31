@@ -5,6 +5,7 @@
 	import { AssetClassPieChart } from '$components/chart';
 	import type { Asset } from '$types/assets';
 	import type { Position } from '$types/positions';
+	import type { Price } from '$types/prices';
 	import DetailPosition from './DetailPosition.svelte';
 	import DetailAsset from './DetailAsset.svelte';
 	import { getPrices } from '$models/prices';
@@ -15,11 +16,12 @@
 	export let asset: Asset | null;
 	export let position: Position | null;
 	export let onClick = () => {};
-	let prices: any;
+	let prices: Price[];
 
 	onMount(async () => {
 		if (asset && asset.symbol) {
 			prices = await getPrices(supabase, asset.symbol);
+			console.log(prices);
 		}
 	});
 </script>
