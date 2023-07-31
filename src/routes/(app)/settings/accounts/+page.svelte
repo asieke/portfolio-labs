@@ -1,4 +1,4 @@
 <script lang="ts">
 </script>
 
-<h3>Accounts</h3>
+<h3>Connect your Financial Accounts via Plaid</h3>
