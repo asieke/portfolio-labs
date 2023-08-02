@@ -18,6 +18,7 @@ import IconError from './IconError.svelte';
 import IconSuccess from './IconSuccess.svelte';
 import IconInfo from './IconInfo.svelte';
 import IconCalculator from './IconCalculator.svelte';
+import IconCreditCard from './IconCreditCard.svelte';
 
 export {
 	IconWarning,
@@ -39,7 +40,8 @@ export {
 	IconAdjustments,
 	IconLock,
 	IconSpinner,
-	IconCalculator
+	IconCalculator,
+	IconCreditCard
 };
 
 //Source: https://heroicons.com/

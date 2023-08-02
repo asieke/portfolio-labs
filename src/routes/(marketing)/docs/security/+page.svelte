@@ -66,6 +66,6 @@
 	}
 
 	p {
-		@apply text-base text-sm leading-relaxed tracking-tight text-slate-600;
+		@apply text-sm leading-relaxed tracking-tight text-slate-600;
 	}
 </style>

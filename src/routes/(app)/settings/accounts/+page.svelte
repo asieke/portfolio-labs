@@ -19,13 +19,10 @@
 	};
 
 	const onSuccess = async (public_token: string, metadata: Plaid.OnSuccessMetaData) => {
-		console.log('1. ', public_token, metadata);
-
 		const { institution } = metadata;
 		const res = await axios.post('/api/plaid/exchange_public_token', { public_token });
 
 		const { access_token } = res.data;
-		console.log('2. Access Token', access_token);
 
 		const intitutionData = {
 			user_id: session?.user?.id || ('' as string),
@@ -35,7 +32,6 @@
 		};
 
 		institutions = await addInstitution(supabase, intitutionData);
-		console.log('3. Institution Added', intitutionData);
 	};
 
 	const getHoldings = async (access_token: string) => {
