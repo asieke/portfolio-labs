@@ -3,6 +3,7 @@ import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/publi
 import { createSupabaseLoadClient } from '@supabase/auth-helpers-sveltekit';
 import type { LayoutLoad } from './$types';
 import type { Profile } from '$types/profiles';
+import { getInstitutions } from '$models/plaid';
 
 export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 	depends('supabase:auth');
@@ -28,5 +29,7 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		}
 	}
 
-	return { supabase, session, profile };
+	const institutions = await getInstitutions(supabase, session?.user.id || null);
+
+	return { supabase, session, profile, institutions };
 };
