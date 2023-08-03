@@ -1,4 +1,4 @@
-import { stripe } from '../client';
+import { stripe } from '$lib/clients/stripeServer';
 
 export const POST = async ({ request }) => {
 	const body = await request.json();

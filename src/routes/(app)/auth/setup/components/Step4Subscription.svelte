@@ -1,6 +1,6 @@
 <script lang="ts">
 	import axios from 'axios';
-	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
+	import { PUBLIC_STRIPE_KEY, PUBLIC_APP_URL } from '$env/static/public';
 	import { TextToggle } from '$components/form';
 	import { onMount } from 'svelte';
 	import { IconArrowLeft } from '$components/svg';
@@ -92,7 +92,8 @@
 			// Create the subscription
 			const res = await axios.post('/api/stripe/create-subscription', {
 				customerId: customer?.id,
-				priceId: selectedProduct?.price_id
+				priceId: selectedProduct?.price_id,
+				trial_period_days: 14
 			});
 
 			const { type, clientSecret } = res.data;
@@ -104,7 +105,7 @@
 				elements,
 				clientSecret,
 				confirmParams: {
-					return_url: 'http://localhost:5173/auth/complete'
+					return_url: PUBLIC_APP_URL + '/auth/complete'
 				}
 			});
 

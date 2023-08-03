@@ -13,6 +13,7 @@ export const POST = async ({ request }) => {
 		console.log(body);
 		const subscription = await stripe.subscriptions.create({
 			customer: body.customerId,
+			trial_period_days: body.trial_period_days,
 			items: [
 				{
 					price: body.priceId
