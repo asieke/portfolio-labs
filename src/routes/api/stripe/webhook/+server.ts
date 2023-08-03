@@ -29,35 +29,60 @@ export const POST = async ({ request }) => {
 
 			console.log('EVENT DATA', data);
 
+			// Handle the event
+			// Handle the event
 			switch (event.type) {
-				case 'invoice.paid':
-					// Used to provision services after the trial has ended.
-					// The status of the invoice will show up as paid. Store the status in your
-					// database to reference when a user accesses your service to avoid hitting rate limits.
-
-					console.log('>>>>>>>>>>>>>>Invoice Paid', event);
-
+				case 'customer.subscription.created': {
+					const customerSubscriptionCreated = event.data.object;
+					console.log(`>>>>>>>>>>>>>>>>Customer subscription created:`, customerSubscriptionCreated);
+					// Then define and call a function to handle the event customer.subscription.created
 					break;
-				case 'invoice.payment_failed':
-					// If the payment fails or the customer does not have a valid payment method,
-					//  an invoice.payment_failed event is sent, the subscription becomes past_due.
-					// Use this webhook to notify your user that their payment has
-					// failed and to retrieve new card details.
+				}
+				case 'customer.subscription.deleted': {
+					const customerSubscriptionDeleted = event.data.object;
+					console.log(`>>>>>>>>>>>>>>>>Customer subscription deleted:`, customerSubscriptionDeleted);
+					// Then define and call a function to handle the event customer.subscription.deleted
 					break;
-				case 'customer.subscription.deleted':
-					if (event.request != null) {
-						// handle a subscription canceled by your request
-						// from above.
-						console.log('>>>>>>>>>>>>>>Subscription Deleted', event);
-					} else {
-						// handle subscription canceled automatically based
-						// upon your subscription settings.
-						console.log('>>>>>>>>>>>>>>Subscription Deleted', event);
-					}
+				}
+				case 'customer.subscription.trial_will_end': {
+					const customerSubscriptionTrialWillEnd = event.data.object;
+					console.log(`>>>>>>>>>>>>>>>>Customer subscription trial will end:`, customerSubscriptionTrialWillEnd);
+					// Then define and call a function to handle the event customer.subscription.trial_will_end
 					break;
+				}
+				case 'customer.subscription.updated': {
+					const customerSubscriptionTrialWillEnd = event.data.object;
+					console.log(`>>>>>>>>>>>>>>>>Customer subscription trial will end:`, customerSubscriptionTrialWillEnd);
+					// Then define and call a function to handle the event customer.subscription.trial_will_end
+					break;
+				}
+				case 'invoice.created': {
+					const invoiceCreated = event.data.object;
+					console.log(`>>>>>>>>>>>>>>>>Invoice created:`, invoiceCreated);
+					// Then define and call a function to handle the event invoice.created
+					break;
+				}
+				case 'invoice.payment_action_required': {
+					const invoicePaymentActionRequired = event.data.object;
+					console.log(`>>>>>>>>>>>>>>>>Invoice payment action required:`, invoicePaymentActionRequired);
+					// Then define and call a function to handle the event invoice.payment_action_required
+					break;
+				}
+				case 'invoice.payment_failed': {
+					const invoicePaymentFailed = event.data.object;
+					console.log(`>>>>>>>>>>>>>>>>Invoice payment failed:`, invoicePaymentFailed);
+					// Then define and call a function to handle the event invoice.payment_failed
+					break;
+				}
+				case 'invoice.payment_succeeded': {
+					const invoicePaymentSucceeded = event.data.object;
+					console.log(`>>>>>>>>>>>>>>>>Invoice payment succeeded:`, invoicePaymentSucceeded);
+					// Then define and call a function to handle the event invoice.payment_succeeded
+					break;
+				}
+				// ... handle other event types
 				default:
-					// Unexpected event type
-					console.log('>>>>>>>>>>>>>>Unexpected event type', event);
+					console.log(`Unhandled event type ${event.type}`);
 			}
 		} catch (err) {
 			return new Response(JSON.stringify({ err }), { status: 500 });
