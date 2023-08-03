@@ -163,7 +163,7 @@
 	STRIPE ELEMENTS
 	---------------------- -->
 		<form id="payment-form">
-			<div id="payment-element" class="h-[300px]" />
+			<div id="payment-element" />
 			<button id="submit" class="submit mt-4 w-full">Submit</button>
 			<div id="error-message" />
 		</form>

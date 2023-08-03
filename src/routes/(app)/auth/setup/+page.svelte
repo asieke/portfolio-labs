@@ -16,11 +16,6 @@
 		await updateProfile(supabase, profile);
 		step = step + 1;
 	};
-
-	const nextNext = async () => {
-		step = step + 1;
-	};
-
 	const prev = () => {
 		step = step - 1;
 	};
@@ -40,7 +35,7 @@
 				<Step2FinancialInformation {profile} {next} {prev} />
 			</div>
 			<div style="display: {step === 3 ? 'block' : 'none'}">
-				<Step3TermsOfService {profile} next={nextNext} {prev} />
+				<Step3TermsOfService {profile} {next} {prev} />
 			</div>
 			<div class={step === 4 ? '' : 'h-0 overflow-hidden'}>
 				<Step4Subscription {prev} />
