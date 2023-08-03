@@ -4,12 +4,23 @@
 	import Step1AccountInformation from './components/Step1AccountInformation.svelte';
 	import Step2FinancialInformation from './components/Step2FinancialInformation.svelte';
 	import Step3TermsOfService from './components/Step3TermsOfService.svelte';
-	import Step4ThankYou from './components/Step4ThankYou.svelte';
+	import Step4Subscription from './components/Step4Subscription.svelte';
+	import Step5ThankYou from './components/Step5ThankYou.svelte';
+	import { onMount } from 'svelte';
+	import type { StripeProduct } from '$types/stripe';
+
+	import { getProducts } from '$models/stripe';
+
+	let products: StripeProduct[];
+
+	onMount(async () => {
+		products = await getProducts();
+	});
 
 	export let data;
 	const { profile, supabase } = data;
 
-	let step = 1;
+	let step = 3;
 
 	const next = async () => {
 		await updateProfile(supabase, profile);
@@ -30,7 +41,11 @@
 			{:else if step === 3}
 				<Step3TermsOfService {profile} {next} {prev} />
 			{:else if step === 4}
-				<Step4ThankYou />
+				{#if products}
+					<Step4Subscription {profile} {next} {prev} {products} />
+				{/if}
+			{:else if step === 5}
+				<Step5ThankYou />
 			{/if}
 		</div>
 	</Container>

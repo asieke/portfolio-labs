@@ -12,4 +12,5 @@ export type Profile = {
 	financial_information: Record<string, string>; // JSONB is represented as any in JavaScript/TypeScript
 	settings: Record<string, string>; // JSONB is represented as any in JavaScript/TypeScript
 	allocation_targets: AssetClass[];
+	stripe_customer_id: string;
 };

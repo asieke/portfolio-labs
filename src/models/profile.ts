@@ -12,3 +12,12 @@ export const updateProfile = async (supabase: SupabaseClient, profile: Profile |
 	const { data, error } = await supabase.from('profiles').update(profile).eq('id', profile.id);
 	return { data, error };
 };
+
+export const getProfile = async (supabase: SupabaseClient, user_id: string | null) => {
+	const { data, error } = await supabase.from('profiles').select('*').eq('id', user_id);
+	if (!data || error) {
+		return {} as Profile;
+	}
+
+	return data[0] as Profile;
+};

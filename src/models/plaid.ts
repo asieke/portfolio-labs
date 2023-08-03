@@ -7,7 +7,6 @@ export const addInstitution = async (supabase: SupabaseClient, institution: Plai
 		if (error) throw error;
 		return await getInstitutions(supabase, institution.user_id);
 	} catch (err) {
-		console.error(err);
 		return [] as PlaidInsitution[];
 	}
 };
@@ -15,11 +14,9 @@ export const addInstitution = async (supabase: SupabaseClient, institution: Plai
 export const getInstitutions = async (supabase: SupabaseClient, user_id: string | null) => {
 	try {
 		const { data, error } = await supabase.from('plaid_institutions').select('*').eq('user_id', user_id);
-		if (error) throw error;
-
+		if (error || !data) throw error;
 		return data as PlaidInsitution[];
 	} catch (err) {
-		console.error(err);
 		return [] as PlaidInsitution[];
 	}
 };

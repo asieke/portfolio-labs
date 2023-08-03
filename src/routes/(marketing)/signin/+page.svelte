@@ -16,7 +16,7 @@
 		state = 'loading';
 		const redirectURL = PUBLIC_APP_URL + '/auth/redirect';
 
-		if (email.length < 3) {
+		if (email.length < 6) {
 			errorText = 'Please enter a valid email address';
 			state = 'initial';
 			return;

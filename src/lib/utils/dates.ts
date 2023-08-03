@@ -38,3 +38,8 @@ export const getDisplayMonth = (date: string) => {
 
 	return months[parseInt(dateArray[1]) - 1] + ' ' + dateArray[0];
 };
+
+export const timestampToDate = (timestamp: number) => {
+	const date = new Date(timestamp);
+	return date.toISOString().split('T')[0];
+};
