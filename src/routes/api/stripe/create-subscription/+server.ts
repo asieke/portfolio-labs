@@ -1,4 +1,5 @@
 import { stripe } from '$lib/clients/stripeServer';
+import type { Stripe } from 'stripe';
 
 export const POST = async ({ request }) => {
 	const body = await request.json();
@@ -24,22 +25,29 @@ export const POST = async ({ request }) => {
 			expand: ['latest_invoice.payment_intent', 'pending_setup_intent']
 		});
 
+		if (!subscription) {
+			throw new Error('Subscription not created');
+		}
+
+		const pending_setup_intent = subscription.pending_setup_intent as Stripe.SetupIntent;
+		const payment_intent = (subscription.latest_invoice as Stripe.Invoice)?.payment_intent as Stripe.PaymentIntent;
+
 		if (subscription.pending_setup_intent !== null) {
 			return new Response(
 				JSON.stringify({
 					type: 'setup',
-					clientSecret: subscription.pending_setup_intent.client_secret
+					clientSecret: pending_setup_intent.client_secret
 				})
 			);
 		} else {
 			return new Response(
 				JSON.stringify({
 					type: 'payment',
-					clientSecret: subscription.latest_invoice.payment_intent.client_secret
+					clientSecret: payment_intent.client_secret
 				})
 			);
 		}
 	} catch (error) {
-		return new Response(JSON.stringify({ error: { message: error.message } }), { status: 400 });
+		return new Response(JSON.stringify({ error }), { status: 400 });
 	}
 };

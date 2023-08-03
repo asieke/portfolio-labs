@@ -30,6 +30,8 @@
 		selectedProduct = products[0];
 		toggleOptions = products.map((p) => p.interval);
 
+		console.log(toggleOptions);
+
 		if (!selectedProduct) return;
 
 		maxPrice = Math.max(...(products.map((p) => p.yearly_price) as number[]));
@@ -80,6 +82,7 @@
 
 			// Disable form submission while loading
 			submitBtn.disabled = true;
+			submitBtn.style.backgroundColor = '#ffcc33';
 
 			// Trigger form validation and wallet collection
 
