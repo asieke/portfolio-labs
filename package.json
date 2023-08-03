@@ -36,6 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@stripe/stripe-js": "^1.54.2",
 		"@supabase/auth-helpers-sveltekit": "^0.10.1",
 		"@supabase/supabase-js": "^2.26.0",
 		"@types/highcharts": "^7.0.0",

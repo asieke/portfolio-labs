@@ -1,52 +1,50 @@
 <script lang="ts">
 	import { updateProfile } from '$models/profile';
 	import { Container } from '$components/layout';
+	import Step0Hello from './components/Step0Hello.svelte';
 	import Step1AccountInformation from './components/Step1AccountInformation.svelte';
 	import Step2FinancialInformation from './components/Step2FinancialInformation.svelte';
 	import Step3TermsOfService from './components/Step3TermsOfService.svelte';
 	import Step4Subscription from './components/Step4Subscription.svelte';
-	import Step5ThankYou from './components/Step5ThankYou.svelte';
-	import { onMount } from 'svelte';
-	import type { StripeProduct } from '$types/stripe';
-
-	import { getProducts } from '$models/stripe';
-
-	let products: StripeProduct[];
-
-	onMount(async () => {
-		products = await getProducts();
-	});
 
 	export let data;
 	const { profile, supabase } = data;
 
-	let step = 3;
+	let step = 0;
 
 	const next = async () => {
 		await updateProfile(supabase, profile);
 		step = step + 1;
 	};
+
+	const nextNext = async () => {
+		step = step + 1;
+	};
+
 	const prev = () => {
 		step = step - 1;
 	};
 </script>
 
-{#if profile}
-	<Container layout="tight">
-		<div class="w-[80vw] md:w-[500px]">
-			{#if step === 1}
-				<Step1AccountInformation {profile} {next} />
-			{:else if step === 2}
+<Container layout="tight">
+	<div class="w-[80vw] md:w-[500px]">
+		{#if profile && step === 0}
+			<Step0Hello {profile} {next} />
+		{/if}
+
+		{#if profile && step > 0}
+			<div style="display: {step === 1 ? 'block' : 'none'}">
+				<Step1AccountInformation {profile} {next} {prev} />
+			</div>
+			<div style="display: {step === 2 ? 'block' : 'none'}">
 				<Step2FinancialInformation {profile} {next} {prev} />
-			{:else if step === 3}
-				<Step3TermsOfService {profile} {next} {prev} />
-			{:else if step === 4}
-				{#if products}
-					<Step4Subscription {profile} {next} {prev} {products} />
-				{/if}
-			{:else if step === 5}
-				<Step5ThankYou />
-			{/if}
-		</div>
-	</Container>
-{/if}
+			</div>
+			<div style="display: {step === 3 ? 'block' : 'none'}">
+				<Step3TermsOfService {profile} next={nextNext} {prev} />
+			</div>
+			<div class={step === 4 ? '' : 'h-0 overflow-hidden'}>
+				<Step4Subscription {prev} />
+			</div>
+		{/if}
+	</div>
+</Container>

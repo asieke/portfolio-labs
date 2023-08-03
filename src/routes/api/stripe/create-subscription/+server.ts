@@ -20,12 +20,24 @@ export const POST = async ({ request }) => {
 			],
 			payment_behavior: 'default_incomplete',
 			payment_settings: { save_default_payment_method: 'on_subscription' },
-			expand: ['latest_invoice.payment_intent']
+			expand: ['latest_invoice.payment_intent', 'pending_setup_intent']
 		});
 
-		console.log('subscription>>>>>', subscription);
-
-		return new Response(JSON.stringify({ subscriptionId: subscription.id, clientSecret: subscription.latest_invoice.payment_intent.client_secret }));
+		if (subscription.pending_setup_intent !== null) {
+			return new Response(
+				JSON.stringify({
+					type: 'setup',
+					clientSecret: subscription.pending_setup_intent.client_secret
+				})
+			);
+		} else {
+			return new Response(
+				JSON.stringify({
+					type: 'payment',
+					clientSecret: subscription.latest_invoice.payment_intent.client_secret
+				})
+			);
+		}
 	} catch (error) {
 		return new Response(JSON.stringify({ error: { message: error.message } }), { status: 400 });
 	}

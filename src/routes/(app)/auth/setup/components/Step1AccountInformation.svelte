@@ -7,6 +7,7 @@
 
 	export let profile: Profile;
 	export let next = async () => {};
+	export let prev = () => {};
 
 	let loading = false;
 	const handleClick = async () => {
@@ -22,12 +23,6 @@
 	<p>Please finish setting up your account to continue</p>
 	<div class="w-full">
 		<form class="space-y-4">
-			<div>
-				<label for="email" class="">Full Name</label>
-				<div class="mt-2">
-					<input type="text" name="fullname" placeholder="Ada Lovelace" bind:value={profile.full_name} />
-				</div>
-			</div>
 			<div>
 				<label for="email" class="">Email</label>
 				<div class="mt-2">
@@ -53,11 +48,12 @@
 					<!-- <input type="text" name="phone" placeholder="(281)-330-8004" bind:this={phone} on:input={updatePhone} /> -->
 				</div>
 			</div>
-			<div class="pt-3">
+			<div class="flex flex-row pt-3">
+				<button class="cancel w-1/3" on:click|preventDefault={prev}>Previous</button>
 				{#if loading}
-					<button class="submit w-full" disabled>Next <IconSpinner class="h-5 w-5" /></button>
+					<button class="submit w-2/3" disabled>Next <IconSpinner class="h-5 w-5" /></button>
 				{:else}
-					<button class="submit w-full" on:click|preventDefault={handleClick}>Next</button>
+					<button class="submit w-2/3" on:click|preventDefault={handleClick}>Next</button>
 				{/if}
 			</div>
 		</form>

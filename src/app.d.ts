@@ -3,6 +3,12 @@
 import { SupabaseClient, Session } from '@supabase/supabase-js';
 
 declare global {
+	interface Window {
+		Stripe: stripe.StripeStatic | undefined;
+	}
+}
+
+declare global {
 	namespace App {
 		interface Locals {
 			supabase: SupabaseClient;
