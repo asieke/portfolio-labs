@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { supabase } from '$lib/clients/supabase.js';
+import { supabaseAdmin } from '$lib/clients/supabase.js';
 import { stripe } from '$lib/clients/stripeServer';
 import type { Stripe } from 'stripe';
 
@@ -72,13 +72,13 @@ export const POST = async ({ request }) => {
 					const invoiceData = data.object as Stripe.Invoice;
 					const customer = invoiceData.customer;
 
-					const { data: profiles } = await supabase.from('profiles').select('*').eq('stripe_customer_id', customer);
+					const { data: profiles } = await supabaseAdmin.from('profiles').select('*').eq('stripe_customer_id', customer);
 
 					//update the profile and set is_active to true
 					if (profiles && profiles.length > 0) {
 						const profile = profiles[0];
 						profile.is_active = true;
-						const { error } = await supabase.from('profiles').update(profile).eq('id', profile.id);
+						const { error } = await supabaseAdmin.from('profiles').update(profile).eq('id', profile.id);
 						console.log('Error?: ', error);
 					}
 
