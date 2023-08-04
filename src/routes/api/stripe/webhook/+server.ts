@@ -1,10 +1,9 @@
-import type { RequestEvent } from '@sveltejs/kit';
-import type { Stripe } from 'stripe';
-
 import dotenv from 'dotenv';
 dotenv.config();
 
+import { supabase } from '$lib/clients/supabase.js';
 import { stripe } from '$lib/clients/stripeServer';
+import type { Stripe } from 'stripe';
 
 const WEBHOOK_SECRET = process.env['STRIPE_WEBHOOK_SECRET'];
 
@@ -27,57 +26,64 @@ export const POST = async ({ request }) => {
 			const event = stripe.webhooks.constructEvent(payload, signature, WEBHOOK_SECRET);
 			const data = event.data;
 
-			console.log('EVENT DATA', data);
-
 			// Handle the event
 			// Handle the event
 			switch (event.type) {
 				case 'customer.subscription.created': {
-					const customerSubscriptionCreated = event.data.object;
-					console.log(`>>>>>>>>>>>>>>>>Customer subscription created:`, customerSubscriptionCreated);
+					console.log(`>>>>>>>>>>>>>>>>Customer subscription created:`);
 					// Then define and call a function to handle the event customer.subscription.created
 					break;
 				}
 				case 'customer.subscription.deleted': {
-					const customerSubscriptionDeleted = event.data.object;
-					console.log(`>>>>>>>>>>>>>>>>Customer subscription deleted:`, customerSubscriptionDeleted);
+					console.log(`>>>>>>>>>>>>>>>>Customer subscription deleted:`);
 					// Then define and call a function to handle the event customer.subscription.deleted
 					break;
 				}
 				case 'customer.subscription.trial_will_end': {
-					const customerSubscriptionTrialWillEnd = event.data.object;
-					console.log(`>>>>>>>>>>>>>>>>Customer subscription trial will end:`, customerSubscriptionTrialWillEnd);
+					console.log(`>>>>>>>>>>>>>>>>Customer subscription trial will end:`);
 					// Then define and call a function to handle the event customer.subscription.trial_will_end
 					break;
 				}
 				case 'customer.subscription.updated': {
-					const customerSubscriptionTrialWillEnd = event.data.object;
-					console.log(`>>>>>>>>>>>>>>>>Customer subscription trial will end:`, customerSubscriptionTrialWillEnd);
+					console.log(`>>>>>>>>>>>>>>>>Customer subscription updated:`);
 					// Then define and call a function to handle the event customer.subscription.trial_will_end
 					break;
 				}
 				case 'invoice.created': {
-					const invoiceCreated = event.data.object;
-					console.log(`>>>>>>>>>>>>>>>>Invoice created:`, invoiceCreated);
+					console.log(`>>>>>>>>>>>>>>>>Invoice created:`);
 					// Then define and call a function to handle the event invoice.created
 					break;
 				}
 				case 'invoice.payment_action_required': {
-					const invoicePaymentActionRequired = event.data.object;
-					console.log(`>>>>>>>>>>>>>>>>Invoice payment action required:`, invoicePaymentActionRequired);
+					console.log(`>>>>>>>>>>>>>>>>Invoice payment action required:`);
 					// Then define and call a function to handle the event invoice.payment_action_required
 					break;
 				}
 				case 'invoice.payment_failed': {
-					const invoicePaymentFailed = event.data.object;
-					console.log(`>>>>>>>>>>>>>>>>Invoice payment failed:`, invoicePaymentFailed);
+					console.log(`>>>>>>>>>>>>>>>>Invoice payment failed:`);
 					// Then define and call a function to handle the event invoice.payment_failed
 					break;
 				}
 				case 'invoice.payment_succeeded': {
-					const invoicePaymentSucceeded = event.data.object;
-					console.log(`>>>>>>>>>>>>>>>>Invoice payment succeeded:`, invoicePaymentSucceeded);
+					console.log(`>>>>>>>>>>>>>>>>Invoice payment succeeded:`);
 					// Then define and call a function to handle the event invoice.payment_succeeded
+					//get the customer id
+					// const customerId = data.customer as string;
+					const invoiceData = data.object as Stripe.Invoice;
+					const customer = invoiceData.customer;
+
+					const { data: profiles } = await supabase.from('profiles').select('*').eq('stripe_customer_id', customer);
+
+					//update the profile and set is_active to true
+					if (profiles && profiles.length > 0) {
+						const profile = profiles[0];
+						profile.is_active = true;
+						const { error } = await supabase.from('profiles').update(profile).eq('id', profile.id);
+						console.log('Error?: ', error);
+					}
+
+					console.log('...UPDATED THE PROFILE ITS TRUE NOW');
+
 					break;
 				}
 				// ... handle other event types
