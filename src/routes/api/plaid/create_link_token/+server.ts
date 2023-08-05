@@ -9,7 +9,7 @@ const PLAID_PRODUCTS = (process.env.PLAID_PRODUCTS || Products.Transactions).spl
 const PLAID_COUNTRY_CODES = (process.env.PLAID_COUNTRY_CODES || 'US').split(',') as CountryCode[];
 // const PLAID_REDIRECT_URI = process.env.PLAID_REDIRECT_URI || '';
 
-export const POST = async (req) => {
+export const POST = async ({ request, locals }) => {
 	console.log('[SERVER]: Generating Link Token');
 
 	const session = await req.locals.getSession();

@@ -5,7 +5,7 @@ import { plaidClient } from '../client';
 
 import type { InvestmentsHoldingsGetRequest } from 'plaid';
 
-export const POST = async ({ request }) => {
+export const POST = async ({ request }: { request: Request }) => {
 	//please extract the public_token from the request body and print it out
 
 	console.log('[SERVER]: Requesting Investment Holdings');

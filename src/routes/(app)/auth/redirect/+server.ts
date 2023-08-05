@@ -13,8 +13,6 @@ interface Params {
 export const GET = async ({ url, locals: { supabase } }: Params) => {
 	const code = url.searchParams.get('code');
 
-	console.log('[SERVER]: Redirecting to /auth/setup');
-
 	if (code) {
 		const session = await supabase.auth.exchangeCodeForSession(code);
 		const user = session.data.user;
@@ -23,12 +21,22 @@ export const GET = async ({ url, locals: { supabase } }: Params) => {
 			const { data, error } = await supabase.from('profiles').select('*').eq('id', user.id);
 			const profile = data?.[0] as Profile;
 
+			console.log('[SERVER]: Redirecting to /auth/setup', profile);
+
+			if (!error && !profile.is_setup) {
+				throw redirect(303, '/setup');
+			}
+
+			if (!error && profile.is_setup && !profile.is_active) {
+				throw redirect(303, '/subscribe');
+			}
+
 			// If there is no error and the user is active
-			if (!error && profile.is_active) {
+			if (!error && profile.is_active && profile.is_setup) {
 				throw redirect(303, '/dashboard');
 			}
 		}
 	}
 
-	throw redirect(303, '/auth/setup');
+	throw redirect(303, '/signup');
 };
