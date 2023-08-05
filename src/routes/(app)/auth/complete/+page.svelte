@@ -9,8 +9,6 @@
 	$page.url.searchParams.forEach((value, key) => {
 		query[key] = value;
 	});
-
-	console.log(query);
 </script>
 
 <Container layout="tight">

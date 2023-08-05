@@ -6,6 +6,7 @@ export type Profile = {
 	dob: Date;
 	accepted_tos: boolean;
 	is_active: boolean;
+	is_setup: boolean;
 	phone: string;
 	address: string;
 	email: string;

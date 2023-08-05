@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '$styles/base.css';
 	import '$styles/app.css';
 	import { Nav, Footer } from '$components/layout';
 </script>

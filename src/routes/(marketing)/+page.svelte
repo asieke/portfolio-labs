@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '$styles/base.css';
 	import GetStarted from './components/GetStarted.svelte';
 	export let data;
 	const { session } = data;

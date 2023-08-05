@@ -11,7 +11,6 @@ export const POST = async ({ request }) => {
 		// latest invoice and that invoice's payment_intent
 		// so we can pass it to the front end to confirm the payment
 
-		console.log(body);
 		const subscription = await stripe.subscriptions.create({
 			customer: body.customerId,
 			trial_period_days: body.trial_period_days,

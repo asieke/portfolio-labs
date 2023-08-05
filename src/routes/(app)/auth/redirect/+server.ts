@@ -13,6 +13,8 @@ interface Params {
 export const GET = async ({ url, locals: { supabase } }: Params) => {
 	const code = url.searchParams.get('code');
 
+	console.log('[SERVER]: Redirecting to /auth/setup');
+
 	if (code) {
 		const session = await supabase.auth.exchangeCodeForSession(code);
 		const user = session.data.user;

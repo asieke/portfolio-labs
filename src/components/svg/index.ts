@@ -20,6 +20,7 @@ import IconInfo from './IconInfo.svelte';
 import IconCalculator from './IconCalculator.svelte';
 import IconCreditCard from './IconCreditCard.svelte';
 import IconArrowLeft from './IconArrowLeft.svelte';
+import IconCircleCheck from './IconCircleCheck.svelte';
 
 export {
 	IconWarning,
@@ -43,7 +44,8 @@ export {
 	IconSpinner,
 	IconCalculator,
 	IconCreditCard,
-	IconArrowLeft
+	IconArrowLeft,
+	IconCircleCheck
 };
 
 //Source: https://heroicons.com/

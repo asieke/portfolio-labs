@@ -36,6 +36,21 @@ export const POST = async ({ request }) => {
 				}
 				case 'customer.subscription.deleted': {
 					console.log(`>>>>>>>>>>>>>>>>Customer subscription deleted:`);
+
+					const subscriptionData = data.object as Stripe.Subscription;
+					const customerId = subscriptionData.customer as string;
+
+					const subscriptions = await stripe.subscriptions.list({
+						customer: customerId
+					});
+
+					if (subscriptions.data.length === 0) {
+						const { error } = await supabaseAdmin.from('profiles').update({ is_active: false }).eq('stripe_customer_id', customerId);
+						console.log('error?: ', error);
+					}
+
+					console.log('<<<<<<<<<<<<<');
+
 					// Then define and call a function to handle the event customer.subscription.deleted
 					break;
 				}
@@ -79,10 +94,7 @@ export const POST = async ({ request }) => {
 						const profile = profiles[0];
 						profile.is_active = true;
 						const { error } = await supabaseAdmin.from('profiles').update(profile).eq('id', profile.id);
-						console.log('Error?: ', error);
 					}
-
-					console.log('...UPDATED THE PROFILE ITS TRUE NOW');
 
 					break;
 				}
