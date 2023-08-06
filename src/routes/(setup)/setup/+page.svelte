@@ -1,15 +1,33 @@
 <script lang="ts">
 	import { Step1AccountInformation } from '../components';
+	import { Step2FinancialInformation } from '../components';
+	import { Subscription } from '../components';
+	import Step0Hello from '../components/Step0Hello.svelte';
+
+	export let data;
+
+	let step = 0;
+	$: console.log('Step changed to: ', step);
+
+	const { profile } = data;
 
 	const next = () => {
-		console.log('next');
+		step = step + 1;
+		console.log('READY FOR NEXT STEP', profile);
+	};
+
+	const prev = () => {
+		step = step - 1;
 	};
 </script>
 
-<div class="mx-auto min-h-screen max-w-xl grid-cols-1">
-	<div class="ml-8 mr-8 min-h-screen border-l-[1px] border-r-[1px] border-dashed border-slate-500 border-opacity-10 py-8 md:ml-0 md:py-16">
-		<div class="-ml-[3px] rounded-lg bg-white p-8 shadow-2xl md:p-12 md:px-16" style="width: calc(100% + 6px)">
-			<Step1AccountInformation />
-		</div>
-	</div>
+{#if step === 0}
+	<Step0Hello {next} />
+{:else if step === 1}
+	<Step1AccountInformation {profile} {next} />
+{:else if step === 2}
+	<Step2FinancialInformation {profile} {prev} {next} />
+{/if}
+<div style="display:{step === 3 ? 'block' : 'none'}">
+	<Subscription />
 </div>

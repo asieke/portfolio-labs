@@ -6,4 +6,5 @@ export type StripeProduct = {
 	unit_amount: number;
 	interval: string;
 	yearly_price: number;
+	monthly_price: number;
 };

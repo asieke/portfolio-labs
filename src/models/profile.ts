@@ -7,6 +7,9 @@ export const updateProfile = async (supabase: SupabaseClient, profile: Profile |
 	//check and see if the profile has accepted_tos = true then set is_active = true
 
 	const { data, error } = await supabase.from('profiles').update(profile).eq('id', profile.id);
+
+	console.log('TRYING TO UPDATE', data, error);
+
 	return { data, error };
 };
 

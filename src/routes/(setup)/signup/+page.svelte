@@ -1,10 +1,8 @@
 <script lang="ts">
 	import axios from 'axios';
-	import { page } from '$app/stores';
 	import { Logo } from '$components/brand';
 	import { ValueProp } from '../components';
 	import { checkEmail, checkFullName } from '$lib/utils/validation';
-	const { supabase, session } = $page.data;
 
 	let email = { value: 'asieke@gmail.com', error: '', valid: false };
 	let name = { value: 'Alex Sieke', error: '', valid: false };
@@ -55,9 +53,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.error {
-		@apply text-red-500;
-	}
-</style>

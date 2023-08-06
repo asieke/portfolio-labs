@@ -56,7 +56,8 @@ export const getProducts = async () => {
 			price_id: price?.id,
 			unit_amount: price?.unit_amount,
 			interval: price?.recurring?.interval,
-			yearly_price: price?.recurring?.interval === 'month' ? (price?.unit_amount || 0) * 12 : price?.unit_amount
+			yearly_price: price?.recurring?.interval === 'month' ? (price?.unit_amount || 0) * 12 : price?.unit_amount,
+			monthly_price: price?.recurring?.interval === 'year' ? (price?.unit_amount || 0) / 12 : price?.unit_amount
 		};
 	}) as StripeProduct[];
 };
