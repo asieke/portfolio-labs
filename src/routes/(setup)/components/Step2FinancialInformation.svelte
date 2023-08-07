@@ -27,7 +27,7 @@
 <div class="mx-auto min-h-screen max-w-xl grid-cols-1">
 	<div class="ml-8 mr-8 min-h-screen border-l-[1px] border-r-[1px] border-dashed border-slate-500 border-opacity-10 py-8 md:ml-0 md:py-16">
 		<div class="-ml-[3px] rounded-lg bg-white p-8 shadow-2xl md:p-12 md:px-16" style="width: calc(100% + 6px)">
-			<Stepper steps={4} current={2} />
+			<button class="mb-3 text-left text-sm text-slate-500" on:click|preventDefault={prev}>← Back</button>
 			<h3 class="text-xl font-bold leading-8 antialiased">Financial Information</h3>
 			<p class="my-3 text-sm text-slate-600">This information helps us better develop your personalized financial plan</p>
 			<form class="mt-4 space-y-4">
@@ -93,9 +93,9 @@
 						<input type="text" bind:value={profile.financial_information['Job Title']} />
 					</div>
 				</div>
-				<div class="grid grid-cols-2 py-4">
-					<button class="text-left text-sm text-slate-500" on:click|preventDefault={prev}>← Back</button>
-					<button class="submit" on:click|preventDefault={next}>Continue → </button>
+				<div class="flex w-full flex-col items-center space-y-4 py-4">
+					<button class="submit" on:click|preventDefault={handleClick}>Continue → </button>
+					<Stepper steps={4} current={2} />
 				</div>
 			</form>
 		</div>

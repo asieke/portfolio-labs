@@ -3,7 +3,7 @@
 
 	import { onMount } from 'svelte';
 	import { formatCurrency } from '$lib/utils/format';
-	import { createOrGetCustomer, getProducts } from '$models/stripe';
+	import { createOrGetCustomer, getProducts, getPaymentMethods } from '$models/stripe';
 	import { page } from '$app/stores';
 
 	import axios from 'axios';
@@ -13,21 +13,38 @@
 	import type { Stripe } from 'stripe';
 	import type { StripeProduct } from '$types/stripe';
 
+	import { CreditCard } from '$components/form';
+
+	export let prev: (() => void) | null = null;
+
 	let selectedProduct: StripeProduct | null = null;
+	let selectedPaymentMethod: Stripe.PaymentMethod | null = null;
 	let status: 'selection' | 'payment' = 'selection';
 
 	const { supabase, profile } = $page.data;
 	let stripe: StripeJS | null | undefined;
 	let customer: Stripe.Customer | null;
 	let products: StripeProduct[] | null;
+	let paymentMethods: Stripe.PaymentMethod[] | null;
 
 	onMount(async () => {
 		console.log('mounted');
 		customer = await createOrGetCustomer(supabase, profile);
 		products = await getProducts();
+		paymentMethods = await getPaymentMethods(customer?.id as string);
+
+		//set the default payment method
+		if (customer?.default_source) {
+			selectedPaymentMethod = paymentMethods?.find((pm) => pm.id === customer?.default_source) || null;
+		}
+		if (!selectedPaymentMethod && paymentMethods && paymentMethods.length > 0) {
+			selectedPaymentMethod = paymentMethods[0];
+		}
 
 		console.log('Customer: ', customer);
 		console.log('Products: ', products);
+		console.log('Payment Methods', paymentMethods);
+		console.log('Selected Method', selectedPaymentMethod);
 
 		stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 		const options = {
@@ -54,11 +71,11 @@
 
 		const handleError = (error: StripeError) => {
 			submitBtn.style.backgroundColor = '';
-			const messageContainer = document.querySelector('#error-message');
-			if (messageContainer) {
-				messageContainer.textContent = error.message || '';
-			}
-			if (submitBtn) submitBtn.disabled = false;
+			// const messageContainer = document.querySelector('#error-message');
+			// if (messageContainer) {
+			// 	messageContainer.textContent = error.message || '';
+			// }
+			// if (submitBtn) submitBtn.disabled = false;
 		};
 
 		form?.addEventListener('submit', async (event) => {
@@ -78,30 +95,37 @@
 
 			// Trigger form validation and wallet collection
 
-			const { error: submitError } = await elements.submit();
-			if (submitError) {
-				handleError(submitError);
-				return;
+			if (!selectedPaymentMethod) {
+				const { error: submitError } = await elements.submit();
+				if (submitError) {
+					handleError(submitError);
+					return;
+				}
 			}
 
 			// Create the subscription
 			const res = await axios.post('/api/stripe/create-subscription', {
 				customerId: customer?.id,
 				priceId: selectedProduct?.price_id,
-				trial_period_days: 14
+				trial_period_days: 14,
+				paymentMethod: selectedPaymentMethod ? selectedPaymentMethod.id : undefined
 			});
+
+			console.log('RESPONSE FROM create-subscription', res);
 
 			const { type, clientSecret } = res.data;
 
+			console.log(type, clientSecret);
+
 			const confirmIntent = type === 'setup' ? stripe.confirmSetup : stripe.confirmPayment;
+
+			const confirmParams = selectedPaymentMethod ? { return_url: PUBLIC_APP_URL + '/welcome', payment_method: selectedPaymentMethod.id } : { return_url: PUBLIC_APP_URL + '/welcome' };
 
 			// Confirm the Intent using the details collected by the Payment Element
 			const { error } = await confirmIntent({
-				elements,
+				elements: selectedPaymentMethod ? undefined : elements,
 				clientSecret,
-				confirmParams: {
-					return_url: PUBLIC_APP_URL + '/welcome'
-				}
+				confirmParams
 			});
 
 			if (error) {
@@ -136,6 +160,9 @@
 					</div>
 				</div>
 				<div class="w-full rounded-b-lg bg-white p-8 md:w-3/5 md:rounded-b-none md:rounded-r-lg md:p-12 md:px-16">
+					{#if prev}
+						<button class="mb-5 text-left text-sm text-black" on:click|preventDefault={prev}>← Back</button>
+					{/if}
 					{#if products && status === 'selection'}
 						<div class="space-y-4">
 							{#each products as product}
@@ -154,9 +181,24 @@
 							{/each}
 						</div>
 					{/if}
+
 					<div style={selectedProduct ? '' : 'height: 0px; overflow:hidden'} class="mt-8 transition-all ease-in-out">
 						<form id="payment-form">
-							<div id="payment-element" />
+							{#if paymentMethods && paymentMethods.length > 0}
+								<h3 class="mb-4 font-bold">Select a Payment Method</h3>
+								<div class="mb-2 flex flex-row space-x-2">
+									{#each paymentMethods as paymentMethod}
+										<button class="creditCard {selectedPaymentMethod?.id === paymentMethod?.id ? 'border-primary-500' : ''}" on:click|preventDefault={() => (selectedPaymentMethod = paymentMethod)}>
+											<CreditCard card={paymentMethod?.card} />
+										</button>
+									{/each}
+									<button class="creditCard {!selectedPaymentMethod ? 'border-primary-500' : ''}" on:click|preventDefault={() => (selectedPaymentMethod = null)}> New Card </button>
+								</div>
+							{/if}
+
+							<div style={!selectedPaymentMethod ? '' : 'height: 0px; overflow:hidden'}>
+								<div id="payment-element" />
+							</div>
 							<button id="submit" class="submit mt-4 w-full">Submit</button>
 							<div id="error-message" />
 						</form>
@@ -173,5 +215,9 @@
 	}
 	button.option:hover {
 		@apply border-primary-500;
+	}
+
+	button.creditCard {
+		@apply mb-3 w-full rounded-lg border-[2px] px-1 py-2 text-xs hover:border-primary-500;
 	}
 </style>

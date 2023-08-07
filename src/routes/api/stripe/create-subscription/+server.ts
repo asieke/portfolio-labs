@@ -4,7 +4,7 @@ import type { Stripe } from 'stripe';
 export const POST = async ({ request }) => {
 	const body = await request.json();
 
-	console.log('[SERVER]: Creating a Subscription');
+	console.log('[SERVER]: Creating a Subscription', body);
 
 	try {
 		// Create the subscription. Note we're expanding the Subscription's
@@ -21,7 +21,8 @@ export const POST = async ({ request }) => {
 			],
 			payment_behavior: 'default_incomplete',
 			payment_settings: { save_default_payment_method: 'on_subscription' },
-			expand: ['latest_invoice.payment_intent', 'pending_setup_intent']
+			expand: ['latest_invoice.payment_intent', 'pending_setup_intent'],
+			default_payment_method: body.payment_method
 		});
 
 		if (!subscription) {

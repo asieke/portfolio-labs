@@ -41,6 +41,13 @@ export const getSubscriptions = async (customerId: string) => {
 	return res.data;
 };
 
+export const getPaymentMethods = async (customerId: string) => {
+	const res = await axios.post('/api/stripe/list-payment-methods', {
+		customerId
+	});
+	return res.data;
+};
+
 export const getProducts = async () => {
 	const res = await axios.post('/api/stripe/list-products', {});
 

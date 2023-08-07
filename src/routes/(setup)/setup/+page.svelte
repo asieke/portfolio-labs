@@ -29,5 +29,5 @@
 	<Step2FinancialInformation {profile} {prev} {next} />
 {/if}
 <div style="display:{step === 3 ? 'block' : 'none'}">
-	<Subscription />
+	<Subscription {prev} />
 </div>

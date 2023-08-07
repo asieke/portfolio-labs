@@ -5,11 +5,15 @@ import { getDashboardPortfolios } from '$models/dashboard';
 import { getDailyBalances } from '$models/balances';
 
 export const load: PageLoad = async ({ parent }) => {
-	const { session, supabase } = await parent();
+	const { session, supabase, profile } = await parent();
 
 	//if !session then redirect to login
 	if (!session) {
 		throw redirect(303, '/signin');
+	}
+
+	if (!profile.is_active) {
+		throw redirect(303, '/subscribe');
 	}
 
 	// Fetch portfolios and balances for the current user
