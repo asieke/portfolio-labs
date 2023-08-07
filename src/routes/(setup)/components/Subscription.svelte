@@ -19,13 +19,13 @@
 
 	let selectedProduct: StripeProduct | null = null;
 	let selectedPaymentMethod: Stripe.PaymentMethod | null = null;
-	let status: 'selection' | 'payment' = 'selection';
 
 	const { supabase, profile } = $page.data;
 	let stripe: StripeJS | null | undefined;
 	let customer: Stripe.Customer | null;
 	let products: StripeProduct[] | null;
 	let paymentMethods: Stripe.PaymentMethod[] | null;
+	let trial: boolean = false;
 
 	onMount(async () => {
 		console.log('mounted');
@@ -107,7 +107,7 @@
 			const res = await axios.post('/api/stripe/create-subscription', {
 				customerId: customer?.id,
 				priceId: selectedProduct?.price_id,
-				trial_period_days: 14,
+				trial_period_days: trial ? 14 : undefined,
 				paymentMethod: selectedPaymentMethod ? selectedPaymentMethod.id : undefined
 			});
 
@@ -163,7 +163,7 @@
 					{#if prev}
 						<button class="mb-5 text-left text-sm text-black" on:click|preventDefault={prev}>← Back</button>
 					{/if}
-					{#if products && status === 'selection'}
+					{#if products}
 						<div class="space-y-4">
 							{#each products as product}
 								<button on:click={() => (selectedProduct = product)} class="option w-full {product.product_id === selectedProduct?.product_id ? 'border-primary-500' : ''}">
@@ -179,6 +179,11 @@
 									</span>
 								</button>
 							{/each}
+						</div>
+						<!-- Bind a radio toggle to the trial variable -->
+						<div class="mt-4 flex flex-row items-center space-x-2 pl-2">
+							<input type="checkbox" bind:checked={trial} />
+							<label for="trial" class="pt-1 text-sm text-slate-500">Try Portfolio Labs Free for 14 days</label>
 						</div>
 					{/if}
 
@@ -219,5 +224,9 @@
 
 	button.creditCard {
 		@apply mb-3 w-full rounded-lg border-[2px] px-1 py-2 text-xs hover:border-primary-500;
+	}
+
+	input[type='checkbox'] {
+		@apply cursor-pointer rounded-sm border-slate-400 ring-0;
 	}
 </style>

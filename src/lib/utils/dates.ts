@@ -40,6 +40,14 @@ export const getDisplayMonth = (date: string) => {
 };
 
 export const timestampToDate = (timestamp: number) => {
+	//if millisecond timestamp
+	if (timestamp < 1000000000000) {
+		timestamp = timestamp * 1000;
+	}
+
+	//if second timestamp
+
 	const date = new Date(timestamp);
+
 	return date.toISOString().split('T')[0];
 };

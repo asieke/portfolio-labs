@@ -5,6 +5,7 @@
 	import { Notifications } from '$components/layout';
 
 	$: pathname = $page.url.pathname;
+	const { profile } = $page.data;
 </script>
 
 <div class="ml-4 flex items-center md:ml-6">
@@ -34,6 +35,7 @@
 				aria-labelledby="user-menu-button"
 				tabindex="-1"
 			>
+				<div class="border-b-[1px] border-slate-300 px-4 pb-2 text-sm text-slate-400 dark:border-slate-600 dark:text-slate-500">{profile.email}</div>
 				{#each profileLinks as { label, href }, i}
 					<a
 						{href}

@@ -126,3 +126,11 @@ form label {
 .positive {
 	@apply text-green-500 dark:text-green-400;
 }
+
+.success {
+	@apply bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100;
+}
+
+.warning {
+	@apply bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100;
+}

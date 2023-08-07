@@ -26,6 +26,13 @@ export const createOrGetCustomer = async (supabase: SupabaseClient, profile: Pro
 	}
 };
 
+export const getCustomer = async (customerId: string) => {
+	const res = await axios.post('/api/stripe/retrieve-customer', {
+		customer_id: customerId
+	});
+	return res.data;
+};
+
 export const createSubscription = async (customerId: string, priceId: string) => {
 	const res = await axios.post('/api/stripe/create-subscription', {
 		priceId,
@@ -44,6 +51,13 @@ export const getSubscriptions = async (customerId: string) => {
 export const getPaymentMethods = async (customerId: string) => {
 	const res = await axios.post('/api/stripe/list-payment-methods', {
 		customerId
+	});
+	return res.data;
+};
+
+export const getPaymentMethod = async (paymentMethodId: string) => {
+	const res = await axios.post('/api/stripe/retrieve-payment-method', {
+		paymentMethodId
 	});
 	return res.data;
 };
