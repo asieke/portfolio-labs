@@ -3,6 +3,7 @@
 	import Chart from './components/Chart.svelte';
 	import Table from './components/Table.svelte';
 	import type { AssetClass } from '$types/assets';
+	import { addAIContext } from '$lib/stores/ai';
 
 	export let data;
 	const { portfolios, profile } = data;
@@ -12,6 +13,7 @@
 
 	$: {
 		assetClasses = portfolios?.[id].asset_class || [];
+		addAIContext(JSON.stringify(assetClasses));
 	}
 </script>
 

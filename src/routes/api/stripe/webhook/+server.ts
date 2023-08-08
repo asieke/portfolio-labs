@@ -45,7 +45,7 @@ export const POST = async ({ request }) => {
 					});
 
 					if (subscriptions.data.length === 0) {
-						const { error } = await supabaseAdmin.from('profiles').update({ is_active: false }).eq('stripe_customer_id', customerId);
+						await supabaseAdmin.from('profiles').update({ is_active: false }).eq('stripe_customer_id', customerId);
 					}
 
 					// Then define and call a function to handle the event customer.subscription.deleted
@@ -90,7 +90,7 @@ export const POST = async ({ request }) => {
 					if (profiles && profiles.length > 0) {
 						const profile = profiles[0];
 						profile.is_active = true;
-						const { error } = await supabaseAdmin.from('profiles').update(profile).eq('id', profile.id);
+						await supabaseAdmin.from('profiles').update(profile).eq('id', profile.id);
 					}
 
 					break;

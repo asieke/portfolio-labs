@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '$styles/base.css';
 	import '$styles/app.css';
-	import { Nav, Footer } from '$components/layout';
+	import { Nav, Footer, Chat } from '$components/layout';
 </script>
 
 <div class="flex min-h-full flex-col bg-gray-100 dark:bg-dark-700">
@@ -14,7 +14,7 @@
 			<slot />
 		</div>
 	</main>
-
+	<Chat />
 	<Footer />
 </div>
 

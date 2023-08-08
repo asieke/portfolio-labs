@@ -3,9 +3,12 @@
 	import { PerformanceChart, PerformanceTable, BenchmarkTable } from '$components/chart';
 	import type { Balance } from '$types/balances';
 	import { chartSelectedDate, chartSelectedBenchmarks } from '$lib/stores/performanceChart';
+	import { addAIContext } from '$lib/stores/ai';
 
 	export let data;
 	const { portfolios, balances } = data;
+
+	addAIContext(`Your performance has been amazing.  Account Summary Total Account Value $9,051,313.86 Total Cost Basis  $2,318,854.11 Yearly Change 38.87% Monthly Change 0.27% Weekly Change 0.08%`);
 
 	let portfolio_id = portfolios?.[0].id;
 	$: displayBalances = balances?.filter((b) => b.portfolio_id === portfolio_id);

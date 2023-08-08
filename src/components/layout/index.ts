@@ -7,5 +7,6 @@ import MenuDesktop from './MenuDesktop.svelte';
 import Container from './Container.svelte';
 import Notifications from './Notifications.svelte';
 import Toast from './Toast.svelte';
+import Chat from './Chat.svelte';
 
-export { Footer, Nav, Links, MenuMobile, MenuDesktop, Container, Notifications, Toast };
+export { Footer, Nav, Links, MenuMobile, MenuDesktop, Container, Notifications, Toast, Chat };

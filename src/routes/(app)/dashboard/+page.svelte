@@ -3,10 +3,13 @@
 	import Table from './components/Table.svelte';
 	import Summary from './components/Summary.svelte';
 	import { PerformanceChart } from '$components/chart';
+	import { addAIContext } from '$lib/stores/ai';
 
 	export let data;
-
 	const { balances, portfolios } = data;
+
+	addAIContext(`Account Summary Total Account Value $9,051,313.86 Total Cost Basis  $2,318,854.11 Yearly Change 38.87% Monthly Change 0.27% Weekly Change 0.08%`);
+
 	const total = portfolios ? portfolios[portfolios.length - 1] : null;
 </script>
 
