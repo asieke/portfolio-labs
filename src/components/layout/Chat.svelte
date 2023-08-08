@@ -28,6 +28,9 @@
 			let chunk = await reader.read();
 			while (!chunk.done) {
 				newMessage += valueToChunk(chunk.value);
+
+				console.log(valueToChunk(chunk.value));
+
 				chunk = await reader.read();
 
 				const temp = [...conversation];

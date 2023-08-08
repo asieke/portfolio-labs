@@ -11,8 +11,6 @@ export const POST = async ({ request, locals }) => {
 		return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
 	}
 
-	console.log('\n', OPEN_AI_KEY, '\n', process.env.OPEN_AI_KEY);
-
 	const response = await fetch('https://api.openai.com/v1/chat/completions', {
 		method: 'POST',
 		headers: {
