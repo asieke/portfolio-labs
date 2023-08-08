@@ -52,21 +52,21 @@
 		<tbody>
 			{#each sortedDisplayPositions as position}
 				<tr>
-					<td><button on:click={() => onClick(position.symbol)}>{position.symbol}</button></td>
+					<td class="whitespace-nowrap"><button on:click={() => onClick(position.symbol)}>{position.symbol}</button></td>
 					<td>{position.name || ''}</td>
-					<td>{formatNumber(position.quantity)}</td>
-					<td>{formatCurrency(position.price)}</td>
-					<td>{formatCurrency(position.market_value)}</td>
+					<td>{formatNumber(position.quantity, 0)}</td>
+					<td>{formatCurrency(position.price, 0)}</td>
+					<td>{formatCurrency(position.market_value, 0)}</td>
 					{#if position.symbol !== 'CASHX'}
-						<td>{formatCurrency(position.cost_basis)}</td>
+						<td>{formatCurrency(position.cost_basis, 0)}</td>
 						{#if dollarUnit}
-							<td class={color(position.market_value - position.cost_basis)}>{formatCurrency(position.market_value - position.cost_basis)}</td>
-							<td class={color(position.market_value - position.market_value_1d)}>{formatCurrency(position.market_value - position.market_value_1d)}</td>
-							<td class={color(position.market_value - position.market_value_7d)}>{formatCurrency(position.market_value - position.market_value_7d)}</td>
+							<td class={color(position.market_value - position.cost_basis)}>{formatCurrency(position.market_value - position.cost_basis, 0)}</td>
+							<td class={color(position.market_value - position.market_value_1d)}>{formatCurrency(position.market_value - position.market_value_1d, 0)}</td>
+							<td class={color(position.market_value - position.market_value_7d)}>{formatCurrency(position.market_value - position.market_value_7d, 0)}</td>
 						{:else}
-							<td class={color(position.market_value / position.cost_basis - 1)}>{formatPercent(position.market_value / position.cost_basis - 1)}</td>
-							<td class={color(position.market_value / position.market_value_1d - 1)}>{formatPercent(position.market_value / position.market_value_1d - 1)}</td>
-							<td class={color(position.market_value / position.market_value_7d - 1)}>{formatPercent(position.market_value / position.market_value_7d - 1)}</td>
+							<td class={color(position.market_value / position.cost_basis - 1)}>{formatPercent(position.market_value / position.cost_basis - 1, 1)}</td>
+							<td class={color(position.market_value / position.market_value_1d - 1)}>{formatPercent(position.market_value / position.market_value_1d - 1, 1)}</td>
+							<td class={color(position.market_value / position.market_value_7d - 1)}>{formatPercent(position.market_value / position.market_value_7d - 1, 1)}</td>
 						{/if}
 					{:else}
 						<td colspan="4" />
@@ -79,7 +79,7 @@
 
 <style lang="postcss">
 	table {
-		@apply mt-5 w-full rounded-xl text-xs;
+		@apply mt-5 w-full rounded-xl text-slate-500;
 	}
 	td {
 		@apply p-2;

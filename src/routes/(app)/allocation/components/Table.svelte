@@ -87,6 +87,6 @@
 	}
 
 	td {
-		@apply border-b-[1px] border-b-slate-500 px-2 py-1 text-left text-sm;
+		@apply border-b-[1px] border-b-slate-500 px-2 py-3 text-left;
 	}
 </style>

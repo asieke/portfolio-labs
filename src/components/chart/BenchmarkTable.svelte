@@ -50,7 +50,7 @@
 	</div>
 	{#each balanceDisplayData as label, i}
 		{#if $chartSelectedBenchmarks[i] === true}
-			<div class="row flex items-center justify-between p-2 text-sm">
+			<div class="row flex items-center justify-between p-2 py-3">
 				<div class="w-1/12">
 					<div class="h-3 w-3" style="background-color: {label.color}" />
 				</div>

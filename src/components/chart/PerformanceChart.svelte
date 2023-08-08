@@ -78,12 +78,12 @@
 </script>
 
 <!-- Display the selected date -->
-<section class="mb-6">
+<section class="mb-8 space-y-3">
 	<h4>My Total Performance: <span class={color(performancePct)}>{formatPercent(performancePct)}</span></h4>
 	<p>CAGR: {formatPercent(getCAGR(performancePct, $chartSelectedDate))}</p>
 	<p>
 		US Total Equity Benchmark: <span class={color(benchmarkPct)}>{formatPercent(benchmarkPct)}</span>
-		<span class="text-sm">({formatPercent(Math.abs(performancePct / benchmarkPct - 1))} {performancePct > benchmarkPct ? 'higher' : 'lower'})</span>
+		<span>({formatPercent(Math.abs(performancePct / benchmarkPct - 1))} {performancePct > benchmarkPct ? 'higher' : 'lower'})</span>
 	</p>
 </section>
 

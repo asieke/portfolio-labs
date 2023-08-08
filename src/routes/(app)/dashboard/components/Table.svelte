@@ -7,6 +7,7 @@
 	 ***********************/
 	import { color } from '$lib/utils/format';
 	import type { Portfolio } from '$types/portfolios';
+	import { formatCurrency, formatPercent } from '$lib/utils/format';
 
 	export let portfolios: Portfolio[];
 </script>
@@ -32,12 +33,12 @@
 				<td>{row.name}</td>
 				<td>{row.description}</td>
 				<!-- Formatting numbers for better readability -->
-				<td>${row.market_value.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
-				<td>${row.cost_basis.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
+				<td>{formatCurrency(row.market_value, 0)}</td>
+				<td>{formatCurrency(row.cost_basis, 0)}</td>
 				<!-- Converting returns to percentages -->
-				<td class={color(row.return_year)}>{(row.return_year * 100).toFixed(2)}%</td>
-				<td class={color(row.return_month)}>{(row.return_month * 100).toFixed(2)}%</td>
-				<td class={color(row.return_week)}>{(row.return_week * 100).toFixed(2)}%</td>
+				<td class={color(row.return_year)}>{formatPercent(row.return_year, 1)}</td>
+				<td class={color(row.return_month)}>{formatPercent(row.return_month, 1)}</td>
+				<td class={color(row.return_week)}>{formatPercent(row.return_week, 1)}</td>
 			</tr>
 		{/each}
 	</tbody>
@@ -46,7 +47,7 @@
 <!-- Styling for the table -->
 <style lang="postcss">
 	table {
-		@apply w-full text-xs;
+		@apply w-full text-slate-500;
 	}
 
 	th:first-child {
@@ -66,7 +67,7 @@
 	}
 
 	td {
-		@apply px-2 py-2;
+		@apply px-2 py-3;
 	}
 
 	th {
