@@ -7,14 +7,11 @@
 	let email = { value: 'asieke@gmail.com', error: '', valid: false };
 	let name = { value: 'Alex Sieke', error: '', valid: false };
 
-	const handleSubmit = async () => {
+	const handleSubmit = () => {
 		email = checkEmail(email);
 		name = checkFullName(name);
 		if (email.valid && name.valid) {
-			let { data } = await axios.post('/api/auth', { email: email.value, name: name.value });
-			console.log('submit', data);
-		} else {
-			console.log('error');
+			axios.post('/api/auth', { email: email.value, name: name.value });
 		}
 	};
 </script>

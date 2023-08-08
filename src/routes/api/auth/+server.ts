@@ -8,16 +8,18 @@ import { supabaseAdmin } from '$lib/clients/supabase';
 export const POST = async ({ request }) => {
 	const body = await request.json();
 
-	const { email, name } = body;
+	const { email, name, supabase } = body;
 
-	await supabaseAdmin.auth.signInWithOtp({
+	await supabase.auth.signInWithOtp({
 		email: email,
 		options: {
 			emailRedirectTo: redirectURL
 		}
 	});
 
-	await supabaseAdmin.from('profiles').update({ full_name: name }).match({ email: email });
+	if (name) {
+		await supabaseAdmin.from('profiles').update({ full_name: name }).match({ email: email });
+	}
 
 	return new Response(JSON.stringify({ body }));
 };

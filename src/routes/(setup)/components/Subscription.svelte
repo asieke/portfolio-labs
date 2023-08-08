@@ -28,7 +28,6 @@
 	let trial: boolean = false;
 
 	onMount(async () => {
-		console.log('mounted');
 		customer = await createOrGetCustomer(supabase, profile);
 		products = await getProducts();
 		paymentMethods = await getPaymentMethods(customer?.id as string);
@@ -40,11 +39,6 @@
 		if (!selectedPaymentMethod && paymentMethods && paymentMethods.length > 0) {
 			selectedPaymentMethod = paymentMethods[0];
 		}
-
-		console.log('Customer: ', customer);
-		console.log('Products: ', products);
-		console.log('Payment Methods', paymentMethods);
-		console.log('Selected Method', selectedPaymentMethod);
 
 		stripe = await loadStripe(PUBLIC_STRIPE_KEY);
 		const options = {
@@ -111,14 +105,9 @@
 				paymentMethod: selectedPaymentMethod ? selectedPaymentMethod.id : undefined
 			});
 
-			console.log('RESPONSE FROM create-subscription', res);
-
 			const { type, clientSecret } = res.data;
 
-			console.log(type, clientSecret);
-
 			const confirmIntent = type === 'setup' ? stripe.confirmSetup : stripe.confirmPayment;
-
 			const confirmParams = selectedPaymentMethod ? { return_url: PUBLIC_APP_URL + '/welcome', payment_method: selectedPaymentMethod.id } : { return_url: PUBLIC_APP_URL + '/welcome' };
 
 			// Confirm the Intent using the details collected by the Payment Element

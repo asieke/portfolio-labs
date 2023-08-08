@@ -21,8 +21,6 @@ export const GET = async ({ url, locals: { supabase } }: Params) => {
 			const { data, error } = await supabase.from('profiles').select('*').eq('id', user.id);
 			const profile = data?.[0] as Profile;
 
-			console.log('[SERVER]: Redirecting to /auth/setup', profile);
-
 			if (!error && !profile.is_setup) {
 				throw redirect(303, '/setup');
 			}

@@ -41,7 +41,6 @@
 	$: {
 		total = data.reduce((a, b) => a + b.total, 0);
 		display = augmentAsset(data);
-		console.log('Display + Target: ', display);
 	}
 </script>
 

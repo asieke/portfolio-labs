@@ -9,12 +9,9 @@
 	const { supabase, session } = data;
 	let { institutions } = data;
 
-	console.log(data);
-
 	const connect = async () => {
 		const res = await axios.post('/api/plaid/create_link_token');
 		const link_token = res.data.link_token;
-		console.log('0. Link Token', link_token);
 		openPlaidLink(link_token, onSuccess);
 	};
 
@@ -36,7 +33,6 @@
 
 	const getHoldings = async (access_token: string) => {
 		const res = await axios.post('/api/plaid/get_holdings', { access_token });
-		console.log('Holdings', res.data);
 	};
 </script>
 

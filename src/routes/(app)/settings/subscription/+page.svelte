@@ -15,10 +15,6 @@
 		subscription = (await getSubscriptions(profile.stripe_customer_id)).data[0] as Stripe.Subscription;
 		const customer = await getCustomer(profile.stripe_customer_id);
 		paymentMethod = await getPaymentMethod(customer.invoice_settings.default_payment_method || customer.default_source);
-
-		console.log(subscription);
-		console.log(customer);
-		console.log(paymentMethod);
 	});
 </script>
 

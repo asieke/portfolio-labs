@@ -8,9 +8,6 @@ export const POST = async (req) => {
 	const supabase = req.locals.supabase;
 	const apiKey = req.request.headers.get('x-api-key');
 
-	console.log('INCOMING CRON POST REQUEST', apiKey);
-	console.log('...supabase', supabase ? 'exists' : 'does not exist');
-
 	if (!supabase || apiKey !== process.env.PRIVATE_API_KEY) {
 		return new Response('Unauthorized', { status: 401 });
 	}
@@ -26,10 +23,7 @@ export const POST = async (req) => {
 
 	await supabase.from('prices').delete().gt('date', startDate);
 
-	console.log('GETTING PRICES');
 	const prices = await getPriceData(symbols.map((r: Record<string, string>) => r.symbol) as string[], startDate);
-	console.log(prices);
-	console.log('GETTING CASH');
 	const cash = await getFredData(maxDate[0].max);
 
 	if (prices && cash) {

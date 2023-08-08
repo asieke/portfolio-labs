@@ -5,7 +5,6 @@ import type { Price } from '$types/prices';
 export const getPrices = async (supabase: SupabaseClient, symbol: string) => {
 	const cachedData = await getCache('prices', symbol);
 	if (cachedData) {
-		console.log('getting it from the cache');
 		return cachedData.data as Price[];
 	}
 
@@ -13,8 +12,6 @@ export const getPrices = async (supabase: SupabaseClient, symbol: string) => {
 	if (error || data.length === 0) return [] as Price[];
 
 	putCache('prices', symbol, data);
-
-	console.log('getting it from the database');
 
 	return data as Price[];
 };

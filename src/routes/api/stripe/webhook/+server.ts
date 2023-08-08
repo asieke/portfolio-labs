@@ -46,10 +46,7 @@ export const POST = async ({ request }) => {
 
 					if (subscriptions.data.length === 0) {
 						const { error } = await supabaseAdmin.from('profiles').update({ is_active: false }).eq('stripe_customer_id', customerId);
-						console.log('error?: ', error);
 					}
-
-					console.log('<<<<<<<<<<<<<');
 
 					// Then define and call a function to handle the event customer.subscription.deleted
 					break;

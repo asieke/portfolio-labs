@@ -7,13 +7,10 @@
 	export let data;
 
 	let step = 0;
-	$: console.log('Step changed to: ', step);
-
 	const { profile } = data;
 
 	const next = () => {
 		step = step + 1;
-		console.log('READY FOR NEXT STEP', profile);
 	};
 
 	const prev = () => {

@@ -31,7 +31,7 @@
 			gain['Your Performance'] = end.end_balance - start.end_balance;
 			bal['Your Performance'] = [start.end_balance, end.end_balance];
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}
 </script>

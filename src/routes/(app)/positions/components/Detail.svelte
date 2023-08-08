@@ -21,7 +21,6 @@
 	onMount(async () => {
 		if (asset && asset.symbol) {
 			prices = await getPrices(supabase, asset.symbol);
-			console.log(prices);
 		}
 	});
 </script>

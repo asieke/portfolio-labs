@@ -6,8 +6,6 @@
 
 	export let data;
 
-	console.log(data);
-
 	const { balances, portfolios } = data;
 	const total = portfolios ? portfolios[portfolios.length - 1] : null;
 </script>
