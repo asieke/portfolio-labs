@@ -4,6 +4,9 @@
 	import { systemPrompt } from '$lib/data/aiPrompts';
 	import { valueToChunk } from '$lib/utils/ai';
 	import { getChatStream } from '$lib/clients/openAI';
+	import { page } from '$app/stores';
+
+	console.log($page);
 
 	let open = true;
 	let conversation: { role: string; content: string }[] = [];
