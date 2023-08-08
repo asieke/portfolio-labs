@@ -27,15 +27,17 @@
 
 <Container layout="right">
 	<div slot="left">
-		<h4>
+		<h3>
 			<button on:click={onClick}>Positions</button>
 			<span class="mx-2">&gt;</span>
 			<span>{asset?.symbol}</span>
-		</h4>
+		</h3>
 		{#if asset && position && position.asset_class}
 			<DetailAsset {asset} />
 		{/if}
-		{#if prices}
+		{#if prices && asset}
+			<h4 class="mt-8">Historical Prices: {asset.name}</h4>
+			<p class="mb-6 text-slate-500 dark:text-slate-400">Hypothetical growth of a $10,000 Investment</p>
 			<PriceChart {prices} />
 		{/if}
 	</div>
@@ -43,7 +45,7 @@
 		<h4>My Position</h4>
 		{#if asset && position && position.asset_class}
 			<DetailPosition {position} />
-			<h4 class="mt-4">Asset Allocation</h4>
+			<h4 class="mb-6 mt-8">Asset Allocation</h4>
 			<AssetClassPieChart data={position.asset_class} />
 		{/if}
 	</div>

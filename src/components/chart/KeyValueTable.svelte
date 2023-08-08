@@ -21,7 +21,7 @@
 						{format === 'string' ? value : format === 'number' ? formatNumber(value) : format === 'currency' ? formatCurrency(value) : formatPercent(value)}
 					</div>
 				{:else}
-					<div class="{style[1]} right text-slate-800 dark:text-slate-200">
+					<div class="{style[1]} right text-slate-500 dark:text-slate-300">
 						{format === 'string' ? value : format === 'number' ? formatNumber(value) : format === 'currency' ? formatCurrency(value) : formatPercent(value)}
 					</div>
 				{/if}
@@ -32,10 +32,10 @@
 
 <style lang="postcss">
 	.row {
-		@apply flex flex-row border-b-[1px] border-slate-200 py-2 text-sm;
+		@apply flex flex-row border-b-[1px] border-slate-200 py-2 text-slate-600;
 	}
 
 	.left {
-		@apply text-slate-500 dark:text-slate-400;
+		@apply text-slate-800 dark:text-slate-100;
 	}
 </style>

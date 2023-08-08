@@ -13,7 +13,7 @@
 	export let portfolio: Portfolio;
 </script>
 
-<div class="mb-6 mt-4">
+<div class="pb-2">
 	<div class="row">
 		<div class="left">Total Account Value</div>
 		<div class="right">{formatCurrency(portfolio.market_value)}</div>
@@ -41,7 +41,7 @@
 		</div>
 	</div>
 </div>
-<!-- <h3 class="section-header mt-6">My Asset Allocation</h3> -->
+
 <AssetClassPieChart data={portfolio.asset_class} />
 <p class="mt-6 leading-7 text-slate-500">
 	The portfolio currently holds a market value of around $7.6M, a significant increase from the initial investment of $2.2M, yielding an impressive year-to-date return of 40.93%. The portfolio is
@@ -52,7 +52,11 @@
 
 <style lang="postcss">
 	.row {
-		@apply flex flex-row border-b-[1px] border-slate-200 py-3;
+		@apply flex flex-row py-3;
+	}
+
+	.row:not(:last-child) {
+		@apply border-b-[1px] border-slate-200;
 	}
 
 	.left {

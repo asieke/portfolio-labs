@@ -24,9 +24,9 @@
 	</div>
 {/each}
 
-<style>
+<style lang="postcss">
 	.row {
-		@apply flex items-center justify-between border-b-[1px] border-b-slate-500 px-2 py-1.5 text-xs;
+		@apply flex items-center justify-between border-t-[1px] border-b-slate-300 px-2 py-1.5 text-xs text-slate-500 dark:text-slate-400;
 	}
 	.row:last-child {
 		@apply border-none;

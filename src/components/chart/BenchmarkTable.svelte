@@ -36,32 +36,33 @@
 	}
 </script>
 
-<div class="mt-6">
-	<!-- Create a table that has a row for every value in balanceDisplayData and a bg color -->
-	<!-- that corresponds to the color in balanceDisplayData -->
-
-	<div class="flex items-center justify-between rounded-tl-md rounded-tr-md bg-primary-600 p-2 text-sm font-semibold text-white dark:bg-primary-700">
-		<div class="w-1/12"><div class="h-3 w-3" /></div>
-		<div class="w-3/12 text-left"><span>Benchmark</span></div>
-		<div class="w-2/12 text-left"><span>Initial</span></div>
-		<div class="w-2/12 text-left"><span>Final</span></div>
-		<div class="w-2/12 text-left"><span>Gain</span></div>
-		<div class="w-2/12 text-left"><span>Percentage</span></div>
-	</div>
-	{#each balanceDisplayData as label, i}
-		{#if $chartSelectedBenchmarks[i] === true}
-			<div class="row flex items-center justify-between p-2 py-3">
-				<div class="w-1/12">
-					<div class="h-3 w-3" style="background-color: {label.color}" />
-				</div>
-				<div class="w-3/12 text-left"><span>{label.name}</span></div>
-				<div class="w-2/12 text-left"><span>{formatCurrency(bal[label.name][0], 0)}</span></div>
-				<div class="w-2/12 text-left"><span>{formatCurrency(bal[label.name][1], 0)}</span></div>
-				<div class="w-2/12 text-left {color(gain[label.name])}"><span>{formatCurrency(gain[label.name], 0)}</span></div>
-				<div class="w-2/12 text-left {color(pct[label.name])}">{formatPercent(pct[label.name])}</div>
-			</div>
-		{/if}
-	{/each}
+<div class="data-table mt-6">
+	<table>
+		<!-- Create a table that has a row for every value in balanceDisplayData and a bg color -->
+		<!-- that corresponds to the color in balanceDisplayData -->
+		<tr>
+			<th class="w-1/12"><div class="h-3 w-3" /></th>
+			<th class="w-3/12 text-left"><span>Benchmark</span></th>
+			<th class="w-2/12 text-left"><span>Initial</span></th>
+			<th class="w-2/12 text-left"><span>Final</span></th>
+			<th class="w-2/12 text-left"><span>Gain</span></th>
+			<th class="w-2/12 text-left"><span>Percentage</span></th>
+		</tr>
+		{#each balanceDisplayData as label, i}
+			{#if $chartSelectedBenchmarks[i] === true}
+				<tr>
+					<td class="w-1/12">
+						<div class="h-3 w-3" style="background-color: {label.color}" />
+					</td>
+					<td class="w-3/12 text-left"><span>{label.name}</span></td>
+					<td class="w-2/12 text-left"><span>{formatCurrency(bal[label.name][0], 0)}</span></td>
+					<td class="w-2/12 text-left"><span>{formatCurrency(bal[label.name][1], 0)}</span></td>
+					<td class="w-2/12 text-left {color(gain[label.name])}"><span>{formatCurrency(gain[label.name], 0)}</span></td>
+					<td class="w-2/12 text-left {color(pct[label.name])}">{formatPercent(pct[label.name])}</td>
+				</tr>
+			{/if}
+		{/each}
+	</table>
 </div>
 
 <style>

@@ -29,7 +29,7 @@
 	}
 </script>
 
-<div>
+<div class="data-table mt-6">
 	<table>
 		<thead>
 			<tr class="text-left">
@@ -39,14 +39,9 @@
 				<th class="w-1/12" rowspan="2">Price</th>
 				<th class="w-1/12" rowspan="2">Value</th>
 				<th class="w-1/12" rowspan="2">Cost Basis</th>
-				<th class="w-1/12 text-center" colspan="3">
-					<button on:click={() => (dollarUnit = !dollarUnit)}>Gain/Loss {dollarUnit ? '($)' : '(%)'}</button>
-				</th>
-			</tr>
-			<tr class="text-left">
-				<th class="w-1/12">Total</th>
-				<th class="w-1/12">Last 7</th>
-				<th class="w-1/12">Yesterday</th>
+				<th on:click={() => (dollarUnit = !dollarUnit)} class="w-1/12 cursor-pointer">Total</th>
+				<th on:click={() => (dollarUnit = !dollarUnit)} class="w-1/12 cursor-pointer">Last 7</th>
+				<th on:click={() => (dollarUnit = !dollarUnit)} class="w-1/12 cursor-pointer">Yesterday</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -78,26 +73,7 @@
 </div>
 
 <style lang="postcss">
-	table {
-		@apply mt-5 w-full rounded-xl text-slate-500;
-	}
-	td {
-		@apply p-2;
-	}
-
-	th {
-		@apply bg-primary-500 px-2 py-1  text-white dark:bg-primary-800;
-	}
-
-	tbody > tr {
-		@apply border-b-[1px] border-slate-200 dark:border-slate-700;
-	}
-
-	tr:nth-last-child(2) td {
-		@apply bg-slate-100 dark:bg-slate-800;
-	}
-
-	tr:last-child td {
-		@apply bg-slate-200 dark:bg-slate-900;
+	tr:last-child {
+		@apply bg-slate-200 dark:bg-slate-800;
 	}
 </style>

@@ -14,8 +14,8 @@
 <Container layout="right">
 	<div slot="left">
 		{#if displayBalances}
-			<PerformanceChart balances={displayBalances} options={{ benchmarkTable: true }} />
-			<p class="mb-6 mt-6 text-sm font-thin tracking-wide">
+			<PerformanceChart balances={displayBalances} />
+			<p class="mb-6 mt-6 text-sm tracking-wide">
 				This chart provides a visual comparison of your investment portfolio's performance against selected benchmarks. Each benchmark represents a standard, like a market sector or the overall
 				market, which you can use to gauge the effectiveness of your investment strategy. The chart factors in your personal investment activity, including any deposits and withdrawals you've made,
 				allowing for a more personalized evaluation. By examining this chart, you can understand how your portfolio would have performed if the same deposits and withdrawals had been made in the
@@ -34,7 +34,7 @@
 		{/if}
 		{#if displayBalances}
 			<PerformanceTable balances={displayBalances} />
-			<p class="mb-6 mt-6 text-sm font-thin tracking-wide">
+			<p class="mb-6 mt-6 text-sm tracking-wide text-slate-500 dark:text-slate-400">
 				This chart provides a visual comparison of your investment portfolio's performance against selected benchmarks. Each benchmark represents a standard, like a market sector or the overall
 				market, which you can use to gauge the effectiveness of your investment strategy.
 			</p>
