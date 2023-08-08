@@ -8,7 +8,7 @@
 
 	console.log($page);
 
-	let open = true;
+	let open = false;
 	let conversation: { role: string; content: string }[] = [];
 	let message = '';
 	let chatContainer: HTMLDivElement;

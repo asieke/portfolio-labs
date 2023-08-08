@@ -78,12 +78,17 @@
 </script>
 
 <!-- Display the selected date -->
-<section class="mb-8 space-y-3">
-	<h4>My Total Performance: <span class={color(performancePct)}>{formatPercent(performancePct)}</span></h4>
-	<p>CAGR: {formatPercent(getCAGR(performancePct, $chartSelectedDate))}</p>
-	<p>
-		US Total Equity Benchmark: <span class={color(benchmarkPct)}>{formatPercent(benchmarkPct)}</span>
-		<span>({formatPercent(Math.abs(performancePct / benchmarkPct - 1))} {performancePct > benchmarkPct ? 'higher' : 'lower'})</span>
+<section class="mb-8">
+	<h3 class="mb-5">My Performance:</h3>
+	<h4 class="text-lg text-slate-500">
+		Total Return: <span class={color(performancePct)}>{formatPercent(performancePct)}</span>
+		| Yearly Return (CAGR): <span class={color(getCAGR(performancePct, $chartSelectedDate))}>{formatPercent(getCAGR(performancePct, $chartSelectedDate))}</span>
+	</h4>
+
+	<p class="text-slate-500">US Total Equity Benchmark: <span class={color(benchmarkPct)}>{formatPercent(benchmarkPct)}</span></p>
+	<p class="text-slate-500">
+		Your performance was <span class={color(performancePct / benchmarkPct - 1)}>({formatPercent(Math.abs(performancePct / benchmarkPct - 1))}</span>
+		{performancePct > benchmarkPct ? 'higher' : 'lower'}) than the benchmark.
 	</p>
 </section>
 

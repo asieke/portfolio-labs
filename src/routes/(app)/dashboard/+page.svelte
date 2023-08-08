@@ -16,7 +16,7 @@
 <Container layout="right">
 	<div slot="left">
 		{#if balances && portfolios}
-			<h3>Portfolio Summary</h3>
+			<h3 class="mb-4">Portfolio Summary</h3>
 			<section class="mb-8">
 				<Table {portfolios} />
 			</section>
@@ -28,7 +28,7 @@
 
 	<div slot="right">
 		{#if total}
-			<h3>Account Summary</h3>
+			<h3 class="mb-4">Account Summary</h3>
 			<Summary portfolio={total} />
 		{/if}
 	</div>

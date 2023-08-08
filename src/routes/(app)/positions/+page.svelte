@@ -27,7 +27,7 @@
 		<Detail onClick={() => (asset = null)} {asset} {position} />
 	{:else}
 		<Container>
-			<h4>Positions</h4>
+			<h3 class="mb-4">Positions</h3>
 			<select class="w-full" bind:value={portfolio_id}>
 				{#each portfolios as portfolio}
 					<option value={portfolio.id}>{portfolio.name}</option>

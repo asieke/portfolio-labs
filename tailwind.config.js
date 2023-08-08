@@ -44,6 +44,5 @@ export default {
 				leftcol: '33% 67%'
 			}
 		}
-	},
-	plugins: [require('@tailwindcss/forms')]
+	}
 };
