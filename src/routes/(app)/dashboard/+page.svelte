@@ -8,6 +8,8 @@
 	export let data;
 	const { balances, portfolios } = data;
 
+	console.log(portfolios);
+
 	addAIContext(`Account Summary Total Account Value $9,051,313.86 Total Cost Basis  $2,318,854.11 Yearly Change 38.87% Monthly Change 0.27% Weekly Change 0.08%`);
 
 	const total = portfolios ? portfolios[portfolios.length - 1] : null;
