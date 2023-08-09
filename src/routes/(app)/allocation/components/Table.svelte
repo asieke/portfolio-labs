@@ -44,41 +44,45 @@
 	}
 </script>
 
-<table>
-	<tr class="bg-primary-700 text-slate-200">
-		<td class="rounded-tl-lg" /><td>Asset Class</td>
-		<td>Category</td>
-		<td>Total Amount</td>
-		<td>Percent</td>
-		<td>Target Percent<br /> (of Asset Class)</td>
-		<td>Target Percent<br /> (of Total)</td>
-		<td>Target Dollar<br /></td>
-		<td class="rounded-tr-lg">Asset Delta</td>
-	</tr>
-
-	{#each display as row}
-		{#each row.breakdown as asset}
-			<tr class={asset.name === 'Total' ? 'bg-slate-200 dark:bg-slate-700' : ''}>
-				<td><div class="h-3 w-3" style="background-color: {asset.color}" /></td>
-				<td>{row.name}</td>
-				<td>{asset.name}</td>
-				<td>{formatCurrency(asset.total, 0)}</td>
-				<td>{formatPercent(asset.name === 'Total' ? asset.total / total : asset.total / row.total, 1)}</td>
-				<td>{formatPercent(asset.targetPct, 1)}</td>
-				<td>{formatPercent(asset.targetPctTotal, 1)}</td>
-				<td>{formatCurrency(asset.targetDollar, 1)}</td>
-				<td class={color(asset.targetDollar - asset.total)}>{formatCurrency(asset.targetDollar - asset.total, 0)}</td>
-			</tr>
+<table class="data text-table">
+	<thead>
+		<tr class="bg-primary-200">
+			<th />
+			<th>Asset Class</th>
+			<th>Category</th>
+			<th>Total Amount</th>
+			<th>Percent</th>
+			<th>Target Percent<br /> (of Asset Class)</th>
+			<th>Target Percent<br /> (of Total)</th>
+			<th>Target Dollar<br /></th>
+			<th>Asset Delta</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#each display as row}
+			{#each row.breakdown as asset}
+				<tr class={asset.name === 'Total' ? 'bg-slate-200 dark:bg-slate-700' : ''}>
+					<td><div class="h-3 w-3" style="background-color: {asset.color}" /></td>
+					<td>{row.name}</td>
+					<td>{asset.name}</td>
+					<td>{formatCurrency(asset.total, 0)}</td>
+					<td>{formatPercent(asset.name === 'Total' ? asset.total / total : asset.total / row.total, 1)}</td>
+					<td>{formatPercent(asset.targetPct, 1)}</td>
+					<td>{formatPercent(asset.targetPctTotal, 1)}</td>
+					<td>{formatCurrency(asset.targetDollar, 1)}</td>
+					<td class={color(asset.targetDollar - asset.total)}>{formatCurrency(asset.targetDollar - asset.total, 0)}</td>
+				</tr>
+			{/each}
 		{/each}
-	{/each}
-	<tr class="bg-slate-300 dark:bg-slate-800">
-		<td />
-		<td colspan="2">Total</td>
-		<td>{formatCurrency(total)}</td>
-		<td colspan="3" />
-		<td>{formatCurrency(total)}</td>
-		<td>{formatCurrency(0)}</td>
-	</tr>
+		<tr class="bg-slate-300 dark:bg-slate-800">
+			<td />
+			<td colspan="2">Total</td>
+			<td>{formatCurrency(total)}</td>
+			<td colspan="3" />
+			<td>{formatCurrency(total)}</td>
+			<td>{formatCurrency(0)}</td>
+		</tr>
+	</tbody>
 </table>
 
 <style>

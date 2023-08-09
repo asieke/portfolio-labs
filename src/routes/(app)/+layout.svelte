@@ -1,19 +1,16 @@
 <script lang="ts">
-	import '$styles/base.css';
-	import '$styles/app.css';
 	import { Nav, Footer, Chat } from '$components/layout';
 </script>
 
-<div class="flex min-h-full flex-col bg-gray-100 dark:bg-dark-700">
-	<div class="bg-gray-800 pb-32 dark:bg-dark-800">
-		<Nav />
-	</div>
+<div class="h-[64px]">
+	<Nav />
+</div>
 
-	<main class="-mt-24 flex-grow">
-		<div class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-			<slot />
-		</div>
-	</main>
+<div class="mx-auto min-h-[calc(100vh-100px)] max-w-7xl px-12 py-8">
+	<slot />
+</div>
+
+<div class="h-[36px]">
 	<Chat />
 	<Footer />
 </div>

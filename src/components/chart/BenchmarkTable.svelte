@@ -36,10 +36,10 @@
 	}
 </script>
 
-<div class="data-table mt-6">
-	<table>
-		<!-- Create a table that has a row for every value in balanceDisplayData and a bg color -->
-		<!-- that corresponds to the color in balanceDisplayData -->
+<table class="data mt-6 text-table">
+	<!-- Create a table that has a row for every value in balanceDisplayData and a bg color -->
+	<!-- that corresponds to the color in balanceDisplayData -->
+	<thead>
 		<tr>
 			<th class="w-1/12"><div class="h-3 w-3" /></th>
 			<th class="w-3/12 text-left"><span>Benchmark</span></th>
@@ -48,6 +48,8 @@
 			<th class="w-2/12 text-left"><span>Gain</span></th>
 			<th class="w-2/12 text-left"><span>Percentage</span></th>
 		</tr>
+	</thead>
+	<tbody>
 		{#each balanceDisplayData as label, i}
 			{#if $chartSelectedBenchmarks[i] === true}
 				<tr>
@@ -62,8 +64,8 @@
 				</tr>
 			{/if}
 		{/each}
-	</table>
-</div>
+	</tbody>
+</table>
 
 <style>
 	/* row but not the last row*/

@@ -42,6 +42,9 @@ export default {
 				// Complex site-specific row configuration
 				rightcol: '67% 33%',
 				leftcol: '33% 67%'
+			},
+			fontSize: {
+				table: '14px'
 			}
 		}
 	}

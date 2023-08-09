@@ -1,3 +1,9 @@
+<!--
+ @component PerformanceChart
+ A chart that displays the performance of the user's portfolio over time.
+ @param {Balance[]} balances - The number of steps in the stepper.
+-->
+
 <script lang="ts">
 	import { color, formatPercent } from '$lib/utils/format';
 	import { getCAGR } from '$lib/utils/financial';
