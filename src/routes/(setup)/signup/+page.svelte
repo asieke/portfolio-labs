@@ -27,8 +27,8 @@
 					<div class="flex flex-row space-x-1 text-xl font-bold leading-8 tracking-tighter"><Logo class="h-6 w-6 pt-2" /><span>Portfolio Labs</span></div>
 				</div>
 			</div>
-			<div class="-ml-[3px] min-h-[400px] rounded-md bg-slate-50 p-8 shadow-2xl md:p-12 md:px-16" style="width: calc(100% + 6px)">
-				<h3 class="text-xl font-bold leading-8 antialiased">Create an Account</h3>
+			<div class="-ml-[3px] min-h-[400px] rounded-md bg-white p-8 shadow-2xl dark:bg-slate-800 md:p-12 md:px-16" style="width: calc(100% + 6px)">
+				<h2>Create an Account</h2>
 				<form class="mt-6 space-y-6">
 					<div>
 						<label for="email">Email address <span class="error">{email.error}</span></label>

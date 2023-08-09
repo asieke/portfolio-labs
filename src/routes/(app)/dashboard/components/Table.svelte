@@ -13,39 +13,37 @@
 </script>
 
 <!-- Portfolio table -->
-<div class="data-table">
-	<table>
-		<thead>
+<table class="data text-table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Market Value</th>
+			<th>Cost Basis</th>
+			<th>Return (Year)</th>
+			<th>Return (Month)</th>
+			<th>Return (Week)</th>
+		</tr>
+	</thead>
+	<!-- Iterating over each portfolio and creating a row for it -->
+	<tbody>
+		{#each portfolios as row}
 			<tr>
-				<th>Name</th>
-				<th>Market Value</th>
-				<th>Cost Basis</th>
-				<th>Return (Year)</th>
-				<th>Return (Month)</th>
-				<th>Return (Week)</th>
+				<!-- Portfolio details -->
+				<td>{row.name}</td>
+				<!-- Formatting numbers for better readability -->
+				<td>{formatCurrency(row.market_value, 0)}</td>
+				<td>{formatCurrency(row.cost_basis, 0)}</td>
+				<!-- Converting returns to percentages -->
+				<td class={color(row.return_year)}>{formatPercent(row.return_year, 1)}</td>
+				<td class={color(row.return_month)}>{formatPercent(row.return_month, 1)}</td>
+				<td class={color(row.return_week)}>{formatPercent(row.return_week, 1)}</td>
 			</tr>
-		</thead>
-		<!-- Iterating over each portfolio and creating a row for it -->
-		<tbody>
-			{#each portfolios as row}
-				<tr>
-					<!-- Portfolio details -->
-					<td>{row.name}</td>
-					<!-- Formatting numbers for better readability -->
-					<td>{formatCurrency(row.market_value, 0)}</td>
-					<td>{formatCurrency(row.cost_basis, 0)}</td>
-					<!-- Converting returns to percentages -->
-					<td class={color(row.return_year)}>{formatPercent(row.return_year, 1)}</td>
-					<td class={color(row.return_month)}>{formatPercent(row.return_month, 1)}</td>
-					<td class={color(row.return_week)}>{formatPercent(row.return_week, 1)}</td>
-				</tr>
-			{/each}
-		</tbody>
-	</table>
-</div>
+		{/each}
+	</tbody>
+</table>
 
 <style lang="postcss">
-	tr:last-child {
-		@apply bg-slate-200 dark:bg-slate-800;
+	tbody tr:last-child {
+		@apply bg-slate-100 dark:bg-slate-800;
 	}
 </style>

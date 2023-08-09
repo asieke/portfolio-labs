@@ -18,10 +18,10 @@
 </script>
 
 <Container>
-	<h4>My Asset Allocation</h4>
+	<h3 class="mb-6">My Asset Allocation</h3>
 
 	{#if portfolios}
-		<select class="w-full" bind:value={id}>
+		<select class="w-full md:w-1/3" bind:value={id}>
 			{#each portfolios as portfolio, i}
 				<option value={i}>{portfolio.name}</option>
 			{/each}

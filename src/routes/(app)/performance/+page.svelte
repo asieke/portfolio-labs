@@ -14,33 +14,29 @@
 	$: displayBalances = balances?.filter((b) => b.portfolio_id === portfolio_id);
 </script>
 
-<Container layout="right">
-	<div slot="left">
-		{#if displayBalances}
-			<PerformanceChart balances={displayBalances} />
-			<p class="mb-6 mt-6 text-sm tracking-wide">
-				This chart provides a visual comparison of your investment portfolio's performance against selected benchmarks. Each benchmark represents a standard, like a market sector or the overall
-				market, which you can use to gauge the effectiveness of your investment strategy. The chart factors in your personal investment activity, including any deposits and withdrawals you've made,
-				allowing for a more personalized evaluation. By examining this chart, you can understand how your portfolio would have performed if the same deposits and withdrawals had been made in the
-				benchmark investments, offering insights into your investment choices relative to market standards.
-			</p>
-		{/if}
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+	<div class="lg-order-1 order-2 col-span-2">
+		<Container>
+			{#if displayBalances}
+				<PerformanceChart balances={displayBalances} />
+			{/if}
+		</Container>
 	</div>
-	<div slot="right">
-		<h4 class="mb-2">My Portfolios</h4>
-		{#if portfolios}
-			<select class="mb-8 w-full" bind:value={portfolio_id}>
-				{#each portfolios as portfolio}
-					<option value={portfolio.id}>{portfolio.name}</option>
-				{/each}
-			</select>
-		{/if}
-		{#if displayBalances}
-			<PerformanceTable balances={displayBalances} />
-			<p class="mb-6 mt-6 text-sm tracking-wide text-slate-500 dark:text-slate-400">
-				This chart provides a visual comparison of your investment portfolio's performance against selected benchmarks. Each benchmark represents a standard, like a market sector or the overall
-				market, which you can use to gauge the effectiveness of your investment strategy.
-			</p>
-		{/if}
+	<div class="order-1 lg:order-2">
+		<Container>
+			<h3 class="mb-4">My Portfolios</h3>
+			{#if portfolios}
+				<select class="mb-8 w-full" bind:value={portfolio_id}>
+					{#each portfolios as portfolio}
+						<option value={portfolio.id}>{portfolio.name}</option>
+					{/each}
+				</select>
+			{/if}
+			{#if displayBalances}
+				<div class="text-xs">
+					<PerformanceTable balances={displayBalances} />
+				</div>
+			{/if}
+		</Container>
 	</div>
-</Container>
+</div>

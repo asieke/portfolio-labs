@@ -7,22 +7,28 @@
 	$: tableData = aggregateBalances(balances.filter((b) => b.date >= $chartSelectedDate));
 </script>
 
-<div class="flex items-center justify-between rounded-tl-md rounded-tr-md bg-primary-600 px-2 py-2 text-xs font-bold text-white dark:bg-primary-700">
-	<div class="w-2/12"><span>Date</span></div>
-	<div class="w-2/12 text-left"><span>Starting</span></div>
-	<div class="w-2/12 text-left"><span>Ending</span></div>
-	<div class="w-2/12 text-left"><span>Net Flows</span></div>
-	<div class="w-2/12 text-left"><span>G/L</span></div>
-</div>
-{#each tableData as row}
-	<div class="row">
-		<div class="w-2/12"><span>{row.date}</span></div>
-		<div class="w-2/12 text-left"><span>{formatCurrency(row.start_balance, 0)}</span></div>
-		<div class="w-2/12 text-left"><span>{formatCurrency(row.end_balance, 0)}</span></div>
-		<div class="w-2/12 text-left"><span>{formatCurrency(row.total_flows, 0)}</span></div>
-		<div class="w-2/12 text-left"><span class={color(row.pct)}>{formatPercent(row.pct, 0)}</span></div>
-	</div>
-{/each}
+<table class="data">
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Starting</th>
+			<th>Ending</th>
+			<th>Flows</th>
+			<th>G/L</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#each tableData as row}
+			<tr>
+				<td>{row.date}</td>
+				<td>{formatCurrency(row.start_balance, 0)}</td>
+				<td>{formatCurrency(row.end_balance, 0)}</td>
+				<td>{formatCurrency(row.total_flows, 0)}</td>
+				<td class={color(row.pct)}>{formatPercent(row.pct, 0)}</td>
+			</tr>
+		{/each}
+	</tbody>
+</table>
 
 <style lang="postcss">
 	.row {

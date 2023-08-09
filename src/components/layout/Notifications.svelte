@@ -5,7 +5,11 @@
 </script>
 
 <div class="relative" id="menuNotifications">
-	<button type="button" on:click={() => menuNotificationsShowing.set(!$menuNotificationsShowing)} class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white">
+	<button
+		type="button"
+		on:click={() => menuNotificationsShowing.set(!$menuNotificationsShowing)}
+		class="rounded-full bg-slate-200 p-1 text-gray-400 hover:outline-none hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-primary-500 dark:bg-slate-800"
+	>
 		<span class="sr-only">View notifications</span>
 		<IconBell />
 	</button>

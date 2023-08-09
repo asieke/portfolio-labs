@@ -27,13 +27,15 @@
 		<Detail onClick={() => (asset = null)} {asset} {position} />
 	{:else}
 		<Container>
-			<h3 class="mb-4">Positions</h3>
-			<select class="w-full" bind:value={portfolio_id}>
-				{#each portfolios as portfolio}
-					<option value={portfolio.id}>{portfolio.name}</option>
-				{/each}
-			</select>
-			<Table positions={displayPositions} {onClick} />
+			<div class="space-y-6">
+				<h3>My Positions</h3>
+				<select class="w-1/3" bind:value={portfolio_id}>
+					{#each portfolios as portfolio}
+						<option value={portfolio.id}>{portfolio.name}</option>
+					{/each}
+				</select>
+				<Table positions={displayPositions} {onClick} />
+			</div>
 		</Container>
 	{/if}
 {/if}
