@@ -14,8 +14,6 @@ import { formatAssetClass } from '$models/assets';
 export const getDashboardPortfolios = async (supabase: SupabaseClient, user_id: string) => {
 	const { data, error } = await supabase.from('views_dashboard').select('*').eq('user_id', user_id);
 
-	console.log('>>>>', error);
-
 	if (error || data.length === 0) return null;
 
 	// sort portfolios so that Total is always last

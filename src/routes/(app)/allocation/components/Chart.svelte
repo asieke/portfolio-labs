@@ -34,7 +34,6 @@
 
 		total = display.reduce((a, b) => a + b.total, 0);
 		tooltips = display.map(() => false);
-		console.log(display);
 	}
 
 	const toolTipOn = (i: number) => {

@@ -6,8 +6,6 @@
 	import { getChatStream } from '$lib/clients/openAI';
 	import { page } from '$app/stores';
 
-	console.log($page);
-
 	let open = false;
 	let conversation: { role: string; content: string }[] = [];
 	let message = '';
@@ -32,8 +30,6 @@
 			while (!chunk.done) {
 				newMessage += valueToChunk(chunk.value);
 
-				console.log(valueToChunk(chunk.value));
-
 				chunk = await reader.read();
 
 				const temp = [...conversation];
@@ -41,8 +37,6 @@
 				chatContainer.scrollTop = chatContainer.scrollHeight;
 				conversation = temp;
 			}
-
-			console.log('All chunks received.');
 		} catch (error) {
 			console.error('Error:', error);
 		}
