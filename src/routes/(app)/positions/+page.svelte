@@ -5,6 +5,8 @@
 	import type { Asset } from '$types/assets';
 	import type { Position } from '$types/positions';
 
+	import { dataToContext } from '$models/ai-process/positions';
+
 	export let data;
 
 	const { portfolios, positions, assets } = data;
@@ -15,6 +17,7 @@
 	let position: Position | null = null;
 
 	$: displayPositions = positions?.filter((position) => position.portfolio_id === portfolio_id);
+	$: dataToContext(displayPositions);
 
 	const onClick = (s: string | null) => {
 		asset = assets?.find((a) => a.symbol === s) || null;

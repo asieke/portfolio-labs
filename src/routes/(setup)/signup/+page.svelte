@@ -24,7 +24,7 @@
 		<div class="ml-8 mr-8 h-full border-l-[1px] border-r-[1px] border-dashed border-slate-500 border-opacity-10 py-8 md:ml-0 md:py-16">
 			<div class="block md:hidden">
 				<div class="pb-4">
-					<div class="flex flex-row space-x-1 text-xl font-bold leading-8 tracking-tighter"><Logo class="h-6 w-6 pt-2" /><span>Portfolio Labs</span></div>
+					<div class="flex flex-row space-x-1.5 text-xl font-bold tracking-tight"><Logo class="h-6 w-6" /><span>Portfolio Labs</span></div>
 				</div>
 			</div>
 			<div class="-ml-[3px] min-h-[400px] rounded-md bg-white p-8 shadow-2xl dark:bg-slate-800 md:p-12 md:px-16" style="width: calc(100% + 6px)">
