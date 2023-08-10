@@ -1,7 +1,6 @@
-const MODEL = 'gpt-4';
 import { PUBLIC_OPEN_AI_KEY } from '$env/static/public';
 
-export const getChatStream = async (messages: { role: string; content: string }[]) => {
+export const getChatStream = async (messages: { role: string; content: string }[], MODEL = 'gpt-4') => {
 	return await fetch('https://api.openai.com/v1/chat/completions', {
 		method: 'POST',
 		headers: {

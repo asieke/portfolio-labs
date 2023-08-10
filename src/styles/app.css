@@ -80,3 +80,45 @@ table.data tr:not(:last-child) {
 table.data td {
 	@apply px-2 py-1.5;
 }
+
+/* ---------------------------------------------- */
+/* Data Table */
+/* ---------------------------------------------- */
+
+.md h2,
+.md h3,
+.md h4,
+.md h5,
+.md h6 {
+	@apply !mb-3 !mt-8 !font-bold text-slate-900;
+}
+
+.md h2 {
+	@apply -ml-[34px] border-l-[3px] border-primary-500 pl-7 !text-2xl lg:-ml-[50px] lg:pl-11;
+}
+
+.md h3 {
+	@apply !text-xl;
+}
+
+.md p,
+.md ul,
+.md li {
+	@apply leading-relaxed text-slate-500;
+}
+
+.md ul {
+	@apply !ml-6 !mt-2 !list-disc;
+}
+
+.md p {
+	@apply !mt-4;
+}
+
+.md ol {
+	@apply !ml-6 !mt-2 !list-decimal;
+}
+
+.md img {
+	@apply mx-auto my-8 h-72 w-full rounded-lg object-cover shadow-xl;
+}

@@ -77,9 +77,9 @@ const getHistoricalBalance = async (portfolio_id) => {
 		basis[symbol] = 0;
 	});
 
-	//['VFIFX', 'VTSMX', 'VBMFX', 'BIAPX', 'BIGPX', 'BTC-USD.CC', 'IOO', 'VEA', 'VWO'];
+	//['FFFFX', 'VTSMX', 'VBMFX', 'BIAPX', 'BIGPX', 'BTC-USD.CC', 'IOO', 'VEA', 'VWO'];
 
-	let benchmarkVFIFX = 0;
+	let benchmarkFFFFX = 0;
 	let benchmarkUSEquity = 0;
 	let benchmarkFixedIncome = 0;
 	let benchmark6040 = 0;
@@ -100,7 +100,7 @@ const getHistoricalBalance = async (portfolio_id) => {
 					balances['CASHX'] += txn.amount;
 					netFlows += txn.amount;
 					//add to benchmarks
-					benchmarkVFIFX += txn.amount;
+					benchmarkFFFFX += txn.amount;
 					benchmarkUSEquity += txn.amount;
 					benchmarkFixedIncome += txn.amount;
 					benchmark6040 += txn.amount;
@@ -134,7 +134,7 @@ const getHistoricalBalance = async (portfolio_id) => {
 		});
 
 		//update benchmarks
-		benchmarkVFIFX *= 1 + (benchmarkPcts['VFIFX'][date] || 0);
+		benchmarkFFFFX *= 1 + (benchmarkPcts['FFFFX'][date] || 0);
 		benchmarkUSEquity *= 1 + (benchmarkPcts['VTSMX'][date] || 0);
 		benchmarkFixedIncome *= 1 + (benchmarkPcts['VBMFX'][date] || 0);
 		benchmark6040 *= 1 + (benchmarkPcts['BIGPX'][date] || 0);
@@ -151,7 +151,7 @@ const getHistoricalBalance = async (portfolio_id) => {
 			balance: total,
 			flows: i === 0 ? 0 : netFlows,
 			benchmarks: {
-				'Vanguard 2050 Fund': benchmarkVFIFX,
+				'Fidelity 2050 Fund': benchmarkFFFFX,
 				'US Equity Total Market': benchmarkUSEquity,
 				'NASDAQ QQQ': benchmarkQQQ,
 				'Fixed Income': benchmarkFixedIncome,
