@@ -30,7 +30,7 @@ export const retirement = [
 		date: '2008-01-06',
 		action: 'buy',
 		amount: 10000,
-		symbol: 'VFIFX'
+		symbol: 'FFFFX'
 	},
 	{
 		date: '2008-01-05',

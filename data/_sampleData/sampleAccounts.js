@@ -20,7 +20,7 @@ export const sampleAccounts = [
 		type: 'Brokerage',
 		portfolios: [
 			{
-				name: 'Schwab - Direct Index',
+				name: 'Fidelity - Direct Index',
 				description: 'Direct Indexing S&P Account',
 				type: 'Taxable Investment',
 				transactions: direct
@@ -32,7 +32,7 @@ export const sampleAccounts = [
 				transactions: global
 			},
 			{
-				name: 'Schwab - 401k',
+				name: 'Fidelity - 401k',
 				description: '401k Retirement Account',
 				type: 'Retirement',
 				transactions: retirement

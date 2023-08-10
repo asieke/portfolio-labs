@@ -21,8 +21,8 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 
 	//select from profiles where profile.email = session.user.email
 
-	const profile = await getProfile(supabase, session?.user.id || null);
-	const institutions = await getInstitutions(supabase, session?.user.id || null);
+	const profile = session ? await getProfile(supabase, session?.user.id || null) : null;
+	const institutions = session ? await getInstitutions(supabase, session?.user.id || null) : null;
 
 	return { supabase, session, profile, institutions };
 };

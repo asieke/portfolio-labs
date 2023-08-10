@@ -2,7 +2,7 @@
 	import { Nav, Footer, Chat } from '$components/layout';
 </script>
 
-<div class="h-[64px]">
+<div class="mt-4 h-[64px]">
 	<Nav />
 </div>
 

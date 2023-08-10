@@ -151,7 +151,7 @@ export const balanceDisplayData = [
 		color: colors['fuchsia']['600']
 	},
 	{
-		name: 'Vanguard 2050 Fund',
+		name: 'Fidelity 2050 Fund',
 		color: colors['orange']['600']
 	},
 	{
