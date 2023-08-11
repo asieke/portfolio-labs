@@ -13,7 +13,7 @@
 	</div>
 	<div class="flex flex-row space-x-4 md:space-x-8">
 		<a href="/">About</a>
-		<a href="/">Blog</a>
+		<a href="/blog">Blog</a>
 		<a href="/">Company</a>
 	</div>
 	<div class="">
