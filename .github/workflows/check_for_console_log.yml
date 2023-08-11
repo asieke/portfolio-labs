@@ -12,7 +12,7 @@ jobs:
 
       - name: Search for console.log
         run: |
-          if grep -r --exclude-dir=src/routes/api "console.log" ./src; then
+          if find ./src -type f -not -path "./src/routes/api/*" -exec grep -H "console.log" {} +; then
             echo "console.log statement found!"
             exit 1
           else
