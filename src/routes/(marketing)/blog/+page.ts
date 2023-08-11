@@ -1,5 +1,5 @@
 // src/routes/profile/+page.ts
-import type { PageLoad } from '../$types';
+import type { PageLoad } from './$types';
 import type { Blog } from '$types/blog';
 
 export const load: PageLoad = async ({ parent }) => {

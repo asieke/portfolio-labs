@@ -18,7 +18,7 @@
 	</div>
 	<div class="">
 		{#if session}
-			<a href="/app" class="">Dashboard →</a>
+			<a href="/dashboard" class="">Dashboard →</a>
 		{:else}
 			<a href="/signin" class="">Log In →</a>
 		{/if}

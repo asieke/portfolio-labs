@@ -8,7 +8,7 @@ export const load: PageLoad = async ({ parent }) => {
 	const { session, supabase, profile } = await parent();
 
 	//if !session then redirect to login
-	if (!session) {
+	if (!session || !profile) {
 		throw redirect(303, '/signin');
 	}
 

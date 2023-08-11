@@ -39,6 +39,15 @@ export const getDisplayMonth = (date: string) => {
 	return months[parseInt(dateArray[1]) - 1] + ' ' + dateArray[0];
 };
 
+export const getDisplayDate = (date: string | Date) => {
+	//takes a date string in the format YYYY-MM-DD and returns a string in the format MMM DD, YYYY
+	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+	const dateArray = (date as string).split('-');
+
+	return months[parseInt(dateArray[1]) - 1] + ' ' + dateArray[2] + ', ' + dateArray[0];
+};
+
 export const timestampToDate = (timestamp: number) => {
 	//if millisecond timestamp
 	if (timestamp < 1000000000000) {
