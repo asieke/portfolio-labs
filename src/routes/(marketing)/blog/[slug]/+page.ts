@@ -15,7 +15,7 @@ export const load: PageLoad = async ({ params, parent }) => {
 	}
 
 	return {
-		blog,
+		blog: blog as Blog,
 		html: marked(blog.md)
 	};
 };

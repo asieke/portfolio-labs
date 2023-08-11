@@ -1,41 +1,26 @@
 <script lang="ts">
-	import SummaryArticle from './components/SummaryArticle.svelte';
-	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
+	import SummaryArticle from './SummaryArticle.svelte';
+	import type { Blog } from '$types/blog';
 
-	export let data;
-	const { blogs, types } = data;
+	let page = 0;
+	let per = 2;
+	let total = 0;
 
 	const filter = () => {
 		const temp = selected === 'All' ? blogs : blogs.filter((blog) => blog.type === selected);
 		total = temp.length;
-		return temp.filter((_, index) => index >= currentPage * per && index < (currentPage + 1) * per);
+		return temp.filter((_, index) => index >= page * per && index < (page + 1) * per);
 	};
 
-	let currentPage = 0;
-	let per = 2;
-	let total = 0;
+	export let types: string[];
+	export let blogs: Blog[];
+	export let selected: string;
 
-	let selected = 'All';
-	let filteredBlogs = filter();
-
-	$: {
-		selected = $page.url.searchParams.get('type') || 'All';
-		currentPage = parseInt($page.url.searchParams.get('page') || '0');
-		filteredBlogs = filter();
-	}
+	$: filteredBlogs = filter();
+	$: console.log(filteredBlogs);
 
 	const onPageClick = (p: number) => {
-		goto(`?type=${selected}&page=${p}`);
-		currentPage = p;
-		filteredBlogs = filter();
-	};
-
-	const onTypeClick = (t: string) => {
-		goto(`?type=${t}&page=0`);
-		//push selected to the location history so user can click back button
-		selected = t;
-		currentPage = 0;
+		page = p;
 		filteredBlogs = filter();
 	};
 </script>
@@ -54,16 +39,16 @@
 		<div class="mb-4 mt-8 grid w-full grid-cols-4 flex-row pl-8">
 			<div class="col-span-3">
 				{#each types as type}
-					<button on:click={() => onTypeClick(type)} class="{type === selected ? 'selected' : ''} pill">{type}</button>
+					<a class="{type === 'All' ? 'selected' : ''} pill" href="/blog/{type}">{type}</a>
 				{/each}
 			</div>
 			<div class="flex items-center justify-end space-x-2 text-sm font-semibold">
-				{#if currentPage > 0}
-					<button class="px-1" on:click={() => onPageClick(currentPage - 1)}>❮</button>
+				{#if page > 0}
+					<button class="px-1" on:click={() => onPageClick(page - 1)}>❮</button>
 				{/if}
-				<span>Page {currentPage + 1} of {Math.ceil(total / per)}</span>
-				{#if currentPage < Math.ceil(total / per) - 1}
-					<button class="w-3" on:click={() => onPageClick(currentPage + 1)}>❯</button>
+				<span>Page {page + 1} of {Math.ceil(total / per)}</span>
+				{#if page < Math.ceil(total / per) - 1}
+					<button class="w-3" on:click={() => onPageClick(page + 1)}>❯</button>
 				{:else}
 					<button class="w-3" disabled />
 				{/if}

@@ -32,7 +32,7 @@
 						</div>
 					</div>
 					<h3 class="mt-3 text-lg font-semibold leading-6 text-white">
-						<a href="#">
+						<a href="/">
 							<span class="absolute inset-0" />
 							Boost your conversion rate
 						</a>
