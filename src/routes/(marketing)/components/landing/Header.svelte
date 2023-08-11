@@ -5,6 +5,7 @@
 
 	console.log('Loading - [Marketing] / Header');
 	console.log('Really dialing it up now!');
+	console.log('WOW there are 3 now!');
 </script>
 
 <nav class="flex h-24 items-center justify-between px-4 md:px-12" aria-label="Global">
