@@ -2,6 +2,8 @@
 	import { Logo } from '$components/brand';
 	import { page } from '$app/stores';
 	const { session } = $page.data;
+
+	console.log('Loading - [Marketing] / Header');
 </script>
 
 <nav class="flex h-24 items-center justify-between px-4 md:px-12" aria-label="Global">
@@ -13,7 +15,7 @@
 	</div>
 	<div class="flex flex-row space-x-4 md:space-x-8">
 		<a href="/">About</a>
-		<a href="/">Blog</a>
+		<a href="/blog">Blog</a>
 		<a href="/">Company</a>
 	</div>
 	<div class="">
