@@ -21,7 +21,8 @@ import IconCalculator from './IconCalculator.svelte';
 import IconCreditCard from './IconCreditCard.svelte';
 import IconArrowLeft from './IconArrowLeft.svelte';
 import IconCircleCheck from './IconCircleCheck.svelte';
-import IconArrowLeftHeavy from './IconArrowLeftHeavy.svelte';
+import IconCircleLeftArrow from './IconCircleLeftArrow.svelte';
+import IconCircleHome from './IconCircleHome.svelte';
 
 export {
 	IconWarning,
@@ -47,7 +48,8 @@ export {
 	IconCreditCard,
 	IconArrowLeft,
 	IconCircleCheck,
-	IconArrowLeftHeavy
+	IconCircleLeftArrow,
+	IconCircleHome
 };
 
 //Source: https://heroicons.com/

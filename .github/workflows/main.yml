@@ -12,7 +12,11 @@ jobs:
 
       - name: Search for console.log
         run: |
+<<<<<<< HEAD
           if grep -r --exclude-dir=./data --exclude-dir=./src/routes/api "console.log" .; then
+=======
+          if grep -r --exclude-dir=./src/routes/api "console.log" ./src; then
+>>>>>>> c25243382d7bc19a3f28402cf9dc2deb753a55ae
             echo "console.log statement found!"
             exit 1
           else

@@ -1,13 +1,26 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { IconArrowLeftHeavy } from '$components/svg';
+	import { goto } from '$app/navigation';
+	import { IconCircleLeftArrow } from '$components/svg';
+	import { getDisplayDate } from '$lib/utils/dates';
+	import { onMount } from 'svelte';
+
 	export let data;
 	const { blog } = data;
-	const date = new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+	let ref: boolean = false;
+
+	onMount(() => {
+		ref = $page.url.searchParams.get('ref') ? true : false;
+		history.replaceState(null, '', '/blog/' + $page.params.slug);
+	});
 
 	const goToPrevious = () => {
-		history.back();
+		if (ref) {
+			history.back();
+		} else {
+			goto('/blog');
+		}
 	};
 </script>
 
@@ -16,10 +29,10 @@
 		<div class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
 			<span class="text-primary-500 dark:text-primary-200">{'[on] '}</span>{blog.title}.
 		</div>
-		<button on:click={goToPrevious} class="absolute -left-6 top-0 flex h-12 w-12 items-center justify-center hover:text-primary-400"><IconArrowLeftHeavy class="h-10 w-10" /></button>
+		<button on:click={goToPrevious} class="absolute -left-6 top-0 flex h-12 w-12 items-center justify-center hover:text-primary-400"><IconCircleLeftArrow class="h-10 w-10" /></button>
 	</div>
 
-	<div class="mb-0 mt-6 w-full pl-8 text-right">{date}</div>
+	<div class="mb-0 mt-6 w-full pl-8 text-right">{getDisplayDate(blog.date)}</div>
 
 	<div class="-ml-8 -mr-8 mb-16 rounded-none bg-white px-8 shadow-lg dark:bg-slate-800 lg:rounded-xl">
 		<div class="-ml-[1px] border-l-[1px] border-dotted border-slate-400 px-8">
