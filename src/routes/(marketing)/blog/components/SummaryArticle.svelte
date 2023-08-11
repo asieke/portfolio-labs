@@ -5,6 +5,7 @@
 	export let blog: Blog;
 	export let onTypeClick = (t: string) => {};
 	export let onAuthorClick = (a: string) => {};
+	export let onLinkClick = async (l: string) => {};
 </script>
 
 <div class="-ml-8 -mr-8 mb-16 rounded-none bg-white px-8 shadow-lg dark:bg-slate-800 lg:rounded-xl">
@@ -22,11 +23,11 @@
 			</div>
 			<!-- Blog Description -->
 			<div class="order-4 col-span-2 px-8 pt-5 lg:order-3 lg:col-span-3">
-				<h1 class="mb-3"><a href="/blog/{blog.url}">{blog.title}</a></h1>
+				<h1 class="mb-3"><button class="text-left" on:click={() => onLinkClick(blog.url)}>{blog.title}</button></h1>
 				<p class="text-lg leading-7 text-slate-500 dark:text-slate-300">
 					{blog.description}
 				</p>
-				<a class="mt-4 block cursor-pointer text-primary-500 hover:font-bold" href="/blog/{blog.url}">Read More →</a>
+				<button class="mt-4 block cursor-pointer text-primary-500 hover:font-bold" on:click={() => onLinkClick(blog.url)}>Read More →</button>
 			</div>
 			<!-- Author Description -->
 			<div class="order-3 col-span-2 pl-8 lg:order-4 lg:col-span-1 lg:pl-0">

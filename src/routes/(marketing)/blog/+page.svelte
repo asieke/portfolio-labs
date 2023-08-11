@@ -2,8 +2,28 @@
 	import SummaryArticle from './components/SummaryArticle.svelte';
 	import { IconCircleHome } from '$components/svg';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import type { Blog } from '$types/blog';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+
+	export const snapshot = {
+		capture: () => {
+			return {
+				currentPage,
+				selected,
+				author,
+				total
+			};
+		},
+		restore: (value) => {
+			if (!value) return;
+			currentPage = value.currentPage;
+			selected = value.selected;
+			author = value.author;
+			total = value.total;
+			filteredBlogs = filter();
+		}
+	};
 
 	export let data;
 	const { blogs, types } = data;
@@ -28,29 +48,37 @@
 
 	let filteredBlogs = filter();
 
-	$: {
+	onMount(async () => {
 		selected = $page.url.searchParams.get('type') || 'All';
 		currentPage = parseInt($page.url.searchParams.get('page') || '0');
 		author = $page.url.searchParams.get('author') || null;
+
+		// history.replaceState(null, '', '/blog');
+		//replace the page in the url bar with blog but don't push to the location history
+
 		filteredBlogs = filter();
-	}
+	});
 
 	const onPageClick = (p: number) => {
-		goto(author ? `?author=${author}&page=${p}` : `?type=${selected}&page=${p}`);
+		// goto(author ? `?author=${author}&page=${p}` : `?type=${selected}&page=${p}`);
 		currentPage = p;
 		filteredBlogs = filter();
 	};
 
 	const onTypeClick = (t: string) => {
-		goto(`?type=${t}&page=0`);
+		// goto(`?type=${t}&page=0`);
 		//push selected to the location history so user can click back button
 		selected = t;
 		currentPage = 0;
 		filteredBlogs = filter();
 	};
 
+	const onLinkClick = async (l: string) => {
+		goto('/blog/' + l + '?ref=true');
+	};
+
 	const onAuthorClick = (a: string | null) => {
-		goto(a ? `?author=${a}&page=0` : '?page=0');
+		// goto(a ? `?author=${a}&page=0` : '?page=0');
 		//push selected to the location history so user can click back button
 		author = a;
 		currentPage = 0;
@@ -99,7 +127,7 @@
 	</div>
 
 	{#each filteredBlogs as blog}
-		<SummaryArticle {blog} {onTypeClick} {onAuthorClick} />
+		<SummaryArticle {blog} {onTypeClick} {onAuthorClick} {onLinkClick} />
 	{/each}
 </div>
 

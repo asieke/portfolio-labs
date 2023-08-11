@@ -1,14 +1,26 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 	import { IconCircleLeftArrow } from '$components/svg';
 	import { getDisplayDate } from '$lib/utils/dates';
+	import { onMount } from 'svelte';
 
 	export let data;
 	const { blog } = data;
 
+	let ref: boolean = false;
+
+	onMount(() => {
+		ref = $page.url.searchParams.get('ref') ? true : false;
+		history.replaceState(null, '', '/blog/' + $page.params.slug);
+	});
+
 	const goToPrevious = () => {
-		history.back();
+		if (ref) {
+			history.back();
+		} else {
+			goto('/blog');
+		}
 	};
 </script>
 
