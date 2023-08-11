@@ -1,8 +1,14 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { IconArrowLeftHeavy } from '$components/svg';
 	export let data;
 	const { blog } = data;
 	const date = new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+	const goToPrevious = () => {
+		history.back();
+	};
 </script>
 
 <div class="mx-8 min-h-screen border-l-[1px] border-dotted border-slate-400 pb-64 pt-20 lg:mx-auto lg:max-w-4xl">
@@ -10,7 +16,7 @@
 		<div class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
 			<span class="text-primary-500 dark:text-primary-200">{'[on] '}</span>{blog.title}.
 		</div>
-		<a href="/blog" class="absolute -left-6 top-0 flex h-12 w-12 items-center justify-center hover:text-primary-400"><IconArrowLeftHeavy class="h-10 w-10" /></a>
+		<button on:click={goToPrevious} class="absolute -left-6 top-0 flex h-12 w-12 items-center justify-center hover:text-primary-400"><IconArrowLeftHeavy class="h-10 w-10" /></button>
 	</div>
 
 	<div class="mb-0 mt-6 w-full pl-8 text-right">{date}</div>

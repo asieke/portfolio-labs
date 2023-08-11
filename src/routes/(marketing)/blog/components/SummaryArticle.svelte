@@ -5,13 +5,11 @@
 
 	//convert date from yyyy-mm-dd to July 4, 1776 format
 	const date = new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-
-	console.log(blog);
 </script>
 
 <div class="-ml-8 -mr-8 mb-16 rounded-none bg-white px-8 shadow-lg dark:bg-slate-800 lg:rounded-xl">
 	<div class="-ml-[1px] border-l-[1px] border-dotted border-slate-400 px-8">
-		<div class="-ml-8 -mr-8 mt-8 grid grid-cols-2 bg-white py-8 dark:bg-slate-800 lg:grid-cols-4">
+		<div class="-ml-8 -mr-8 grid grid-cols-2 bg-white py-8 dark:bg-slate-800 lg:grid-cols-4">
 			<!-- Blog Type -->
 			<div class="order-1 lg:order-1 lg:col-span-3">
 				<div class="-ml-[2px] border-l-[3px] border-primary-500 pl-8 dark:border-primary-200">
