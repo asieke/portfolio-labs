@@ -2,7 +2,7 @@
 	import { getChatStream } from '$lib/clients/openAI';
 	import { valueToChunk } from '$lib/utils/ai';
 
-	let prompt = `You are a front end developer who is an expert in tailwind css.  You will be provided with either a blank element or an existing element AND an instruction on what to create or modify.  You will ONLY return the modified element, no other text.`;
+	let prompt = `You are a front end developer who is an expert in tailwind css.  You will be provided with either a blank element or an existing element AND an instruction on what to create or modify.  You will ONLY return the modified element, no other text.  If the user provides code ALWAYS return ALL of the code plus any modifications you make.`;
 
 	let code = '<div class="text-red-300">How are you doing today</div>\n<b>Im good</b>';
 	let message = '';
