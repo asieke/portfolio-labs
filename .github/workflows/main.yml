@@ -7,14 +7,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Search for console.log
-      run: |
-        if grep -r --exclude-dir=data --exclude-dir=routes/api "console.log" .; then
-          echo "console.log statement found!"
-          exit 1
-        else
-          echo "No console.log statements found."
-        fi
+      - name: Search for console.log
+        run: |
+          if grep -r --exclude-dir=./data --exclude-dir=./src/routes/api "console.log" .; then
+            echo "console.log statement found!"
+            exit 1
+          else
+            echo "No console.log statements found."
+          fi
