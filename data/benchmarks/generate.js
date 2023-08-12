@@ -7,46 +7,80 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function main() {
-	const file = fs.readFileSync(path.resolve(__dirname, './data/historical.tsv'), 'utf8');
-	const lines = file.split('\n').map((line) => line.split('\t'));
+	// Read the file 'historical.tsv' from the 'data' directory.
+	const fileContent = fs.readFileSync(path.resolve(__dirname, './data/historical.tsv'), 'utf8');
 
-	const headers = lines.shift();
-	const sources = lines.shift();
-	const dataRows = lines;
+	// Split the file content into lines and each line into its columns using tabs.
+	const parsedLines = fileContent.split('\n').map((line) => line.split('\t'));
 
-	const result = headers.slice(2).map((header, index) => {
-		const prices = dataRows.map((row) => {
-			const [year, month] = row;
-			return [`${year}-${String(month).padStart(2, '0')}-01`, row[2 + index]];
-		});
-		return {
-			name: header,
-			source: sources[2 + index],
-			prices: prices
-		};
-	});
+	// Extract descriptions and symbols from the first and second lines, respectively.
+	// They start from the third column (index 2).
+	const assetDescriptions = parsedLines[0].slice(2);
+	const assetSymbols = parsedLines[1].slice(2);
 
-	//delete from benchmark_assets where id > 0;
-	//delete from benchmark_prices where id > 0;
+	// Initialize an output array with objects containing asset descriptions, symbols, and a prices placeholder.
+	const assetsData = assetDescriptions.map((description, index) => ({
+		description: description,
+		symbol: assetSymbols[index],
+		prices: []
+	}));
+
+	// Loop through the remaining lines to extract date (year and month) and prices for each asset.
+	// Start from the third line (index 2).
+	for (let i = 2; i < parsedLines.length; i++) {
+		// For each asset, starting from the third column (index 2).
+		for (let j = 2; j < assetDescriptions.length + 2; j++) {
+			// If there's a price entry for the asset at this date.
+			if (parsedLines[i][j] && parsedLines[i][j] !== '') {
+				// Construct a date string in the format 'YYYY-MM-01' and add it alongside the price to the asset's prices list.
+				assetsData[j - 2].prices.push([parsedLines[i][0] + '-' + parsedLines[i][1] + '-01', parsedLines[i][j]]);
+			}
+		}
+	}
+
+	// Delete all entries from the benchmark_assets and benchmark_prices tables where id is greater than 0.
 	await supabase.from('benchmark_assets').delete().gt('id', 0);
 	await supabase.from('benchmark_prices').delete().gt('id', 0);
 
-	for (let i = 0; i < result.length; i++) {
-		const { data, error } = await supabase
-			.from('benchmark_assets')
-			.insert({
-				symbol: result[i].source,
-				description: result[i].name
-			})
-			.select();
+	// Loop through the assetsData to load each asset.
+	for (let i = 0; i < assetsData.length; i++) {
+		console.log('Loading asset...', assetsData[i].symbol);
 
-		const { data: prices, error: pricesError } = await supabase.from('benchmark_prices').insert(
-			result[i].prices.map((price) => ({
-				asset_id: data[0].id,
+		try {
+			// Insert the asset into the benchmark_assets table.
+			const assetInsertionResponse = await supabase
+				.from('benchmark_assets')
+				.insert({
+					symbol: assetsData[i].symbol,
+					description: assetsData[i].description
+				})
+				.select();
+
+			if (assetInsertionResponse.error) {
+				throw assetInsertionResponse.error;
+			}
+
+			// Extract the ID of the newly inserted asset.
+			const assetId = assetInsertionResponse.data[0].id;
+
+			// Prepare price data for insertion.
+			const priceDataForInsertion = assetsData[i].prices.map((price) => ({
+				asset_id: assetId,
 				date: price[0],
 				price: price[1]
-			}))
-		);
+			}));
+
+			// Insert the prices into the benchmark_prices table.
+			const priceInsertionResponse = await supabase.from('benchmark_prices').insert(priceDataForInsertion);
+
+			if (priceInsertionResponse.error) {
+				throw priceInsertionResponse.error;
+			}
+		} catch (error) {
+			console.error('Error processing asset:', assetsData[i].symbol, error.message);
+			// If you want to stop the entire process upon an error, uncomment the line below.
+			// throw error;
+		}
 	}
 }
 
