@@ -4,8 +4,6 @@
 
 	export let data;
 	const { benchmarkPrices } = data;
-
-	console.log(benchmarkPrices);
 </script>
 
 <Container>
