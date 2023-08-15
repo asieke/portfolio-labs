@@ -6,7 +6,6 @@
 	export let onTypeClick = (t: string) => {};
 	export let onAuthorClick = (a: string) => {};
 	export let onLinkClick = async (l: string) => {};
-	console.log(blog);
 </script>
 
 <div class="-ml-8 -mr-8 mb-16 rounded-none bg-white px-8 shadow-lg dark:bg-slate-800 lg:rounded-xl">
