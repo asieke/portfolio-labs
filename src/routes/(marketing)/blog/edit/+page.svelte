@@ -5,6 +5,7 @@
 	import { addToast } from '$lib/stores/toasts';
 	import { page } from '$app/stores';
 	import { marked } from 'marked';
+	import { showDialog } from '$lib/stores/dialog';
 
 	const { supabase } = $page.data;
 
@@ -18,7 +19,7 @@
 	const saveBlog = async (blog: Blog | null) => {
 		if (!blog) {
 			addToast('Please select a blog before saving', 'info');
-			return null;
+			return;
 		}
 		if (blog?.id) {
 			//editing an existing blog
@@ -27,7 +28,6 @@
 				addToast('There was an error saving, please try again', 'error');
 			} else {
 				addToast('Blog updated successfully', 'success');
-				return blog;
 			}
 		} else {
 			const { data, error } = await supabase.from('blog').insert(blog).select('*');
@@ -35,7 +35,7 @@
 				addToast('There was an error saving, please try again', 'error');
 			} else {
 				addToast('Blog created successfully', 'success');
-				return (selected = data[0] as Blog);
+				blogs = [data[0] as Blog, ...blogs];
 			}
 		}
 	};
@@ -46,7 +46,21 @@
 
 	const handleBackClick = async () => {
 		//show a model with Ok or cancel
-		confirm('Are you sure you want to go back?');
+		showDialog({
+			title: 'Save your changes?',
+			message: 'Navigating away from this page will discard your changes',
+			buttons: [
+				{ text: 'Discard', onClick: () => (selected = null), color: 'bg-slate-300' },
+				{
+					text: 'Save',
+					onClick: async () => {
+						await saveBlog(selected);
+						selected = null;
+					},
+					color: 'bg-green-400'
+				}
+			]
+		});
 	};
 </script>
 
