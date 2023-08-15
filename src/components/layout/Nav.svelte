@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MenuDesktop, MenuMobile, Links, Toast } from '$components/layout';
+	import { MenuDesktop, MenuMobile, Links } from '$components/layout';
 </script>
 
 <nav class="h-full bg-slate-100 dark:bg-dark-950">
@@ -16,5 +16,4 @@
 			</div>
 		</div>
 	</div>
-	<Toast />
 </nav>

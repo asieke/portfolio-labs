@@ -6,6 +6,7 @@
 
 	import { darkMode } from '$lib/stores/darkMode';
 	import { Toggle } from '$components/form';
+	import { Toast } from '$components/layout';
 
 	export let data;
 
@@ -35,6 +36,7 @@
 	<div class="fixed -left-96 -right-96 top-72 -z-30 h-48 -rotate-[10deg] bg-primary-300 opacity-20" />
 {/if}
 <slot />
+<Toast />
 
 <div class="fixed bottom-0 left-0 z-50"><Toggle enabled={$darkMode} onEnable={() => darkMode.set(true)} onDisable={() => darkMode.set(false)} /></div>
 

@@ -3,7 +3,7 @@
 	import { IconWarning, IconError, IconInfo, IconSuccess } from '$components/svg';
 </script>
 
-<div class="absolute right-3 top-3 flex w-[200px] flex-col gap-y-4">
+<div class="absolute left-[50%] top-4 -ml-[180px] flex w-[360px] flex-col gap-y-4">
 	{#each $toasts as { message, id, status, state }}
 		<button on:click={() => removeToast(id)}>
 			<div class="toast {status} {state}">
