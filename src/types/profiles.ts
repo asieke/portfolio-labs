@@ -14,4 +14,5 @@ export type Profile = {
 	settings: Record<string, string>; // JSONB is represented as any in JavaScript/TypeScript
 	allocation_targets: AssetClass[];
 	stripe_customer_id: string;
+	is_admin: boolean;
 };
