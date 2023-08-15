@@ -37,6 +37,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@notionhq/client": "^2.2.11",
 		"@stripe/stripe-js": "^1.54.2",
 		"@supabase/auth-helpers-sveltekit": "^0.10.1",
 		"@supabase/supabase-js": "^2.26.0",
@@ -47,6 +48,7 @@
 		"highcharts": "^11.1.0",
 		"localforage": "^1.10.0",
 		"marked": "^7.0.2",
+		"notion-to-md": "^3.1.1",
 		"plaid": "^15.2.0",
 		"stripe": "^12.16.0"
 	}

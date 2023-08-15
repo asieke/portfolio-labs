@@ -38,6 +38,9 @@
 						<span class="text-sm text-slate-500 dark:text-slate-400">CEO / Co-Founder</span>
 					</div>
 				</button>
+				{#if blog.status === 'draft'}
+					<div class="mt-6 flex w-full items-center justify-center bg-slate-200 p-2 align-middle">DRAFT</div>
+				{/if}
 			</div>
 		</div>
 	</div>
