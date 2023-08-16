@@ -17,3 +17,9 @@ Added a table in the modeling page to display the first 3 benchmark prices.
 - Updated the layout component to include the Toast and Dialog components.
 - Created a new Dialog store and added the `showDialog` function.
 - Updated the Blog type to include a `status` field and the Profile type to include an `is_admin` field.
+
+## 2023-08-16 - Sync blogs with Notion
+[Link to PR](https://github.com/asieke/portfolio-labs/pull/14)
+Sync blogs with Notion by making a POST request to fetch and save blogs.
+- 💻 Sync blogs with Notion by making a POST request to fetch and save blogs.
+- 🔑 Add authentication to the `/api/notion/get-blogs` endpoint using Supabase session or API key.
