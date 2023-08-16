@@ -1,12 +1,23 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+const { PL_NOTION_KEY } = process.env;
 import { supabaseAdmin } from '$lib/clients/supabase';
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 import type { Blog } from '$types/blog';
 
-export const POST = async () => {
+export const POST = async ({ request, locals }: { request: Request; locals: App.Locals }) => {
+	const session = await locals.getSession();
+	const { headers } = request;
+	const KEY = headers.get('Authorization');
+
+	//Needs to have either KEY OR Session, else not authenticated
+	if (!(KEY === PL_NOTION_KEY || session?.access_token)) {
+		console.log('[SERVER] - NOT AUTHENTICATED');
+		return new Response(JSON.stringify({ error: 'Not Authenticated' }), { status: 401 });
+	}
+
 	console.log('[SERVER] - getting blogs from Notion');
 	const notion = new Client({
 		auth: process.env.NOTION_SECRET_KEY
