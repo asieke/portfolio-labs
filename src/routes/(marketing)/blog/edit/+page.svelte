@@ -10,7 +10,7 @@
 
 	const sync = async () => {
 		submitting = true;
-		const { data } = await axios.post('/api/notion/get-blogs', { blogs });
+		const { data } = await axios.post('/api/notion/get-blogs');
 		blogs = data.blogs;
 		addToast('Blogs successfully synced/saved to notion', 'success');
 	};
