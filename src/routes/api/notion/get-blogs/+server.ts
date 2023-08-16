@@ -7,6 +7,20 @@ import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 import type { Blog } from '$types/blog';
 
+// GET request handler to fetch blogs uses Key auth
+export const GET = async ({ request }: { request: Request }) => {
+	const url = new URL(request.url);
+	const KEY = url.searchParams.get('key');
+
+	if (KEY !== PL_NOTION_KEY) {
+		return new Response(JSON.stringify({ error: 'Not Authenticated' }), { status: 401 });
+	}
+
+	const blogs = await getNotionBlogsAndUpdate();
+	return new Response(JSON.stringify({ blogs }));
+};
+
+// POST request handler to fetch blogs uses either Key AUTH or session Auth
 export const POST = async ({ request, locals }: { request: Request; locals: App.Locals }) => {
 	const session = await locals.getSession();
 	const { headers } = request;
@@ -14,11 +28,17 @@ export const POST = async ({ request, locals }: { request: Request; locals: App.
 
 	//Needs to have either KEY OR Session, else not authenticated
 	if (!(KEY === PL_NOTION_KEY || session?.access_token)) {
-		console.log('[SERVER] - NOT AUTHENTICATED');
 		return new Response(JSON.stringify({ error: 'Not Authenticated' }), { status: 401 });
 	}
 
-	console.log('[SERVER] - getting blogs from Notion');
+	const blogs = await getNotionBlogsAndUpdate();
+	return new Response(JSON.stringify({ blogs }));
+};
+
+// Fetches blogs from notion
+// returns a blog object with all blogs
+// upserts into supabase
+const getNotionBlogsAndUpdate = async () => {
 	const notion = new Client({
 		auth: process.env.NOTION_SECRET_KEY
 	});
@@ -58,9 +78,9 @@ export const POST = async ({ request, locals }: { request: Request; locals: App.
 			console.log(`[SERVER] - upserted blog ${blogs[i].id}`);
 		}
 
-		return new Response(JSON.stringify({ blogs }));
+		return blogs;
 	} catch (e) {
 		console.error(e);
-		return new Response(JSON.stringify({ error: e }));
+		return { error: e };
 	}
 };
