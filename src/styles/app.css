@@ -61,6 +61,16 @@ button.submit:disabled {
 	@apply bg-slate-200 text-slate-500 dark:bg-slate-700 dark:text-slate-400;
 }
 
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+
 /* ---------------------------------------------- */
 /* Data Table */
 /* ---------------------------------------------- */

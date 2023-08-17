@@ -15,7 +15,7 @@
 			displayData.push({
 				name: a.name + ' - ' + b.name,
 				value: b.total,
-				color: b.color
+				color: b.color || '#000'
 			});
 		});
 	});
