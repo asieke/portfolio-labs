@@ -10,9 +10,10 @@ type ChartProps = {
 	showX?: boolean;
 	showY?: boolean;
 	color?: string;
+	tooltip?: boolean;
 };
 
-export const drawChart = ({ container, data, onMouseOver, onMouseOut, showX = true, showY = true, color = '#ffcc33' }: ChartProps) => {
+export const drawChart = ({ container, data, onMouseOver, onMouseOut, showX = true, showY = true, color = '#ffcc33', tooltip = true }: ChartProps) => {
 	// Create a Highcharts stock chart in the given container with the specified configuration
 
 	Highcharts.stockChart(container, {
@@ -92,8 +93,8 @@ export const drawChart = ({ container, data, onMouseOver, onMouseOut, showX = tr
             ${showX ? Highcharts.dateFormat('%b %e, %Y', this.x) : ''}
 						${showY ? `<div>${formatCurrency(this.y)}</div>` : ''}
           </div>
-					<div class='z-5 absolute w-[20px] h-[20px] rounded-full bg-slate-600' style='left: ${left}px; top: ${top}px; opacity: 0.5'></div>
-					<div class="z-5 absolute w-[12px] h-[12px] shadow-xl rounded-full ml-[4px] mt-[4px]" style="background-color: ${color}; left: ${left}px; top: ${top}px;" />
+					${tooltip ? `<div class='z-5 absolute w-[20px] h-[20px] rounded-full bg-slate-600' style='left: ${left}px; top: ${top}px; opacity: 0.5'></div>` : ''}
+					${tooltip ? `<div class="z-5 absolute w-[12px] h-[12px] shadow-xl rounded-full ml-[4px] mt-[4px]" style="background-color: ${color}; left: ${left}px; top: ${top}px;" />` : ''}
         `;
 			},
 			backgroundColor: undefined,
