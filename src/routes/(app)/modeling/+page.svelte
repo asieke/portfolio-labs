@@ -33,12 +33,10 @@
 
 	const onDragHandler = (values: { name: string; value: number; color: string }[]) => {
 		assetTargets = values;
-		console.log('updating values to: ', assetTargets);
 	};
 
 	const onEventChangeHandler = (rows: { event: string; when: number; amount: number }[]) => {
 		events = rows;
-		console.log('updating values to: ', events);
 	};
 
 	const simulate = () => {

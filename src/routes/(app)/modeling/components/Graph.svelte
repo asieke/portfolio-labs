@@ -21,8 +21,6 @@
 	let adjustedResults: SimulationResult[];
 	let highlightedResult: SimulationResult;
 
-	console.log(simulationResults);
-
 	let container: HTMLElement;
 
 	const onMouseOver = (x: number) => {

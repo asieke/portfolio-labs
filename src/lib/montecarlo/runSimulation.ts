@@ -11,11 +11,6 @@ type Props = {
 };
 
 export const runSimulation = ({ startingBalance, assetTargets, events, returns, inflation }: Props) => {
-	console.log('Starting Balance: ', startingBalance);
-	console.log('Asset Targets: ', assetTargets);
-	console.log('Events: ', events);
-	console.log('Returns: ', returns);
-
 	//create an array of 360 elements
 
 	const balances = [];
