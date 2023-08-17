@@ -13,7 +13,7 @@
 
 	$: {
 		assetClasses = portfolios?.[id].asset_class || [];
-		addAIContext(JSON.stringify(assetClasses));
+		addAIContext({ page: 'Allocation', content: JSON.stringify(assetClasses) });
 	}
 </script>
 

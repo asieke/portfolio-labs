@@ -8,7 +8,7 @@
 	export let data;
 	const { portfolios, balances } = data;
 
-	addAIContext(`Your performance has been amazing.  Account Summary Total Account Value $9,051,313.86 Total Cost Basis  $2,318,854.11 Yearly Change 38.87% Monthly Change 0.27% Weekly Change 0.08%`);
+	addAIContext({ page: 'Performance', content: 'Your performance is rad' });
 
 	let portfolio_id = portfolios?.[0].id;
 	$: displayBalances = balances?.filter((b) => b.portfolio_id === portfolio_id);

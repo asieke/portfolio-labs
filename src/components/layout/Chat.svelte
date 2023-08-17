@@ -1,24 +1,24 @@
 <script lang="ts">
 	import { tick } from 'svelte';
-	import { context } from '$lib/stores/ai';
+	import { context, chatMessages } from '$lib/stores/ai';
 	import { systemPrompt } from '$lib/data/aiPrompts';
 	import { valueToChunk } from '$lib/utils/ai';
 	import { getChatStream } from '$lib/clients/openAI';
-	import { page } from '$app/stores';
+
+	console.log('Chat Messages', $chatMessages);
 
 	let open = false;
-	let conversation: { role: string; content: string }[] = [];
 	let message = '';
 	let chatContainer: HTMLDivElement;
 	let messageContainer: HTMLTextAreaElement;
 
 	const submitMessage = async () => {
-		const messages = [{ role: 'system', content: systemPrompt + '\nContext for this request: ' + $context }, ...conversation];
+		const messagesForAI = [{ role: 'system', content: systemPrompt + '\nContext for this request: ' + $context.content }, ...$chatMessages];
 
-		conversation = [...conversation, { role: 'assistant', content: '...' }];
+		chatMessages.set([...$chatMessages, { role: 'assistant', content: '...' }]);
 
 		try {
-			const response = await getChatStream(messages);
+			const response = await getChatStream(messagesForAI);
 
 			if (!response.body) {
 				throw new Error('ReadableStream not yet supported in this browser.');
@@ -33,10 +33,10 @@
 
 				chunk = await reader.read();
 
-				const temp = [...conversation];
+				const temp = [...$chatMessages];
 				temp[temp.length - 1].content = newMessage;
 				chatContainer.scrollTop = chatContainer.scrollHeight;
-				conversation = temp;
+				chatMessages.set(temp);
 			}
 		} catch (error) {
 			console.error('Error:', error);
@@ -49,7 +49,7 @@
 		if (e.key === 'Enter' && !e.shiftKey) {
 			// Check for absence of Shift key here
 			e.preventDefault();
-			conversation = [...conversation, { role: 'user', content: message }];
+			chatMessages.set([...$chatMessages, { role: 'user', content: message }]);
 			tick().then(() => {
 				chatContainer.scrollTop = chatContainer.scrollHeight;
 			});
@@ -79,10 +79,14 @@
 	</div>
 	<div class="h-[350px] w-full bg-slate-100 dark:bg-slate-900">
 		<div bind:this={chatContainer} class="h-[290px] w-full overflow-y-auto p-4">
-			{#each conversation as item}
-				<div class={`bubble ${item.role === 'user' ? 'user' : 'assistant'} `}>
-					{item.content}
-				</div>
+			{#each $chatMessages as item}
+				{#if item.content.substring(0, 18) === 'Switching to page:'}
+					<div class="mb-3 w-full text-center text-sm text-slate-400 dark:text-slate-700">-{item.content}-</div>
+				{:else}
+					<div class={`bubble ${item.role === 'user' ? 'user' : 'assistant'} `}>
+						{item.content}
+					</div>
+				{/if}
 			{/each}
 		</div>
 		<div class="flex h-[60px] w-full items-center bg-slate-200 px-4 dark:bg-slate-700">
