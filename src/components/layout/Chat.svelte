@@ -5,8 +5,6 @@
 	import { valueToChunk } from '$lib/utils/ai';
 	import { getChatStream } from '$lib/clients/openAI';
 
-	console.log('Chat Messages', $chatMessages);
-
 	let open = false;
 	let message = '';
 	let chatContainer: HTMLDivElement;
