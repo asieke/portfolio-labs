@@ -33,3 +33,8 @@ AI store context and chat component updates, including switching pages and displ
 - 📝 Refactor submitMessage function to use new AI store context
 - 💄 Update chat component UI to display messages when switching pages
 - 🩹 Prevent default behavior when pressing Enter in chat component
+
+## 2023-08-17 - Modeling Impact
+[Link to PR](https://github.com/asieke/portfolio-labs/pull/16)
+
+Model simulation UI with draggable asset allocation and event selector components.
