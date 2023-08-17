@@ -23,3 +23,13 @@ Added a table in the modeling page to display the first 3 benchmark prices.
 Sync blogs with Notion by making a POST request to fetch and save blogs.
 - 💻 Sync blogs with Notion by making a POST request to fetch and save blogs.
 - 🔑 Add authentication to the `/api/notion/get-blogs` endpoint using Supabase session or API key.
+
+## 2023-08-17 - AI Store Context and Chat Component Updates
+[Link to PR](https://github.com/asieke/portfolio-labs/pull/15)
+AI store context and chat component updates, including switching pages and displaying messages.
+- ✨ Update AI store context to include page and content properties
+- 🔄 Update chat component to use new AI store context
+- 🐛 Fix bug in chat component where conversation variable is unused
+- 📝 Refactor submitMessage function to use new AI store context
+- 💄 Update chat component UI to display messages when switching pages
+- 🩹 Prevent default behavior when pressing Enter in chat component
