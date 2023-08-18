@@ -8,7 +8,7 @@
 	export let data;
 	const { portfolios, balances } = data;
 
-	addAIContext({ page: 'Performance', content: 'Your performance is rad' });
+	addAIContext({ page: 'Performance', content: JSON.stringify(portfolios) });
 
 	let portfolio_id = portfolios?.[0].id;
 	$: displayBalances = balances?.filter((b) => b.portfolio_id === portfolio_id);

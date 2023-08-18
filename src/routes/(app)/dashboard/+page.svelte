@@ -10,7 +10,7 @@
 	export let data;
 	const { balances, portfolios } = data;
 
-	addAIContext({ page: 'Dashboard', content: 'My portfolio is rad' });
+	addAIContext({ page: 'Dashboard', content: JSON.stringify(portfolios) });
 
 	const total = portfolios ? portfolios[portfolios.length - 1] : null;
 </script>
